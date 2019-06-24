@@ -1,9 +1,13 @@
+#Sys.setenv("http_proxy"="proxysg:8080")
+#Sys.setenv("https_proxy"="proxysg:8080")
+
+
 #' Create an API call for B-data flows
 #'
 #' @param data_item character string; the id of the B flow
 #' @param api_key character string; api key retreived from the Elexon portal
 #' @param ... other values (all character strings) to be passed to the function as API parameters
-#' @return url; created url for the call
+#' @return string; created url for the call
 #' @examples
 #' build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
 
@@ -42,14 +46,14 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_
     url = paste0(url, "&EndTime=", end_time)
   }
   url = paste0(url, "&ServiceType=", service_type)
-  return(url(url))
+  return(url)
 }
 
 
 #' Create B flow API call and retrieve the results
 #'
 #' @inheritParams build_b_call
-#' @return xml/tibble; results returned either via xml or csv depending on service_type
+#' @return A response() object
 #' @examples
 #' get_b(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016)
 
@@ -60,24 +64,34 @@ get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period 
                       year, month, week, process_type, start_time,
                       end_time, start_date, end_date, service_type, version)
   results <- httr::GET(url)
-  if (service_type == "csv"){
-    parsed <- content(results)
-  } else if (service_type == "xml") {
-    parsed <- read_xml(results)
-  }
-
-
-  structure(
-    list(
-      request = url,
-      response = results$status_code,
-      content = parsed
-    ),
-    class = "BMRS_api"
-  )
+  return(results)
 }
 
+parse_response <- function(response, format){
+  parsed_content <- httr::content(response, "text")
+  if (format == "csv"){
+    start_ind <- stringr::str_locate_all(parsed_content, "\\*")
+    end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
+    parsed_content <- substr(parsed_content, max(start_ind[[1]][,2]+1), end_ind-1)
+    ret <- as_tibble(read.table(text = parsed_content, sep = ",", header = TRUE))
+  }
+  else if (format == "xml"){
+    ret <- as_list(read_xml(response))
+  }
+  else {
+    stop("Invalid format specified")
+  }
+  return(ret)
+}
 
+  # structure(
+  #   list(
+  #     request = url,
+  #     response = results$status_code,
+  #     content = parsed
+  #   ),
+  #   class = "BMRS_api"
+  # )
 
 
 
