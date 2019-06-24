@@ -1,0 +1,19 @@
+Package: BMRSr
+Type: Package
+Title: Wrapper Functions to the BMRS API
+Version: 0.1.0
+Authors@R: person("Adam", "Rawles", email = "adam.rawles@elexon.co.uk", role = c("aut", "cre"))
+Description: A package containing wrapper functions to better interact with the Balancing Mechanism
+    Reporting System.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    httr,
+    xml2,
+    stringr,
+    tibble
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
+URL: https://github.com/ARawles/BMRSr
