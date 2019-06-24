@@ -17,8 +17,6 @@ get_b(data_item, api_key, settlement_date = NULL,
 }
 \value{
 xml/tibble; results returned either via xml or csv depending on service_type
-#' @examples
-get_b(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016)
 }
 \description{
 Create B flow API call and retrieve the results

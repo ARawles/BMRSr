@@ -1,9 +1,18 @@
+#' Create an API call for B-data flows
+#'
+#' @param data_item character string; the id of the B flow
+#' @param api_key character string; api key retreived from the Elexon portal
+#' @param ... other values (all character strings) to be passed to the function as API parameters
+#' @return url; created url for the call
+#' @examples
+#' build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
+
 build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_period = NULL,
                          year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
                          end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", version = "v1") {
   url = paste0("https://api.bmreports.com/BMRS/", data_item, "/", version, "?APIKey=", api_key)
   if (!is.null(settlement_date)) {
-    url = paste0(url, "&SettlementDate=", settlement_date)
+    url = paste0(url, "&SettlementDate=", format_date(settlement_date))
   }
   if (!is.null(settlement_period)){
     url = paste0(url, "&Period=", settlement_period)
@@ -33,9 +42,16 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_
     url = paste0(url, "&EndTime=", end_time)
   }
   url = paste0(url, "&ServiceType=", service_type)
-  return(url)
+  return(url(url))
 }
 
+
+#' Create B flow API call and retrieve the results
+#'
+#' @inheritParams build_b_call
+#' @return xml/tibble; results returned either via xml or csv depending on service_type
+#' @examples
+#' get_b(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016)
 
 get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period = NULL,
                   year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
