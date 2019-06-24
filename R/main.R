@@ -1,13 +1,3 @@
-library(httr)
-library(xml2)
-library(stringr)
-source("useful_functions.R")
-
-
-Sys.setenv("http_proxy"="proxysg:8080")
-Sys.setenv("https_proxy"="proxysg:8080")
-
-
 build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_period = NULL,
                          year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
                          end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", version = "v1") {
@@ -53,7 +43,7 @@ get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period 
   url <- build_b_call(data_item, api_key, settlement_date, settlement_period,
                       year, month, week, process_type, start_time,
                       end_time, start_date, end_date, service_type, version)
-  results <- GET(url)
+  results <- httr::GET(url)
   if (service_type == "csv"){
     parsed <- content(results)
   } else if (service_type == "xml") {
@@ -72,9 +62,7 @@ get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period 
 }
 
 
-print.BMRS_api <- function(x,...){
-  xml_children(x$content)
-}
+
 
 
 
