@@ -19,6 +19,8 @@
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
 #' @return character string; created url for the call
+#' @family call-building functions
+#' @export
 #' @examples
 #' build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
 
@@ -80,8 +82,11 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
 #' @return string; created url for the call
+#' @family call-building functions
 #' @examples
 #' build_remit_call(data_item = "MessageListRetrieval", api_key = "12345", settlement_date = "14-12-2016")
+#' @export
+
 build_remit_call <- function(data_item, api_key, event_start = NULL, event_end = NULL, publication_from = NULL, publication_to = NULL,
                              participant_id = NULL, asset_id =  NULL, event_type = NULL, fuel_type = NULL, message_type = NULL, message_id = NULL,
                              unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1"){
@@ -161,8 +166,11 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
 #' @return string; created url for the call
+#' @family call-building functions
 #' @examples
 #' build_legacy_call(data_item = "FUELINST", api_key = "12345", from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
+#' @export
+
 build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL, bm_unit_type = NULL,
                               lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
                               is_two_day_window = NULL, from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, to_settlement_date = NULL,
@@ -241,12 +249,14 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 }
 
 #' Build an API call (uses the appropriate function based on the data item)
-#'
-#' @inheritParams build_b_call
-#' @inheritParams  build_remit_call
-#' @inheritParams  build_legacy_call
-#' @example
+#' @param ... values to be passed to appropriate build_x_call function
+#' @family call-building functions
+#' @seealso \code{\link{build_b_call}}
+#' @seealso \code{\link{build_remit_call}}
+#' @seealso \code{\link{build_legacy_call}}
+#' @examples
 #' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018", to_date = "13 Jun 2018", service_type = "csv")
+#' @export
 build_call <- function(...){
   params <- list(...)
   typed_call <- get_function(params[['data_item']])
@@ -256,7 +266,9 @@ build_call <- function(...){
 
 #' Get the correct function to create the API call depending on the data item
 #' @param data_item character string; data item to be retrieved
-#' @example get_function("TEMP")
+#' @examples
+#' get_function("TEMP")
+#' @export
 get_function <- function(data_item){
   if (nchar(data_item) == 5 & substr(data_item,1,1) == "B"){
     return(build_b_call)
@@ -281,6 +293,7 @@ get_function <- function(data_item){
 #' Get the required parameters for a data item
 #' @param data_item string of the data item to get the parameters for
 #' @return A list containing the named parameters required for that call
+#' @export
 get_parameters <- function(data_item){
   return(list(settlement_date = NULL, settlement_period = NULL))
 }
@@ -304,6 +317,7 @@ send_request <- function(url) {
 #' @examples
 #' tibble_example <- parse_response(response, "csv") #returns a tibble
 #' tibble_example <- parse_response(response, "csv") #returns a list
+#' @export
 parse_response <- function(response, format){
   parsed_content <- httr::content(response, "text")
   if (format == "csv"){
@@ -328,6 +342,7 @@ parse_response <- function(response, format){
 #' @return A tibble if service_type = "csv", otherwisea list
 #' @examples
 #' full_request(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
+#' @export
 
 full_request <- function(...){
   d_item <- list(...)[['data_item']]

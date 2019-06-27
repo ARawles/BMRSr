@@ -73,3 +73,8 @@ Create an API call for legacy data
 \examples{
 build_legacy_call(data_item = "FUELINST", api_key = "12345", from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
 }
+\seealso{
+Other call-building functions: \code{\link{build_b_call}},
+  \code{\link{build_call}}, \code{\link{build_remit_call}}
+}
+\concept{call-building functions}

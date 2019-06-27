@@ -12,3 +12,6 @@ get_function(data_item)
 \description{
 Get the correct function to create the API call depending on the data item
 }
+\examples{
+get_function("TEMP")
+}

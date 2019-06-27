@@ -6,6 +6,24 @@
 \usage{
 build_call(...)
 }
+\arguments{
+\item{...}{values to be passed to appropriate build_x_call function}
+}
 \description{
 Build an API call (uses the appropriate function based on the data item)
 }
+\examples{
+build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018", to_date = "13 Jun 2018", service_type = "csv")
+}
+\seealso{
+\code{\link{build_b_call}}
+
+\code{\link{build_remit_call}}
+
+\code{\link{build_legacy_call}}
+
+Other call-building functions: \code{\link{build_b_call}},
+  \code{\link{build_legacy_call}},
+  \code{\link{build_remit_call}}
+}
+\concept{call-building functions}

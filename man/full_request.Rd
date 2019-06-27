@@ -6,6 +6,9 @@
 \usage{
 full_request(...)
 }
+\arguments{
+\item{...}{values to be passed to appropriate build_x_call function}
+}
 \value{
 A tibble if service_type = "csv", otherwisea list
 }

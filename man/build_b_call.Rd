@@ -48,3 +48,9 @@ Create an API call for B-data flows
 \examples{
 build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
 }
+\seealso{
+Other call-building functions: \code{\link{build_call}},
+  \code{\link{build_legacy_call}},
+  \code{\link{build_remit_call}}
+}
+\concept{call-building functions}

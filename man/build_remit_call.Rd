@@ -55,3 +55,8 @@ Create an API call for REMIT flows
 \examples{
 build_remit_call(data_item = "MessageListRetrieval", api_key = "12345", settlement_date = "14-12-2016")
 }
+\seealso{
+Other call-building functions: \code{\link{build_b_call}},
+  \code{\link{build_call}}, \code{\link{build_legacy_call}}
+}
+\concept{call-building functions}
