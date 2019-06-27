@@ -8,18 +8,43 @@ build_b_call(data_item, api_key, settlement_date = NULL,
   settlement_period = NULL, year = NULL, month = NULL, week = NULL,
   process_type = NULL, start_time = NULL, end_time = NULL,
   start_date = NULL, end_date = NULL, service_type = "csv",
-  version = "v1")
+  api_version = "v1")
 }
 \arguments{
 \item{data_item}{character string; the id of the B flow}
 
 \item{api_key}{character string; api key retreived from the Elexon portal}
 
-\item{...}{other values to be passed to the function}
+\item{settlement_date}{character string; settlement date (automatically cleaned by format_date)}
+
+\item{settlement_period}{character string; settlement period}
+
+\item{year}{character string; year}
+
+\item{month}{character string; month}
+
+\item{week}{character string; week}
+
+\item{process_type}{character string; process type}
+
+\item{start_time}{character string; start time}
+
+\item{end_time}{character string; end time}
+
+\item{start_date}{character string; start date}
+
+\item{end_date}{character string; end date}
+
+\item{service_type}{character string; file format (csv or xml)}
+
+\item{api_version}{character string; version of the api to use (currently on v1)}
 }
 \value{
-url; created url for the call
+character string; created url for the call
 }
 \description{
 Create an API call for B-data flows
+}
+\examples{
+build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
 }
