@@ -50,23 +50,24 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, settlement_
 }
 
 
-#' Create B flow API call and retrieve the results
+#' Send an API request (basically a wrapper to httr:GET)
 #'
-#' @inheritParams build_b_call
+#' @param url A string with the API request (usually generated from build_b_call())
 #' @return A response() object
-#' @examples
-#' get_b(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016)
-
-get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period = NULL,
-                  year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
-                  end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", version = "v1"){
-  url <- build_b_call(data_item, api_key, settlement_date, settlement_period,
-                      year, month, week, process_type, start_time,
-                      end_time, start_date, end_date, service_type, version)
-  results <- httr::GET(url)
-  return(results)
+send_request <- function(url) {
+  response <- httr::GET(url)
+  return(response)
 }
 
+
+#' Create B flow API call and retrieve the results
+#'
+#' @param response A response() object returned from the API request
+#' @param format The format of the content of the response() object; either "csv" or "xml"
+#' @return A tibble if format == "csv", otherwise a list
+#' @examples
+#' tibble_example <- parse_response(response, "csv") #returns a tibble
+#' tibble_example <- parse_response(response, "csv") #returns a list
 parse_response <- function(response, format){
   parsed_content <- httr::content(response, "text")
   if (format == "csv"){
@@ -82,6 +83,25 @@ parse_response <- function(response, format){
     stop("Invalid format specified")
   }
   return(ret)
+}
+
+
+#' Create B flow API call, send the request and retrieve the results, and parse them
+#'
+#' @inheritParams build_b_call
+#' @return A tibble if service_type = "csv", otherwisea list
+#' @examples
+#' get_b(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016)
+
+get_b <- function(data_item, api_key, settlement_date = NULL, settlement_period = NULL,
+                  year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
+                  end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", version = "v1"){
+  url <- build_b_call(data_item, api_key, settlement_date, settlement_period,
+                      year, month, week, process_type, start_time,
+                      end_time, start_date, end_date, service_type, version)
+  results <- send_request(url)
+  parsed <- parse_response(results, service_type)
+  return(parsed)
 }
 
   # structure(
