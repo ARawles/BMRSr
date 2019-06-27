@@ -1,7 +1,3 @@
-#Sys.setenv("http_proxy"="proxysg:8080")
-#Sys.setenv("https_proxy"="proxysg:8080")
-
-
 #' Create an API call for B-data flows
 #'
 #' @param data_item character string; the id of the B flow
