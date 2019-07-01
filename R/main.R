@@ -121,7 +121,7 @@ full_request <- function(..., get_params = list(), parse = TRUE){
 
 check_data_item <- function(data_item, type){
   if (type == "B Flow"){
-    if (data_item %!in% c()){
+    if (data_item %!in% c("B1720")){
       warning("Requested data item is not a valid B flow")
     }
   }
