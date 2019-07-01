@@ -6,3 +6,6 @@ format_date <- function(dat){
                                              "%d %m %Y", "%d %b %Y", "%d %B %Y"))
   return(format(date_return, format = "%Y-%m-%d"))
 }
+
+
+'%!in%' <- function(x,y)!('%in%'(x,y))

@@ -1,7 +1,6 @@
 library(testthat)
 library(BMRSr)
-
-context("Error messages")
+library(tibble)
 
 
 test_check("BMRSr")
