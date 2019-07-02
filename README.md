@@ -3,6 +3,8 @@
 BMRSr
 =====
 
+[![Travis build status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr)
+
 Overview
 --------
 
