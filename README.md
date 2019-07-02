@@ -3,7 +3,10 @@
 BMRSr
 =====
 
-The goal of BMRSr is to provide wrapper functions to better make use of the Balancing Mechanism Reporting System API.
+Overview
+--------
+
+The goal of BMRSr is to provide wrapper functions to better make use of the Balancing Mechanism Reporting System API. The BMRS API allow access to a number of B flow, REMIT and Legacy data. This package contains functions to build the API requests, send them, retrieve the requested data and parse it.
 
 Installation
 ------------
@@ -14,28 +17,55 @@ You can install the released version of BMRSr from [GitHub](https://github.com/A
 devtools::install_github("BMRSr")
 ```
 
-Example
--------
+You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).
 
-You can use the full\_request function to do a complete API request and return the results as a tibble or list
+Usage
+-----
+
+BMRSr contains functions that can be split into 4 main categories:
+
+-   Build
+-   Send & Receive
+-   Parse
+-   Utility
+
+### Build
+
+These functions build the URL for the API request. The main function `build_call()` is the one you'll likely be calling, but all this does is call the appropriate `build_x_call()` function for the data\_item you've requested:
+
+`build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")` actually calls
 
 ``` r
-## This creates an API request to retrieve the B1720 flow on 1st Jan 2018, Settlement Period 1, and returns the results as a tibble
-full_request(data_item = "B1720", api_key = "12345", settlement_date = '1 Jan 2018', period = "1", service_type = "csv")
+build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
+#> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
 ```
 
-You can also use the functions to create the API calls without retrieving the results
+### Send & Receive
+
+This function (`send_request`) sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
+
+This function can be used with a premade url, however the user will also have to respecify the data item from the URL:
 
 ``` r
-## This builds and returns the URL to retrieve the B1720 flow
-build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
-#> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
+send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", data_item = "B1720")
+```
 
-## This builds and returns the URL to retreive the REMIT flow
-build_call(data_item = "MessageListRetrieval", api_key = "12345", publication_from = "1 Jan 2018", publication_to = "10 Jan 2018", service_type = "xml")
-#> [1] "https://api.bmreports.com/BMRS/MessageListRetrieval/v1?APIKey=12345&PublicationFrom=2018-01-01&PublicationTo=2018-01-10&ServiceType=xml"
+### Parse
 
-## This builds and returns the URL to retreive the temperature data
-build_call(data_item = "TEMP", api_key = "12345", from_date = "1 Jan 2018", to_date = "10 Jan 2018", service_type = "csv")
-#> [1] "https://api.bmreports.com/BMRS/TEMP/v1?APIKey=12345&FromDate=2018-01-01&ToDate=2018-01-10&ServiceType=csv"
+This function (`parse_response()`) takes the response() object returned from the send\_request() function, and parses the response base on the service\_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists.
+
+``` r
+parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", data_item = "B1720"), format  = "csv")
+```
+
+### Utility
+
+These functions support the functionality of the previous 3 types. These functions include `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function. `check_data_item` ensures that the request is for a valid data item.
+
+### End-to-End
+
+To do all of these steps (build the call, send and receive the data, and then parse it), use the `full_request()` function.
+
+``` r
+full_request(full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "test"))
 ```
