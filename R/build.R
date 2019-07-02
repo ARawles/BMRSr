@@ -177,7 +177,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
                               lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
                               is_two_day_window = NULL, from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, to_settlement_date = NULL,
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
-                              trade_type = NULL, api_version = "v1", service_type = "csv"){
+                              trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv"){
   check_data_item(data_item, "Legacy")
   url = paste0("https://api.bmreports.com/BMRS/", data_item, "/", api_version, "?APIKey=", api_key)
   if (!is.null(from_date)) {
@@ -242,6 +242,9 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
   }
   if (!is.null(end_time)){
     url = paste0(url, "&EndTime=", end_time)
+  }
+  if (!is.null(trade_name)){
+    url = paste0(url, "&TradeName=", trade_name)
   }
   if (!is.null(trade_type)){
     url = paste0(url, "&TradeType=", trade_type)

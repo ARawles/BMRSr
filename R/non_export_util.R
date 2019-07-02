@@ -9,3 +9,10 @@ format_date <- function(dat){
 
 
 '%!in%' <- function(x,y)!('%in%'(x,y))
+
+upper_case <- function(x){
+  if (x %!in% c("MessageDetailRetrieval", "MessageListRetrieval")){
+    ret <- toupper(x)
+  }
+  return(ret)
+}

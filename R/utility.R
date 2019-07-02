@@ -30,7 +30,7 @@ get_function <- function(data_item){
 #' @return A list containing the named parameters required for that call
 #' @export
 get_parameters <- function(data_item){
-  return(list(settlement_date = NULL, settlement_period = NULL))
+  return(get_parameters_list[[upper_case(data_item)]])
 }
 
 
@@ -46,7 +46,7 @@ check_data_item <- function(data_item, type){
                           "B1770", "B1780", "B1790", "B1810", "B1820", "B1830",
                           "B0610", "B0620", "B0630", "B0640", "B0650", "B0810",
                           "B1410", "B1420", "B1430", "B1440", "B1610", "B1620",
-                          "B1630", "B0910", "B1320", "B0710", "B0720", "B1010",
+                          "B1630", "B0910", "B1320", "B1330", "B0710", "B0720", "B1010",
                           "B1020", "B1030", "B1510", "B1520", "B1530", "B1540")){
       warning("Requested data item is not a valid B flow")
       ret <- FALSE
