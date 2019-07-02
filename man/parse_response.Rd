@@ -20,6 +20,8 @@ A tibble if format == "csv", otherwise a list
 Parse the results of a call (specific for B flows)
 }
 \examples{
+\dontrun{
 tibble_example <- parse_response(response, "csv") #returns a tibble
 list_example <- parse_response(response, "xml") #returns a list
+}
 }

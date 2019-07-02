@@ -5,8 +5,10 @@
 #' @param format The format of the content of the response() object; either "csv" or "xml"
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
+#' \dontrun{
 #' tibble_example <- parse_response(response, "csv") #returns a tibble
 #' list_example <- parse_response(response, "xml") #returns a list
+#' }
 #' @export
 parse_response <- function(response, format){
   parsed_content <- httr::content(response, "text")
