@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ##Overview
 
-The goal of BMRSr is to provide wrapper functions to better make use of the Balancing Mechanism Reporting System API. The BMRS API allow access to a number of B flow, REMIT and Legacy data. This package contains functions to build the API requests, send them, retrieve the requested data and parse it.
+The goal of BMRSr is to provide wrapper functions to better make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf). The BMRS API allows access to a number of B flows, REMIT and Legacy data. This package contains functions to build the API requests, send them, retrieve the requested data and parse it.
 
 ## Installation
 
@@ -42,7 +42,12 @@ BMRSr contains functions that can be split into 4 main categories:
 
 These functions build the URL for the API request. The main function `build_call()` is the one you'll likely be calling, but all this does is call the appropriate `build_x_call()` function for the data_item you've requested:
 
-`build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")` actually calls
+
+```{r}
+build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
+```
+
+actually calls
 ```{r}
 build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
 ```
@@ -50,7 +55,7 @@ build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 20
 
 ### Send & Receive
 
-This function (`send_request`) sends the provided URL to the API and returns a response() object with the added attribute of data_item_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
+This function - `send_request` - sends the provided URL to the API and returns a response() object with the added attribute of data_item_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
 
 This function can be used with a premade url, however the user will also have to respecify the data item from the URL:
 
@@ -59,7 +64,7 @@ send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDat
 ```
 ### Parse
 
-This function (`parse_response()`) takes the response() object returned from the send_request() function, and parses the response base on the service_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists.
+This function - `parse_response()` - takes the response() object returned from the send_request() function, and parses the response base on the service_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists.
 
 ```{r eval = FALSE}
 parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", data_item = "B1720"), format  = "csv")
