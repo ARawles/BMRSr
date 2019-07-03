@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ##Overview
 
-The goal of BMRSr is to provide wrapper functions to better make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf). The BMRS API allows access to a number of B flows, REMIT and Legacy data. This package contains functions to build the API requests, send them, retrieve the requested data and parse it.
+The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users. The BMRS API allows access to a number of B flows, REMIT and Legacy data. This R package contains functions to build the API requests, send them, retrieve the requested data and parse it.
 
 ## Installation
 
