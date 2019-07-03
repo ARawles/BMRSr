@@ -33,7 +33,7 @@ BMRSr contains functions that can be split into 4 main categories:
 
 ### Build
 
-These functions build the URL for the API request. The main function `build_call()` is the one you'll likely be calling, but all this does is call the appropriate `build_x_call()` function for the data\_item you've requested:
+These functions build the URL for the API request. The main function `build_call()` is the one you'll likely be calling, but all this does is call the appropriate `build_x_call()` function for the data item you've requested. For example:
 
 ``` r
 build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
@@ -47,6 +47,10 @@ build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 20
 #> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
 ```
 
+Currently, there is no matching of the input parameters to the data item. In other words, you can supply input parameters that are valid for the type of call you're making (B Flow, REMIT, Legacy) but that aren't valid for the particular data item you've chosen (e.g. B1720, TEMP, etc.).
+
+To see all the allowed input parameters for each type, use `?build_[type]_call`.
+
 ### Send & Receive
 
 This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
@@ -59,7 +63,7 @@ send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDat
 
 ### Parse
 
-This function - `parse_response()` - takes the response() object returned from the send\_request() function, and parses the response base on the service\_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists.
+This function - `parse_response()` - takes the response() object returned from the send\_request() function, and parses the response base on the service\_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists. The returned CSVs from many of the calls contain unnecessary or incorrect data, so this parsing function will remove that data before returning a corrected response.
 
 ``` r
 parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", data_item = "B1720"), format  = "csv")
@@ -67,7 +71,7 @@ parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=1234
 
 ### Utility
 
-These functions support the functionality of the previous 3 types. These functions include `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function. `check_data_item` ensures that the request is for a valid data item.
+These functions support the functionality of the previous 3 types. These functions include `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function. `check_data_item` ensures that the request is for a valid data item. `get_parameters()` returns a list with the allowed input parameters for the supplied data item.
 
 ### End-to-End
 
