@@ -12,7 +12,7 @@ full_request(..., get_params = list(), parse = TRUE)
 \item{get_params}{A list of parameters to be passed to the send_request function (which will pass those parameters to httr::get)}
 }
 \value{
-If parse == TRUE: A tibble if service_type = "csv", otherwise a list \n If parse == FALSE: a response() object
+If parse == TRUE: A tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned
 }
 \description{
 Create an API call, send the request and retrieve the results, and parse them
