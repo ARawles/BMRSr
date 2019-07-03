@@ -16,12 +16,12 @@ parse_response <- function(response, format){
     start_ind <- stringr::str_locate_all(parsed_content, "\\*")
     end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
     parsed_content <- substr(parsed_content, max(start_ind[[1]][,2]+1), end_ind-1)
-    ret <- tibble::as_tibble(read.table(text = parsed_content, sep = ",", header = TRUE))
+    ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = TRUE))
   }
   else if (response$data_item_type == "Legacy" && format == "csv"){
     start_ind <- stringr::str_locate(parsed_content, "\n")
     parsed_content <- substr(parsed_content, start_ind, nchar(parsed_content))
-    ret <- tibble::as_tibble(read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
+    ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
   }
   else if (format == "xml"){
     ret <- as.list(xml2::read_xml(response))
