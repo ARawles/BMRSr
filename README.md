@@ -3,7 +3,7 @@
 BMRSr
 =====
 
-[![Travis build status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr)
+[![Travis build status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr) [![Coverage status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master)
 
 Overview
 --------
@@ -49,7 +49,7 @@ build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 20
 
 ### Send & Receive
 
-This function - `send_request` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
+This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
 
 This function can be used with a premade url, however the user will also have to respecify the data item from the URL:
 
@@ -74,5 +74,5 @@ These functions support the functionality of the previous 3 types. These functio
 To do all of these steps (build the call, send and receive the data, and then parse it), use the `full_request()` function.
 
 ``` r
-full_request(full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "test"))
+full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "test")
 ```
