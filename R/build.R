@@ -6,7 +6,7 @@
 #' @param data_item character string; the id of the B flow
 #' @param api_key character string; api key retreived from the Elexon portal
 #' @param settlement_date character string; settlement date (automatically cleaned by format_date)
-#' @param settlement_period character string; settlement period
+#' @param period character string; settlement period
 #' @param year character string; year
 #' @param month character string; month
 #' @param week character string; week
@@ -150,6 +150,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @param settlement_date character string; settlement date (automatically cleaned by format_date)
 #' @param settlement_period character string; settlement period
 #' @param bm_unit_id character string; BM Unit ID
+#' @param bm_unit_type character string; BM Unit type
 #' @param lead_party_name character string;  lead party name
 #' @param ngc_bm_unit_name character string; NGC BM Unit name
 #' @param from_cleared_date character string; from cleared date (automatically cleaned by format_date)
@@ -164,6 +165,8 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @param balancing_service_volume character string; balancing service volume
 #' @param zone_identifier character string; zone identifier
 #' @param start_time character string; start time
+#' @param end_time character string; end time
+#' @param trade_name character string; trade name
 #' @param trade_type character string; trade type
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
@@ -173,8 +176,8 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' build_legacy_call(data_item = "FUELINST", api_key = "12345", from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
 #' @export
 
-build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL, bm_unit_type = NULL,
-                              lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
+build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL,
+                              bm_unit_type = NULL, lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
                               is_two_day_window = NULL, from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, to_settlement_date = NULL,
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv"){

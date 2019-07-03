@@ -10,6 +10,8 @@ full_request(..., get_params = list(), parse = TRUE)
 \item{...}{values to be passed to appropriate build_x_call function}
 
 \item{get_params}{A list of parameters to be passed to the send_request function (which will pass those parameters to httr::get)}
+
+\item{parse}{boolean; whether the results should be parsed or returned as a response() object}
 }
 \value{
 If parse == TRUE: A tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned

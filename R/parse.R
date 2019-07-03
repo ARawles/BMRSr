@@ -1,7 +1,6 @@
 #' Parse the results of a call (specific for B flows)
 #'
 #' @param response A response() object returned from the API request
-#' @param data_item the data item that was requested and returned in the response() object
 #' @param format The format of the content of the response() object; either "csv" or "xml"
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples

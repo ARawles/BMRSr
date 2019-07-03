@@ -8,6 +8,10 @@ send_request(url, data_item, config_options = list())
 }
 \arguments{
 \item{url}{A string with the API request (usually generated from build_b_call())}
+
+\item{data_item}{character string; data item (used to append a data_item_type attribute to the response() object)}
+
+\item{config_options}{list; a named list of config options to be passed to httr::GET}
 }
 \value{
 A response() object

@@ -31,6 +31,8 @@ build_legacy_call(data_item, api_key, from_date = NULL, to_date = NULL,
 
 \item{bm_unit_id}{character string; BM Unit ID}
 
+\item{bm_unit_type}{character string; BM Unit type}
+
 \item{lead_party_name}{character string;  lead party name}
 
 \item{ngc_bm_unit_name}{character string; NGC BM Unit name}
@@ -58,6 +60,10 @@ build_legacy_call(data_item, api_key, from_date = NULL, to_date = NULL,
 \item{zone_identifier}{character string; zone identifier}
 
 \item{start_time}{character string; start time}
+
+\item{end_time}{character string; end time}
+
+\item{trade_name}{character string; trade name}
 
 \item{trade_type}{character string; trade type}
 

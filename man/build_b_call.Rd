@@ -16,6 +16,8 @@ build_b_call(data_item, api_key, settlement_date = NULL, period = NULL,
 
 \item{settlement_date}{character string; settlement date (automatically cleaned by format_date)}
 
+\item{period}{character string; settlement period}
+
 \item{year}{character string; year}
 
 \item{month}{character string; month}
@@ -35,8 +37,6 @@ build_b_call(data_item, api_key, settlement_date = NULL, period = NULL,
 \item{service_type}{character string; file format (csv or xml)}
 
 \item{api_version}{character string; version of the api to use (currently on v1)}
-
-\item{settlement_period}{character string; settlement period}
 }
 \value{
 character string; created url for the call
