@@ -16,13 +16,13 @@ test_that("Missing arguments", {
 })
 
 test_that("Build output", {
-  expect_type(build_call(data_item = "B1034", api_key = "test"), "character")
-  expect_type(build_b_call(data_item = "B1034", api_key = "test"), "character")
+  expect_type(build_call(data_item = "B1030", api_key = "test"), "character")
+  expect_type(build_b_call(data_item = "B1030", api_key = "test"), "character")
   expect_type(build_remit_call(data_item = "MessageDetailRetrieval", api_key = "test"), "character")
   expect_type(build_legacy_call(data_item = "FLOW", api_key = "test"), "character")
 })
 
 
 test_that("Invalid REMIT format", {
-  expect_warning(build_call(data_item = "MessageDetailRetrieval", api_key = "test", event_start = "12 Jun 2018", event_end = "13 Jun 2018", service_type = "csv"))
+  expect_warning(build_call(data_item = "MessageDetailRetrieval", api_key = "test", message_id = "1", service_type = "csv"))
 })

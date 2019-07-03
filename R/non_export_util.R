@@ -14,5 +14,8 @@ upper_case <- function(x){
   if (x %!in% c("MessageDetailRetrieval", "MessageListRetrieval")){
     ret <- toupper(x)
   }
+  else {
+    ret <- x
+  }
   return(ret)
 }
