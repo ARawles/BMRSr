@@ -1,4 +1,4 @@
-get_parameters_list <- list(B1720 = c("settlement_date", "period"),
+get_parameters_list <<- list(B1720 = c("settlement_date", "period"),
                             B1730 = c("settlement_date", "period"),
                             B1740 = c("settlement_date", "period"),
                             B1750 = c("settlement_date", "period"),
