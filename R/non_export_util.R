@@ -1,8 +1,8 @@
 # non-exported, utility functions
 
 format_date <- function(dat){
-  date_return <- as.Date(dat, tryFormats = c("%d-%m-%Y", "%d-%b-%Y", "%d-%m-%y",
-                                             "%d/%m/%Y", "%d/%b/%Y", "%d/%m/%y",
+  date_return <- as.Date(dat, tryFormats = c("%d-%m-%Y", "%d-%b-%Y",
+                                             "%d/%m/%Y", "%d/%b/%Y",
                                              "%d %m %Y", "%d %b %Y", "%d %B %Y"))
   return(format(date_return, format = "%Y-%m-%d"))
 }
@@ -12,7 +12,6 @@ format_datetime <- function(dattime){
                                                         "%Y/%m/%d %H:%M:%OS",
                                                         "%d-%m-%Y %H:%M:%OS",
                                                         "%d-%b-%Y %H:%M:%OS",
-                                                        "%d-%m-%y %H:%M:%OS",
                                                         "%d/%m/%Y %H:%M:%OS",
                                                         "%d/%b/%Y %H:%M:%OS",
                                                         "%d/%m/%y %H:%M:%OS",
@@ -23,10 +22,8 @@ format_datetime <- function(dattime){
                                                         "%Y/%m/%d %H%M%OS",
                                                         "%d-%m-%Y %H%M%OS",
                                                         "%d-%b-%Y %H%M%OS",
-                                                        "%d-%m-%y %H%M%OS",
                                                         "%d/%m/%Y %H%M%OS",
                                                         "%d/%b/%Y %H%M%OS",
-                                                        "%d/%m/%y %H%M%OS",
                                                         "%d %m %Y %H%M%OS",
                                                         "%d %b %Y %H%M%OS",
                                                         "%d %B %Y %H%M%OS",
@@ -34,12 +31,10 @@ format_datetime <- function(dattime){
                                                         "%Y%b%d%H%M%OS",
                                                         "%d%m%Y%H%M%OS",
                                                         "%d%b%Y%H%M%OS",
-                                                        "%d%B%Y%H%M%OS",
-                                                        "%d%b%y%H%M%OS",
-                                                        "%d%B%y%H%M%OS"
+                                                        "%d%B%Y%H%M%OS"
                                                         ))
 
-  return(format(datetime_return, format = "%Y%m%d%H%M%OS"))
+  return(format(datetime_return, format = "%Y-%m-%d%H:%M:%OS"))
 }
 
 format_time <- function(time){
@@ -54,7 +49,7 @@ format_time <- function(time){
 format_month <- function(month){
   if (nchar(month) > 3){
     warning("month is longer than 3 values, provided value will be trimmed")
-    month_return <- subset(month, 1, 3)
+    month_return <- substr(month, 1, 3)
   }
   else {
     month_return <- month

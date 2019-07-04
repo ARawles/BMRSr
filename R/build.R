@@ -287,7 +287,9 @@ build_call <- function(data_item, api_key, service_type = "csv", api_version = "
                        # balancing_service_volume = NULL, zone_identifier = NULL,
                        # trade_name = NULL, trade_type = NULL,
                        # service_type = "csv", api_version = "v1"){
-
+  if (service_type %!in% c("csv", "xml", "CSV", "XML")){
+    stop("Invalid service type specified")
+  }
   allowed_params <- get_parameters(data_item)
   prov_params <- list(...)
   if (length(prov_params) >= 1){
