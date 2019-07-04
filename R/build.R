@@ -33,7 +33,10 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
     request$url = paste0(request$url, "&SettlementDate=", format_date(settlement_date))
   }
   if (!is.null(period)){
-    request$url = paste0(request$url, "&Period=", period)
+    if (period <= 0 | period > 50){
+      stop("invalid period value")
+    }
+    request$url = paste0(request$url, "&Period=", as.character(period))
   }
   if (!is.null(process_type)){
     request$url = paste0(request$url, "&ProcessType", process_type)
@@ -200,6 +203,9 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
     request$url = paste0(request$url, "&SettlementDate=", format_date(settlement_date))
   }
   if (!is.null(settlement_period)){
+    if (settlement_period <= 0 | settlement_period > 50){
+      stop("invalid settlement_period value")
+    }
     request$url = paste0(request$url, "&SettlementPeriod=", settlement_period)
   }
   if (!is.null(bm_unit_id)){
@@ -236,6 +242,9 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
     request$url = paste0(request$url, "&ToSettlementDate=", format_date(to_settlement_date))
   }
   if (!is.null(period)){
+    if (period <= 0 | period > 50){
+      stop("invalid period value")
+    }
     request$url = paste0(request$url, "&Period=", period)
   }
   if (!is.null(fuel_type)){
