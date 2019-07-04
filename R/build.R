@@ -41,7 +41,7 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
     url = paste0(url, "&Year=", year)
   }
   if (!is.null(month)){
-    url = paste0(url, "&Month=", month)
+    url = paste0(url, "&Month=", format_month(month))
   }
   if (!is.null(week)){
     url = paste0(url, "&Week=", week)
@@ -53,10 +53,10 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
     url = paste0(url, "&EndDate=", format_date(end_date))
   }
   if (!is.null(start_time)){
-    url = paste0(url, "&StartTime=", start_time)
+    url = paste0(url, "&StartTime=", format_time(start_time))
   }
   if (!is.null(end_time)){
-    url = paste0(url, "&EndTime=", end_time)
+    url = paste0(url, "&EndTime=", format_time(end_time))
   }
   url = paste0(url, "&ServiceType=", service_type)
   return(url)
@@ -217,10 +217,10 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
     url = paste0(url, "&IsTwoDayWindow=", is_two_day_window)
   }
   if (!is.null(from_datetime)){
-    url = paste0(url, "&FromDateTime=", from_datetime)
+    url = paste0(url, "&FromDateTime=", format_datetime(from_datetime))
   }
   if (!is.null(to_datetime)){
-    url = paste0(url, "&ToDateTime=", to_datetime)
+    url = paste0(url, "&ToDateTime=", format_datetime(to_datetime))
   }
   if (!is.null(from_settlement_date)){
     url = paste0(url, "&FromSettlementDate=", format_date(from_settlement_date))
@@ -241,10 +241,10 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
     url = paste0(url, "&ZoneIdentifier=", zone_identifier)
   }
   if (!is.null(start_time)){
-    url = paste0(url, "&StartTime=", start_time)
+    url = paste0(url, "&StartTime=", format_time(start_time))
   }
   if (!is.null(end_time)){
-    url = paste0(url, "&EndTime=", end_time)
+    url = paste0(url, "&EndTime=", format_time(end_time))
   }
   if (!is.null(trade_name)){
     url = paste0(url, "&TradeName=", trade_name)
