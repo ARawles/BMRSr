@@ -37,19 +37,35 @@ These functions build the URL for the API request. The main function `build_call
 
 ``` r
 build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
+#> [1] "settlement_date"
+#> [1] "period"
+#> $url
 #> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
+#> 
+#> $service_type
+#> [1] "csv"
+#> 
+#> $data_item
+#> [1] "B1720"
 ```
 
 actually calls
 
 ``` r
 build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
+#> $url
 #> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
+#> 
+#> $service_type
+#> [1] "csv"
+#> 
+#> $data_item
+#> [1] "B1720"
 ```
 
-Currently, there is no matching of the input parameters to the data item. In other words, you can supply input parameters that are valid for the type of call you're making (B Flow, REMIT, Legacy) but that aren't valid for the particular data item you've chosen (e.g. B1720, TEMP, etc.).
+The input parameters you provide will be checked against those that are valid for the data item you are requesting, however there is no check on whether you have provided (at least) the required parameters for the data item.
 
-To see all the allowed input parameters for each type, use `?build_[type]_call`.
+To see all the allowed input parameters for each type (not each data item), use `?build_[type]_call`.
 
 ### Send & Receive
 
