@@ -56,6 +56,13 @@ actually calls
 build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
 ```
 
+These functions return a list of three items:
+
+* the url as a character string (`$url`)
+* the service type/return format (`$service_type`)
+* the data item (`$data_item`)
+
+
 The input parameters you provide will be checked against those that are valid for the data item you are requesting, however there is no check on whether you have provided (at least) the required parameters for the data item.
 
 To see all the allowed input parameters for each type (not each data item), use `?build_[type]_call`.

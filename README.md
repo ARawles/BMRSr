@@ -37,8 +37,6 @@ These functions build the URL for the API request. The main function `build_call
 
 ``` r
 build_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 2018", period = "1", service_type = "csv")
-#> [1] "settlement_date"
-#> [1] "period"
 #> $url
 #> [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv"
 #> 
@@ -62,6 +60,12 @@ build_b_call(data_item = "B1720", api_key = "12345", settlement_date = "1 Jan 20
 #> $data_item
 #> [1] "B1720"
 ```
+
+These functions return a list of three items:
+
+-   the url as a character string (`$url`)
+-   the service type/return format (`$service_type`)
+-   the data item (`$data_item`)
 
 The input parameters you provide will be checked against those that are valid for the data item you are requesting, however there is no check on whether you have provided (at least) the required parameters for the data item.
 
