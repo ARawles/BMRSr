@@ -1,7 +1,7 @@
 #' Create an API call, send the request and retrieve the results, and parse them
 #'
 #' @inheritParams build_call
-#' @param get_params A list of parameters to be passed to the send_request function (which will pass those parameters to httr::get)
+#' @param get_params list; parameters to be passed to the send_request function (which will pass those parameters to httr::get)
 #' @param parse boolean; whether the results should be parsed or returned as a response() object
 #' @return If parse == TRUE: A tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned
 #' @examples
