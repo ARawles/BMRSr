@@ -9,7 +9,6 @@
 #' @export
 
 full_request <- function(..., get_params = list(), parse = TRUE){
-  d_item <- list(...)[['data_item']]
   request <- do.call(build_call, args = list(...))
   results <- send_request(request$url, request$data_item, get_params)
   if (parse == TRUE){

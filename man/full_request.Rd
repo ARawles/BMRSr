@@ -9,12 +9,12 @@ full_request(..., get_params = list(), parse = TRUE)
 \arguments{
 \item{...}{values to be passed to appropriate build_x_call function}
 
-\item{get_params}{list; named list of parameters to be passed to the send_request function (which will pass those parameters to httr::get)}
+\item{get_params}{list; parameters to be passed to the send_request function (which will pass those parameters to httr::get)}
 
 \item{parse}{boolean; whether the results should be parsed or returned as a response() object}
 }
 \value{
-If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned
+If parse == TRUE: A tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned
 }
 \description{
 Create an API call, send the request and retrieve the results, and parse them
