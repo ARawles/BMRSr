@@ -98,5 +98,5 @@ These functions support the functionality of the previous 3 types. These functio
 To do all of these steps (build the call, send and receive the data, and then parse it), use the `full_request()` function.
 
 ``` r
-full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "test")
+full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "csv")
 ```
