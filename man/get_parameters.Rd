@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility.R
 \name{get_parameters}
 \alias{get_parameters}
-\title{TO DO: Get the required parameters for a data item}
+\title{Get the required parameters for a data item}
 \usage{
 get_parameters(data_item)
 }
@@ -13,5 +13,5 @@ get_parameters(data_item)
 A list containing the named parameters required for that call
 }
 \description{
-TO DO: Get the required parameters for a data item
+Get the required parameters for a data item
 }

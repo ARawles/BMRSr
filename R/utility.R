@@ -25,7 +25,7 @@ get_function <- function(data_item){
   }
 }
 
-#' TO DO: Get the required parameters for a data item
+#' Get the required parameters for a data item
 #' @param data_item character; the data item to get the parameters for
 #' @return A list containing the named parameters required for that call
 #' @export
