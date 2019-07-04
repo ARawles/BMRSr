@@ -1,6 +1,6 @@
 #' Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)
 #'
-#' @param url A string with the API request (usually generated from build_b_call())
+#' @param url character string; url string for the API request (usually generated from build_b_call())
 #' @param data_item character string; data item (used to append a data_item_type attribute to the response() object)
 #' @param config_options list; a named list of config options to be passed to httr::GET
 #' @return A response() object

@@ -72,7 +72,7 @@ build_legacy_call(data_item, api_key, from_date = NULL, to_date = NULL,
 \item{service_type}{character string; file format (csv or xml)}
 }
 \value{
-string; created url for the call
+list; created url for the call, service type and data item
 }
 \description{
 Create an API call for legacy data

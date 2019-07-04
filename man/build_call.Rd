@@ -4,9 +4,18 @@
 \alias{build_call}
 \title{Build an API call (uses the appropriate function based on the data item)}
 \usage{
-build_call(...)
+build_call(data_item, api_key, service_type = "csv",
+  api_version = "v1", ...)
 }
 \arguments{
+\item{data_item}{character string; data item}
+
+\item{api_key}{character string; api key for the request}
+
+\item{service_type}{character string; should be either "csv" or "xml" to specify return format}
+
+\item{api_version}{character string; api version to use - currently only v1 is valid}
+
 \item{...}{values to be passed to appropriate build_x_call function}
 }
 \description{

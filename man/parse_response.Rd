@@ -9,7 +9,7 @@ parse_response(response, format)
 \arguments{
 \item{response}{A response() object returned from the API request}
 
-\item{format}{The format of the content of the response() object; either "csv" or "xml"}
+\item{format}{character string; format of the content of the response() object; either "csv" or "xml"}
 }
 \value{
 A tibble if format == "csv", otherwise a list

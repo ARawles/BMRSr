@@ -39,7 +39,7 @@ build_b_call(data_item, api_key, settlement_date = NULL, period = NULL,
 \item{api_version}{character string; version of the api to use (currently on v1)}
 }
 \value{
-character string; created url for the call
+list; created url for the call, service type and data item
 }
 \description{
 Create an API call for B-data flows

@@ -7,7 +7,7 @@
 send_request(url, data_item, config_options = list())
 }
 \arguments{
-\item{url}{A string with the API request (usually generated from build_b_call())}
+\item{url}{character string; url string for the API request (usually generated from build_b_call())}
 
 \item{data_item}{character string; data item (used to append a data_item_type attribute to the response() object)}
 

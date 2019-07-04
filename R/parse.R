@@ -1,7 +1,7 @@
 #' Parse the results of a call (specific for B flows)
 #'
 #' @param response A response() object returned from the API request
-#' @param format The format of the content of the response() object; either "csv" or "xml"
+#' @param format character string; format of the content of the response() object; either "csv" or "xml"
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
 #' \dontrun{

@@ -47,7 +47,7 @@ build_remit_call(data_item, api_key, event_start = NULL,
 \item{api_version}{character string; version of the api to use (currently on v1)}
 }
 \value{
-string; created url for the call
+list; created url for the call, service type and data item
 }
 \description{
 Create an API call for REMIT flows
