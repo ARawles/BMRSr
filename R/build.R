@@ -47,10 +47,10 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
     url = paste0(url, "&Week=", week)
   }
   if (!is.null(start_date)){
-    url = paste0(url, "&StartDate=", start_date)
+    url = paste0(url, "&StartDate=", format_date(start_date))
   }
   if (!is.null(end_date)){
-    url = paste0(url, "&EndDate=", end_date)
+    url = paste0(url, "&EndDate=", format_date(end_date))
   }
   if (!is.null(start_time)){
     url = paste0(url, "&StartTime=", start_time)
@@ -266,12 +266,39 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' @examples
 #' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018", to_date = "13 Jun 2018", service_type = "csv")
 #' @export
-build_call <- function(...){
-  params <- list(...)
-  if (is.null(params[['data_item']])){
-    stop("argument 'data_item' is missing, with no default")
+build_call <- function(data_item, api_key, service_type = "csv", api_version = "v1", ...){
+
+
+                       # settlement_date = NULL, period = NULL,
+                       # year = NULL, month = NULL, week = NULL, process_type = NULL,
+                       # start_time = NULL, end_time = NULL, start_date = NULL,
+                       # end_date = NULL, event_start = NULL, event_end = NULL,
+                       # publication_from = NULL, publication_to = NULL,
+                       # participant_id = NULL, asset_id =  NULL, event_type = NULL,
+                       # fuel_type = NULL, message_type = NULL, message_id = NULL,
+                       # unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL,
+                       # from_date = NULL, to_date = NULL, settlement_period =  NULL,
+                       # bm_unit_id = NULL, bm_unit_type = NULL,
+                       # lead_party_name = NULL, ngc_bm_unit_name = NULL,
+                       # from_cleared_date = NULL, to_cleared_date = NULL,
+                       # is_two_day_window = NULL, from_datetime = NULL,
+                       # to_datetime = NULL, from_settlement_date = NULL,
+                       # to_settlement_date = NULL, period = NULL, fuel_type = NULL,
+                       # balancing_service_volume = NULL, zone_identifier = NULL,
+                       # trade_name = NULL, trade_type = NULL,
+                       # service_type = "csv", api_version = "v1"){
+
+  allowed_params <- get_parameters(data_item)
+  prov_params <- list(...)
+  if (length(prov_params) >= 1){
+    for (i in 1:length(prov_params)){
+      print(names(prov_params[i]))
+      if (names(prov_params)[i] %!in% allowed_params){
+        stop("invalid parameter supplied for chosen data item")
+      }
+    }
   }
-  typed_call <- get_function(params[['data_item']])
-  url <- do.call(what = typed_call, args = params)
+  typed_call <- get_function(data_item)
+  url <- do.call(what = typed_call, args = c(data_item = data_item, api_key = api_key, service_type = service_type, api_version = api_version, prov_params))
   return(url)
 }
