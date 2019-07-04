@@ -10,16 +10,10 @@
 
 full_request <- function(..., get_params = list(), parse = TRUE){
   d_item <- list(...)[['data_item']]
-  if (is.null(list(...)[['service_type']])){
-    s_type = "csv"
-  }
-  else {
-    s_type <- list(...)[['service_type']]
-  }
-  url <- do.call(build_call, args = list(...))
-  results <- send_request(url, d_item, get_params)
+  request <- do.call(build_call, args = list(...))
+  results <- send_request(request$url, request$data_item, get_params)
   if (parse == TRUE){
-    ret <- parse_response(results, format = s_type)
+    ret <- parse_response(results, format = request$service_type)
   } else {
     ret <- results
   }
