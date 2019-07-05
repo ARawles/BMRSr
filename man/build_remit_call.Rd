@@ -53,7 +53,8 @@ list; created url for the call, service type and data item
 Create an API call for REMIT flows
 }
 \examples{
-build_remit_call(data_item = "MessageListRetrieval", api_key = "12345", event_start = "14-12-2016", event_end = "15-12-2016")
+build_remit_call(data_item = "MessageListRetrieval", api_key = "12345",
+event_start = "14-12-2016", event_end = "15-12-2016")
 }
 \seealso{
 Other call-building functions: \code{\link{build_b_call}},

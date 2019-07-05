@@ -90,7 +90,8 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @examples
-#' build_remit_call(data_item = "MessageListRetrieval", api_key = "12345", event_start = "14-12-2016", event_end = "15-12-2016")
+#' build_remit_call(data_item = "MessageListRetrieval", api_key = "12345",
+#' event_start = "14-12-2016", event_end = "15-12-2016")
 #' @export
 
 build_remit_call <- function(data_item, api_key, event_start = NULL, event_end = NULL, publication_from = NULL, publication_to = NULL,
@@ -182,7 +183,8 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @examples
-#' build_legacy_call(data_item = "FUELINST", api_key = "12345", from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
+#' build_legacy_call(data_item = "FUELINST", api_key = "12345",
+#' from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
 #' @export
 
 build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL,
@@ -283,7 +285,8 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' @seealso \code{\link{build_remit_call}}
 #' @seealso \code{\link{build_legacy_call}}
 #' @examples
-#' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018", to_date = "13 Jun 2018", service_type = "csv")
+#' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018",
+#' to_date = "13 Jun 2018", service_type = "csv")
 #' @export
 build_call <- function(data_item, api_key, service_type = "csv", api_version = "v1", ...){
 
