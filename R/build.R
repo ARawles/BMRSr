@@ -318,6 +318,7 @@ build_call <- function(data_item, api_key, service_type = "csv", api_version = "
       }
     }
   }
+  data_item <- upper_case(data_item)
   typed_call <- get_function(data_item)
   request <- do.call(what = typed_call, args = c(data_item = data_item, api_key = api_key, service_type = service_type, api_version = api_version, prov_params))
   return(request)
