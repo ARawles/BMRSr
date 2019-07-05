@@ -34,7 +34,8 @@ format_datetime <- function(dattime){
                                                         "%d%B%Y%H%M%OS"
                                                         ))
 
-  return(format(datetime_return, format = "%Y-%m-%d%H:%M:%OS"))
+  datetime_return <- format(datetime_return, format = "%Y-%m-%d%%%H:%M:%OS")
+  return(datetime_return)
 }
 
 format_time <- function(time){
