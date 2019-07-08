@@ -9,11 +9,11 @@
 #' settlement_date = "14-12-2016", parse = TRUE)
 #' @export
 
-full_request <- function(..., get_params = list(), parse = TRUE){
+full_request <- function(..., get_params = list(), parse = TRUE, clean_dates = TRUE){
   request <- do.call(build_call, args = list(...))
   results <- send_request(request$url, request$data_item, get_params)
   if (parse == TRUE){
-    ret <- parse_response(results, format = request$service_type)
+    ret <- parse_response(results, format = request$service_type, clean_dates = clean_dates)
   } else {
     ret <- results
   }

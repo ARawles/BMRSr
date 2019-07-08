@@ -2,6 +2,7 @@
 #'
 #' @param response A response() object returned from the API request
 #' @param format character string; format of the content of the response() object; either "csv" or "xml"
+#' @param clean_dates boolean; whether to clean date/time columns
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
 #' \dontrun{
@@ -9,14 +10,16 @@
 #' list_example <- parse_response(response, "xml") #returns a list
 #' }
 #' @export
-parse_response <- function(response, format){
+parse_response <- function(response, format, clean_dates = TRUE){
   parsed_content <- httr::content(response, "text")
   if (response$data_item_type == "B Flow" && format == "csv"){
     start_ind <- stringr::str_locate_all(parsed_content, "\\*")
     end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
     parsed_content <- substr(parsed_content, max(start_ind[[1]][,2]+1), end_ind-1)
     ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = TRUE))
-    ret <- clean_date_columns(ret)
+    if (clean_dates == TRUE){
+      ret <- clean_date_columns(ret)
+    }
   }
   else if (response$data_item_type == "Legacy" && format == "csv"){
     start_ind <- stringr::str_locate(parsed_content, "\n")
@@ -30,7 +33,9 @@ parse_response <- function(response, format){
     else {
       names(ret) <- get_column_names(response$data_item)
     }
+    if (clean_dates == TRUE){
     ret <- clean_date_columns(ret)
+    }
   }
   else if (format == "xml"){
     ret <- as.list(xml2::read_xml(response))
