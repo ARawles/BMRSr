@@ -23,6 +23,12 @@ parse_response <- function(response, format){
     ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
     ret <- droplevels(ret)
     ret <- ret[1:nrow(ret) - 1,]
+    if (ncol(ret) != get_column_names(response$data_item)){
+      warning("Number of columns in csv doesn't match expected; leaving names as default")
+    }
+    else {
+      names(ret) <- get_column_names(response$data_item)
+    }
   }
   else if (format == "xml"){
     ret <- as.list(xml2::read_xml(response))
