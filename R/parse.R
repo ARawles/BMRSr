@@ -16,6 +16,7 @@ parse_response <- function(response, format){
     end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
     parsed_content <- substr(parsed_content, max(start_ind[[1]][,2]+1), end_ind-1)
     ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = TRUE))
+    ret <- clean_date_columns(ret)
   }
   else if (response$data_item_type == "Legacy" && format == "csv"){
     start_ind <- stringr::str_locate(parsed_content, "\n")
@@ -23,6 +24,7 @@ parse_response <- function(response, format){
     ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
     ret <- droplevels(ret)
     ret <- ret[1:nrow(ret) - 1,]
+    ret <- clean_date_columns(ret)
     if (ncol(ret) != length(get_column_names(response$data_item))){
       warning("Number of columns in csv doesn't match expected; leaving names as default")
     }
