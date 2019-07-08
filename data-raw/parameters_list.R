@@ -103,7 +103,7 @@ get_parameters_list <- list(B1720 = c("settlement_date", "period"),
 
 )
 
-get_column_names_list <- list(TEMP = c("record_type", "spot_date_time", "temperature_out_turn", "normal_reference_temperature", "low_reference_temperature", "high_reference_temperature"),
+get_column_names_list <- list(TEMP = c("record_type", "spot_date", "temperature_out_turn", "normal_reference_temperature", "low_reference_temperature", "high_reference_temperature"),
                               BOD = c("record_type", "bm_unit_id", "bm_unit_type", "lead_party_name", "ngc_bm_unit_name", "settlement_date", "settlement_period", "bm_offer_pair_number", "from_time", "from_level", "to_time", "to_level", "bid_price", "offer_price"),
                               CDN = c("record_type", "participant_id", "credit_default_level", "entered_default_settlement_date", "entered_default_settlement_period", "cleared_default_settlement_date", "cleared_default_settlement_period", "cleared_default_text"),
                               SYSWARN = c("record_type", "warning_date_time", "warning_text"),

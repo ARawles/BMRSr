@@ -135,13 +135,13 @@ get_column_names <- function(data_item){
 clean_date_columns <- function(x){
   for (i in 1:ncol(x)){
     if (stringr::str_detect(names(x)[i], "date") == TRUE & stringr::str_detect(names(x)[i], "date_time") == FALSE){
-      x[,i] <- as.Date(x[,i], format = "%Y%m%d")
+      x[,i] <- as.Date(as.character(x[,i]), format = "%Y%m%d")
     }
     else if(stringr::str_detect(names(x)[i], "date") == TRUE & stringr::str_detect(names(x)[i], "date_time") == TRUE){
-      x[,i] <- as.POSIXct(x[,i], format = "%Y-%m-%d %H:%M:%OS")
+      x[,i] <- as.POSIXct(as.character(x[,i]), format = "%Y-%m-%d %H:%M:%OS")
     }
     else if (stringr::str_detect(names(x)[i], "date") == FALSE & stringr::str_detect(names(x)[i], "time") == TRUE){
-      x[,i] <- as.POSIXct(x[,i], "%H:%M:%OS")
+      x[,i] <- as.POSIXct(as.character(x[,i]), "%H:%M:%OS")
     }
   }
   return(x)
