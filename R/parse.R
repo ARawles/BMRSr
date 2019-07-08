@@ -22,6 +22,7 @@ parse_response <- function(response, format){
     parsed_content <- substr(parsed_content, start_ind, nchar(parsed_content))
     ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
     ret <- droplevels(ret)
+    ret <- ret[1:nrow(ret) - 1,]
   }
   else if (format == "xml"){
     ret <- as.list(xml2::read_xml(response))
