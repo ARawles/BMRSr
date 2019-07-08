@@ -21,6 +21,7 @@ send_request <- function(url, data_item, config_options = list()) {
                            "BMUNITSEARCH", "SYSWARNTDYTOM", "HISTSYSWARN", "LOLPDRM", "DEMCI", "STORAW", "TRADINGUNIT")){
     response$data_item_type <- "Legacy"
   }
+  response$data_item <- data_item
   return(response)
 }
 
