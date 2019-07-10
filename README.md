@@ -73,7 +73,7 @@ To see all the allowed input parameters for each type (not each data item), use 
 
 ### Send & Receive
 
-This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the httr::GET() function (implemented primarily for proxies and the like).
+This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the `httr::GET()` function (implemented primarily for proxies and the like).
 
 This function can be used with a premade url, however the user will also have to respecify the data item from the URL:
 
@@ -94,10 +94,11 @@ parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=1234
 These functions support the functionality of the previous 3 types:
 
 -   `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function.
--   `check_data_item` ensures that the request is for a valid data item. `get_parameters()` returns a list with the allowed input parameters for the supplied data item.
--   `clean_data_columns` reformats date/time/datetime columns based on their column names.
--   `get_data_items` returns all valid data items.
--   `get_column_names` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
+-   `check_data_item()` ensures that the request is for a valid data item.
+-   `get_parameters()` returns a list with the allowed input parameters for the supplied data item.
+-   `clean_data_columns()` reformats date/time/datetime columns based on their column names.
+-   `get_data_items()` returns all valid data items.
+-   `get_column_names()` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
 
 ### End-to-End
 
