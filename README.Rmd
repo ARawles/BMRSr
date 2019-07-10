@@ -89,7 +89,7 @@ parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=1234
 
 ### Utility
 
-These functions support the functionality of the previous 3 types. These functions include `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function. `check_data_item` ensures that the request is for a valid data item. `get_parameters()` returns a list with the allowed input parameters for the supplied data item.
+These functions support the functionality of the previous 3 types. These functions include `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function. `check_data_item` ensures that the request is for a valid data item. `get_parameters()` returns a list with the allowed input parameters for the supplied data item. `clean_data_columns` reformats date/time/datetime columns based on their column names. `get_data_items` returns all valid data items. `get_column_names` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
 
 ### End-to-End
 
