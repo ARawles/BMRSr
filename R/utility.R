@@ -56,13 +56,7 @@ check_data_item <- function(data_item, type){
     }
   }
   else if (type == "Legacy"){
-    if (data_item %!in% c("TEMP", "BOD", "CDN", "SYSWARN", "DISBAD", "NETBSAD", "FREQ", "MID", "DEVINDOD", "NONBM", "QAS", "ROLSYSDEM",
-                          "WINDFORPK", "WINDFORFUELHH","FUELINSTHHCUR", "FUELINST", "FUELHH", "INTERFUELHH", "NOU2T14D", "FOU2T14D",
-                          "UOU2T14D", "NOU2T52W", "FOU2T52W", "UOU2T52W", "NOUY1", "NOUY2", "NOUY3", "NOUY4", "NOUY5", "ZOU2T14D",
-                          "ZOU2T52W", "ZOUY1", "ZOUY2", "ZOUY3", "ZOUY4", "ZOUY5", "INDOITSDO", "MELIMBALNGC", "FORDAYDEM", "DEMMF2T14D",
-                          "DEMMF2T52W", "SOSOP", "SOSOT", "PKDEMYESTTDYTOM", "INDPKDEMINFO", "SYSDEM", "INDTRIADDEMINFO", "PHYBMDATA",
-                          "DYNBMDATA", "DERBMDATA", "DERSYSDATA", "DETSYSPRICES", "MKTDEPTHDATA", "LATESTACCEPTS", "HISTACCEPTS", "SYSMSG",
-                          "BMUNITSEARCH", "SYSWARNTDYTOM", "HISTSYSWARN", "LOLPDRM", "DEMCI", "STORAW", "TRADINGUNIT")){
+    if (data_item %!in% get_data_items()){
       warning("Requested data item is not a valid legacy data item")
       ret <- FALSE
     }
@@ -95,7 +89,7 @@ get_data_items <- function() {
            "B1410", "B1420", "B1430", "B1440", "B1610", "B1620",
            "B1630", "B0910", "B1320", "B1330", "B0710", "B0720", "B1010",
            "B1020", "B1030", "B1510", "B1520", "B1530", "B1540",
-           "REMIT", "TEMP", "BOD", "CDN", "SYSWARN", "DISBAD", "NETBSAD", "FREQ", "MID", "DEVINDOD", "NONBM", "QAS", "ROLSYSDEM",
+           "MessageListRetrieval", "MessageDetailRetrieval", "TEMP", "BOD", "CDN", "SYSWARN", "DISBAD", "NETBSAD", "FREQ", "MID", "DEVINDOD", "NONBM", "QAS", "ROLSYSDEM",
            "WINDFORPK", "WINDFORFUELHH","FUELINSTHHCUR", "FUELINST", "FUELHH", "INTERFUELHH", "NOU2T14D", "FOU2T14D",
            "UOU2T14D", "NOU2T52W", "FOU2T52W", "UOU2T52W", "NOUY1", "NOUY2", "NOUY3", "NOUY4", "NOUY5", "ZOU2T14D",
            "ZOU2T52W", "ZOUY1", "ZOUY2", "ZOUY3", "ZOUY4", "ZOUY5", "INDOITSDO", "MELIMBALNGC", "FORDAYDEM", "DEMMF2T14D",
@@ -109,19 +103,7 @@ get_data_items <- function() {
 #' @value vector; a vector of character strings with the column headings
 #' @export
 get_column_names <- function(data_item){
-  if (upper_case(data_item) %!in% c("B1720", "B1730", "B1740", "B1750", "B1760",
-                          "B1770", "B1780", "B1790", "B1810", "B1820", "B1830",
-                          "B0610", "B0620", "B0630", "B0640", "B0650", "B0810",
-                          "B1410", "B1420", "B1430", "B1440", "B1610", "B1620",
-                          "B1630", "B0910", "B1320", "B1330", "B0710", "B0720", "B1010",
-                          "B1020", "B1030", "B1510", "B1520", "B1530", "B1540",
-                          "MessageListRetrieval", "MessageDetailRetrieval", "TEMP", "BOD", "CDN", "SYSWARN", "DISBAD", "NETBSAD", "FREQ", "MID", "DEVINDOD", "NONBM", "QAS", "ROLSYSDEM",
-                          "WINDFORPK", "WINDFORFUELHH","FUELINSTHHCUR", "FUELINST", "FUELHH", "INTERFUELHH", "NOU2T14D", "FOU2T14D",
-                          "UOU2T14D", "NOU2T52W", "FOU2T52W", "UOU2T52W", "NOUY1", "NOUY2", "NOUY3", "NOUY4", "NOUY5", "ZOU2T14D",
-                          "ZOU2T52W", "ZOUY1", "ZOUY2", "ZOUY3", "ZOUY4", "ZOUY5", "INDOITSDO", "MELIMBALNGC", "FORDAYDEM", "DEMMF2T14D",
-                          "DEMMF2T52W", "SOSOP", "SOSOT", "PKDEMYESTTDYTOM", "INDPKDEMINFO", "SYSDEM", "INDTRIADDEMINFO", "PHYBMDATA",
-                          "DYNBMDATA", "DERBMDATA", "DERSYSDATA", "DETSYSPRICES", "MKTDEPTHDATA", "LATESTACCEPTS", "HISTACCEPTS", "SYSMSG",
-                          "BMUNITSEARCH", "SYSWARNTDYTOM", "HISTSYSWARN", "LOLPDRM", "DEMCI", "STORAW", "TRADINGUNIT")){
+  if (upper_case(data_item) %!in% get_data_items()){
     stop("Not a valid data item")
   }
 
