@@ -7,7 +7,12 @@
 #' @export
 send_request <- function(url, data_item, config_options = list()) {
   response <- httr::GET(url, do.call(httr::config, config_options))
-  if (nchar(data_item) == 5 & substr(data_item,1,1) == "B"){
+  if (data_item %in% c("B1720", "B1730", "B1740", "B1750", "B1760",
+                       "B1770", "B1780", "B1790", "B1810", "B1820", "B1830",
+                       "B0610", "B0620", "B0630", "B0640", "B0650", "B0810",
+                       "B1410", "B1420", "B1430", "B1440", "B1610", "B1620",
+                       "B1630", "B0910", "B1320", "B1330", "B0710", "B0720", "B1010",
+                       "B1020", "B1030", "B1510", "B1520", "B1530", "B1540")){
     response$data_item_type <- "B Flow"
   }
   else if (data_item %in% c("MessageDetailRetrieval", "MessageListRetrieval")){

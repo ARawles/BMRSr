@@ -11,20 +11,27 @@
 #' }
 #' @export
 parse_response <- function(response, format, clean_dates = TRUE){
+  if (httr::status_code(response) != 200){
+    warning(paste("Parsing unsuccessful: response code was", status_code(response)))
+    return()
+  }
   parsed_content <- httr::content(response, "text")
   if (response$data_item_type == "B Flow" && format == "csv"){
-    start_ind <- stringr::str_locate_all(parsed_content, "\\*")
+    if (is(httr::content(response, "parsed")) == "xml_document"){
+      stop("csv requested, xml returned. Check your API key is correct.")
+    }
     end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
-    parsed_content <- substr(parsed_content, max(start_ind[[1]][,2]+1), end_ind-1)
-    ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = TRUE))
+    parsed_content <- substr(parsed_content, 1, end_ind-1)
+    ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA"))
     if (clean_dates == TRUE){
       ret <- clean_date_columns(ret)
     }
   }
   else if (response$data_item_type == "Legacy" && format == "csv"){
-    start_ind <- stringr::str_locate(parsed_content, "\n")
-    parsed_content <- substr(parsed_content, start_ind, nchar(parsed_content))
-    ret <- tibble::as_tibble(utils::read.table(text = parsed_content, sep = ",", header = FALSE, fill = TRUE))
+    if (is(httr::content(response, "parsed")) == "xml_document"){
+      stop("csv requested, xml returned. Check your API key is correct.")
+    }
+    ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
     ret <- droplevels(ret)
     ret <- ret[1:nrow(ret) - 1,]
     if (ncol(ret) != length(get_column_names(response$data_item))){
