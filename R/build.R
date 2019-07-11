@@ -34,7 +34,9 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
   }
   if (!is.null(period)){
     if (period <= 0 | period > 50){
+      if (period != "*"){
       stop("invalid period value")
+      }
     }
     request$url = paste0(request$url, "&Period=", as.character(period))
   }
