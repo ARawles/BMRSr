@@ -4,6 +4,7 @@
 #' @param data_item character string; data item (used to append a data_item_type attribute to the response() object)
 #' @param config_options list; a named list of config options to be passed to httr::GET
 #' @return A response() object
+#' @export
 send_request <- function(url, data_item, config_options = list()) {
   response <- httr::GET(url, do.call(httr::config, config_options))
   if (nchar(data_item) == 5 & substr(data_item,1,1) == "B"){

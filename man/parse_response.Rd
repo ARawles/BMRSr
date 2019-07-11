@@ -4,12 +4,14 @@
 \alias{parse_response}
 \title{Parse the results of a call (specific for B flows)}
 \usage{
-parse_response(response, format)
+parse_response(response, format, clean_dates = TRUE)
 }
 \arguments{
 \item{response}{A response() object returned from the API request}
 
 \item{format}{character string; format of the content of the response() object; either "csv" or "xml"}
+
+\item{clean_dates}{boolean; whether to clean date/time columns}
 }
 \value{
 A tibble if format == "csv", otherwise a list
