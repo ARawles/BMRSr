@@ -11,41 +11,43 @@
 #' }
 #' @export
 parse_response <- function(response, format, clean_dates = TRUE){
+
   if (httr::status_code(response) != 200){
     warning(paste("Parsing unsuccessful: response code was", httr::status_code(response)))
     return()
   }
+
   parsed_content <- httr::content(response, "text")
-  if (response$data_item_type == "B Flow" && format == "csv"){
+  if (format == "csv"){
+
     if (methods::is(httr::content(response, "parsed"))[1] == "xml_document"){
-      stop("csv requested, xml returned. Check your API key is correct.")
+      stop(paste("csv requested, xml returned. ", "Error code = ", xml2::as_list(xml2::read_xml(response)))$response$responseMetadata$httpCode[[1]])
     }
-    end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
-    parsed_content <- substr(parsed_content, 1, end_ind-1)
-    ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA"))
-    if (clean_dates == TRUE){
-      ret <- clean_date_columns(ret)
+
+    if (response$data_item_type == "B Flow"){
+      end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
+      parsed_content <- substr(parsed_content, 1, end_ind-1)
+      ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA"))
+      if (clean_dates == TRUE){
+        ret <- clean_date_columns(ret)
+      }
     }
-  }
-  else if (response$data_item_type == "Legacy" && format == "csv"){
-    if (methods::is(httr::content(response, "parsed")) == "xml_document"){
-      stop("csv requested, xml returned. Check your API key is correct.")
-    }
-    ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
-    ret <- droplevels(ret)
-    ret <- ret[1:nrow(ret) - 1,]
-    if (ncol(ret) != length(get_column_names(response$data_item))){
-      warning("Number of columns in csv doesn't match expected; leaving names as default")
-    }
-    else {
-      names(ret) <- get_column_names(response$data_item)
-    }
-    if (clean_dates == TRUE){
-    ret <- clean_date_columns(ret)
-    }
-  }
+    else if (response$data_item_type == "Legacy"){
+      ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
+      ret <- droplevels(ret)
+      ret <- ret[1:nrow(ret) - 1,]
+      if (ncol(ret) != length(get_column_names(response$data_item))){
+        warning("Number of columns in csv doesn't match expected; leaving names as default")
+      }
+      else {
+        names(ret) <- get_column_names(response$data_item)
+      }
+      if (clean_dates == TRUE){
+        ret <- clean_date_columns(ret)
+      }
+    }}
   else if (format == "xml"){
-    ret <- as.list(xml2::read_xml(response))
+    ret <- xml2::as_list(xml2::read_xml(response))
   }
   else {
     stop("Invalid format specified")

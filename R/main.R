@@ -14,7 +14,7 @@
 
 full_request <- function(..., get_params = list(), parse = TRUE, clean_dates = TRUE){
   request <- do.call(build_call, args = list(...))
-  results <- send_request(request$url, request$data_item, get_params)
+  results <- send_request(request, get_params)
   if (parse == TRUE){
     ret <- parse_response(results, format = request$service_type, clean_dates = clean_dates)
   } else {

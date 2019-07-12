@@ -7,8 +7,8 @@ test_that("Invalid data items/types",{
 })
 
 test_that("Non-succesful response codes",{
-  expect_error(parse_response(send_request("https://api.bmreports.com/BMRS/B1770/v1?APIKey=test&ettlementDate=2018-06-01&Period=10&ServiceType=csv", "B1770"), format = "csv"))
-  expect_error(parse_response(send_request("https://api.bmreports.com/BMRS/B1770/v1?APIKey=test&SettlementDate=2018-06-01&Period=10&ServiceType=csv", "B1770"), format = "error"))
+  expect_error(parse_response(send_request(request = list(url = "https://api.bmreports.com/BMRS/B1770/v1?APIKey=test&ettlementDate=2018-06-01&Period=10&ServiceType=csv",data_item = "B1770")), format = "csv"))
+  expect_error(parse_response(send_request(request = list(url = "https://api.bmreports.com/BMRS/B1770/v1?APIKey=test&ettlementDate=2018-06-01&Period=10&ServiceType=csv",data_item = "B1770")), format = "error"))
 })
 
 
