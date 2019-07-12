@@ -6,8 +6,10 @@
 #' @param clean_dates boolean; whether the csv response columns should be cleaned (reformatted to be correct date/time/datetime)
 #' @return If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse == FALSE, a response() object is returned
 #' @examples
+#' \dontrun{
 #' full_request(data_item = "B1730", api_key = "12345",
 #' settlement_date = "14-12-2016", parse = TRUE)
+#' }
 #' @export
 
 full_request <- function(..., get_params = list(), parse = TRUE, clean_dates = TRUE){

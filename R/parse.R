@@ -28,7 +28,7 @@ parse_response <- function(response, format, clean_dates = TRUE){
     }
   }
   else if (response$data_item_type == "Legacy" && format == "csv"){
-    if (is(httr::content(response, "parsed")) == "xml_document"){
+    if (methods::is(httr::content(response, "parsed")) == "xml_document"){
       stop("csv requested, xml returned. Check your API key is correct.")
     }
     ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
