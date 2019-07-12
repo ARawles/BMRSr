@@ -13,9 +13,11 @@ full_request(..., get_params = list(), parse = TRUE,
 \item{get_params}{list; parameters to be passed to the send_request function (which will pass those parameters to httr::get)}
 
 \item{parse}{boolean; whether the results should be parsed or returned as a response() object}
+
+\item{clean_dates}{boolean; whether the csv response columns should be cleaned (reformatted to be correct date/time/datetime)}
 }
 \value{
-If parse == TRUE: A tibble if service_type = "csv", otherwise a list. If parse == FALSE: a response() object is returned
+If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse == FALSE, a response() object is returned
 }
 \description{
 Create an API call, send the request and retrieve the results, and parse them

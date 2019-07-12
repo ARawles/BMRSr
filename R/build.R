@@ -281,6 +281,10 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 }
 
 #' Build an API call (uses the appropriate function based on the data item)
+#' @param data_item character string; data item to be retrieved
+#' @param api_key character string; user's API key
+#' @param service_type character string; one of "csv" or "xml" to define return format
+#' @param api_version character string; API version to use - currently only on version 1
 #' @param ... values to be passed to appropriate build_x_call function
 #' @family call-building functions
 #' @seealso \code{\link{build_b_call}}

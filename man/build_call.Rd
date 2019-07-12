@@ -8,6 +8,14 @@ build_call(data_item, api_key, service_type = "csv",
   api_version = "v1", ...)
 }
 \arguments{
+\item{data_item}{character string; data item to be retrieved}
+
+\item{api_key}{character string; user's API key}
+
+\item{service_type}{character string; one of "csv" or "xml" to define return format}
+
+\item{api_version}{character string; API version to use - currently only on version 1}
+
 \item{...}{values to be passed to appropriate build_x_call function}
 }
 \description{

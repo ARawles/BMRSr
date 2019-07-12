@@ -12,12 +12,12 @@
 #' @export
 parse_response <- function(response, format, clean_dates = TRUE){
   if (httr::status_code(response) != 200){
-    warning(paste("Parsing unsuccessful: response code was", status_code(response)))
+    warning(paste("Parsing unsuccessful: response code was", httr::status_code(response)))
     return()
   }
   parsed_content <- httr::content(response, "text")
   if (response$data_item_type == "B Flow" && format == "csv"){
-    if (is(httr::content(response, "parsed"))[1] == "xml_document"){
+    if (methods::is(httr::content(response, "parsed"))[1] == "xml_document"){
       stop("csv requested, xml returned. Check your API key is correct.")
     }
     end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
