@@ -128,7 +128,7 @@ clean_date_columns <- function(x){
       x[,i] <- as.POSIXct(sapply(x[,i], as.character), format = "%Y-%m-%d %H:%M:%OS")
     }
     else if (stringr::str_detect(names(x)[i], "date") == FALSE & stringr::str_detect(names(x)[i], "time") == TRUE){
-      x[,i] <- as.POSIXct(sapply(x[,i], as.character), "%H:%M:%OS")
+      x[,i] <- as.POSIXct(sapply(x[,i], as.character), tryFormats = c("%H:%M:%OS", "%Y%m%d%H%M%OS"))
     }
   }
   return(x)
