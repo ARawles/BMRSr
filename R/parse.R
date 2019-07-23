@@ -21,7 +21,7 @@ parse_response <- function(response, format, clean_dates = TRUE){
   if (format == "csv"){
 
     if (methods::is(httr::content(response, "parsed"))[1] == "xml_document"){
-      stop(paste("csv requested, xml returned. ", "Error code = ", xml2::as_list(xml2::read_xml(response)))$response$responseMetadata$httpCode[[1]])
+      stop(paste("csv requested, xml returned. ", "Error code = ", xml2::as_list(xml2::read_xml(response))$response$responseMetadata$httpCode[[1]]))
     }
 
     if (response$data_item_type == "B Flow"){
