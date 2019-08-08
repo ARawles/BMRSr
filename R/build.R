@@ -208,7 +208,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
   }
   if (!is.null(settlement_period)){
     if (settlement_period <= 0 | settlement_period > 50){
-      if (period != "*"){
+      if (settlement_period != "*"){
         stop("invalid settlemet_period value")
       }
     }
