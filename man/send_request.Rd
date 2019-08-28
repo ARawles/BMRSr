@@ -4,17 +4,15 @@
 \alias{send_request}
 \title{Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)}
 \usage{
-send_request(url, data_item, config_options = list())
+send_request(request, config_options = list())
 }
 \arguments{
-\item{url}{character string; url string for the API request (usually generated from build_b_call())}
-
-\item{data_item}{character string; data item (used to append a data_item_type attribute to the response() object)}
+\item{request}{list; a named list with at least a url to be sent and the data item contained within (most easily generated from build_call())}
 
 \item{config_options}{list; a named list of config options to be passed to httr::GET}
 }
 \value{
-A response() object
+A response() object with an added data_item attribute
 }
 \description{
 Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)
