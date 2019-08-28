@@ -49,7 +49,8 @@ To perform a complete API request (build the call, send and receive the data, an
 full_request(data_item = "B1720",
              api_key = "test",
              settlement_date = "12 Jun 2018",
-             period = "1", service_type = "csv")
+             period = "1",
+             service_type = "csv")
 ```
 
 ### Build
@@ -103,9 +104,10 @@ send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDat
 This function - `parse_response()` - takes the response() object returned from the send_request() function, and parses the response base on the service_type parameter (whether it was "csv" or "xml"). CSVs return tibbles, and XMLs return lists. The returned CSVs from many of the calls contain unnecessary or incorrect data, so this parsing function will remove that data before returning a corrected response.
 
 ```{r eval = FALSE}
-parse_response(send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv",
-                            data_item = "B1720"),
-               format  = "csv")
+parse_response(
+  send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv",
+               data_item = "B1720"),
+  format  = "csv")
 ```
 
 
@@ -139,10 +141,11 @@ get_parameters("FUELINST")
 
 ```{r eval = FALSE}
 #Perform the full request and ask for a CSV back
-gen_data <- full_request(data_item = "FUELINST", api_key = api,
-             from_datetime = "2019-07-01 00:00:00",
-             to_datetime = "2019-07-03 00:00:00",
-             service_type = "csv")
+gen_data <- full_request(data_item = "FUELINST",
+                         api_key = api,
+                         from_datetime = "2019-07-01 00:00:00",
+                         to_datetime = "2019-07-03 00:00:00",
+                         service_type = "csv")
 ```
 
 
