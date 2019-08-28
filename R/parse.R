@@ -43,7 +43,7 @@ parse_response <- function(response, format, clean_dates = TRUE){
         names(ret) <- get_column_names(response$data_item)
       }
       if (clean_dates == TRUE){
-        ret <- clean_date_columns(ret)
+        ret <- try(clean_date_columns(ret))
       }
     }}
   else if (format == "xml"){
