@@ -31,6 +31,14 @@ BMRSr contains functions that can be split into 4 main categories:
 -   Parse
 -   Utility
 
+### End-to-End
+
+To perform a complete API request (build the call, send and receive the data, and then parse it), use the `full_request()` function.
+
+``` r
+full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "csv")
+```
+
 ### Build
 
 These functions build the URL for the API request. The main function `build_call()` is the one you'll likely be calling, but all this does is call the appropriate `build_x_call()` function for the data item you've requested. For example:
@@ -100,10 +108,27 @@ These functions support the functionality of the previous 3 types:
 -   `get_data_items()` returns all valid data items.
 -   `get_column_names()` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
 
-### End-to-End
+Full example
+------------
 
-To do all of these steps (build the call, send and receive the data, and then parse it), use the `full_request()` function.
+Here's a full example, using the package to return generation by fuel type data
 
 ``` r
-full_request(data_item = "B1720", api_key = "test", settlement_date = "12 Jun 2018", period = "1", service_type = "csv")
+
+api <- "your_api_key_goes_here"
+
+
+#We're requesting the FUELINST data item here.
+#A full list of all the data items can be returned using the get_data_items() function
+
+#Find out which parameters we need to provide for the data item we've chosen...
+get_parameters("FUELINST")
+#> [1] "from_datetime" "to_datetime"
+```
+
+``` r
+full_request(data_item = "FUELINST", api_key = api,
+             from_datetime = "2019-08-27 00:00:00",
+             to_datetime = "2019-08-28 00:00:00",
+             service_type = "csv")
 ```
