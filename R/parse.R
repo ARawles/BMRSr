@@ -29,7 +29,7 @@ parse_response <- function(response, format, clean_dates = TRUE){
       parsed_content <- substr(parsed_content, 1, end_ind-1)
       ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA"))
       if (clean_dates == TRUE){
-        ret <- try(clean_date_columns(ret))
+        ret <- try(clean_date_columns(ret), TRUE)
       }
     }
     else if (response$data_item_type == "Legacy"){
@@ -43,7 +43,7 @@ parse_response <- function(response, format, clean_dates = TRUE){
         names(ret) <- get_column_names(response$data_item)
       }
       if (clean_dates == TRUE){
-        ret <- try(clean_date_columns(ret))
+        ret <- try(clean_date_columns(ret), TRUE)
       }
     }}
   else if (format == "xml"){
