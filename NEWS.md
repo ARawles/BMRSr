@@ -4,6 +4,7 @@
 * Included packages used in example in README.md in Suggests
 * Updated documentation of included dataset to include description of every column
 * Fixed versioning scheme
+* Changed license to GPL (>= 2)
 
 # BMRSr 0.1.2.001
 
