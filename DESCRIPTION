@@ -2,7 +2,7 @@ Package: BMRSr
 Type: Package
 Title: Wrapper Functions to the BMRS API
 Version: 0.1.2
-Authors@R: person("Adam", "Rawles", email = "adam.rawles@elexon.co.uk", role = c("aut", "cre"))
+Authors@R: person("Adam", "Rawles", email = "adamrawles@hotmail.co.uk", role = c("aut", "cre"))
 Description: A package containing wrapper functions to better interact with the Balancing Mechanism
     Reporting System API.
 License: MIT
