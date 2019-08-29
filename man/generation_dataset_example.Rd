@@ -28,7 +28,7 @@
   ...
 }}
 \source{
-\url{ttps://www.bmreports.com/bmrs/?q=help/about-us}
+\url{https://www.bmreports.com/bmrs/?q=help/about-us}
 }
 \usage{
 generation_dataset_example
