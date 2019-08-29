@@ -157,9 +157,7 @@ gen_data <- full_request(data_item = "FUELINST",
 ``` r
 #Load the libraries for a bit more cleaning and then plotting...
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
-#> Warning: package 'ggplot2' was built under R version 3.5.3
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
-#> Warning: package 'dplyr' was built under R version 3.5.3
 
 #Change the fuel types from columns to a grouping
 gen_data <- gen_data %>%

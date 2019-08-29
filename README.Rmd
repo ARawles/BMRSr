@@ -156,7 +156,7 @@ gen_data <- full_request(data_item = "FUELINST",
 gen_data <- generation_dataset_example
 ```
 
-```{r eval = TRUE}
+```{r eval = TRUE, warning=FALSE}
 #Load the libraries for a bit more cleaning and then plotting...
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
