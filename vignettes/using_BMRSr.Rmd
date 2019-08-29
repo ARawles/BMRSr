@@ -238,6 +238,6 @@ generation_data <- generation_data %>%
   tidyr::gather(key = "fuel_type", value = "generation_mw", ccgt:intnem)
 
 #Make a line graph of the different generation types
-ggplot2::ggplot(data = gen_data, aes(x = spot_time, y = generation_mw, colour = fuel_type)) +
+ggplot2::ggplot(data = generation_data, aes(x = spot_time, y = generation_mw, colour = fuel_type)) +
   ggplot2::geom_line()
 ```
