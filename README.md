@@ -91,6 +91,8 @@ The input parameters you provide will be checked against those that are valid fo
 
 To see all the allowed input parameters for each type (not each data item), use `?build_[type]_call`.
 
+To see which input parameter you need for your data item, use `get_parameters(your_data_item)`.
+
 ### Send & Receive
 
 This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data\_item\_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config\_options parameter as a named list, that will be passed to the `httr::GET()` function (implemented primarily for proxies and the like).

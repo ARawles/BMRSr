@@ -87,6 +87,8 @@ The input parameters you provide will be checked against those that are valid fo
 
 To see all the allowed input parameters for each type (not each data item), use `?build_[type]_call`.
 
+To see which input parameter you need for your data item, use `get_parameters(your_data_item)`.
+
 
 ### Send & Receive
 
