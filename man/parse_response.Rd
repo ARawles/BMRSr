@@ -2,14 +2,14 @@
 % Please edit documentation in R/parse.R
 \name{parse_response}
 \alias{parse_response}
-\title{Parse the results of a call (specific for B flows)}
+\title{Parse the results of a call}
 \usage{
 parse_response(response, format, clean_dates = TRUE)
 }
 \arguments{
-\item{response}{A response() object returned from the API request}
+\item{response}{A response object returned from the API request}
 
-\item{format}{character string; format of the content of the response() object; either "csv" or "xml"}
+\item{format}{character string; format of the content of the response object; either "csv" or "xml"}
 
 \item{clean_dates}{boolean; whether to clean date/time columns}
 }
@@ -17,7 +17,7 @@ parse_response(response, format, clean_dates = TRUE)
 A tibble if format == "csv", otherwise a list
 }
 \description{
-Parse the results of a call (specific for B flows)
+Parse the results of a call
 }
 \examples{
 \dontrun{
