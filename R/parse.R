@@ -1,7 +1,7 @@
-#' Parse the results of a call (specific for B flows)
+#' Parse the results of a call
 #'
-#' @param response A response() object returned from the API request
-#' @param format character string; format of the content of the response() object; either "csv" or "xml"
+#' @param response A response object returned from the API request
+#' @param format character string; format of the content of the response object; either "csv" or "xml"
 #' @param clean_dates boolean; whether to clean date/time columns
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
