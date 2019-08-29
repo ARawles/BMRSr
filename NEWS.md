@@ -1,3 +1,7 @@
+#BMRSr 1.0.0
+
+* Minor changes to prepare for CRAN publication
+
 # BMRSr 0.1.3
 
 * Added NEWS.md
