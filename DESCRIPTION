@@ -28,4 +28,5 @@ Suggests:
     ggplot2,
     dplyr,
     tidyr
-VignetteBuilder: knitr
+VignetteBuilder:
+    knitr
