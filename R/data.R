@@ -4,6 +4,7 @@
 #'
 #' @format A data frame with 8655 rows and 6 variables:
 #' \describe{
+#'   \item{record_type}{data item}
 #'   \item{settlement_date}{Settlement Date of the observation}
 #'   \item{settlement_period}{Settlement Period of the observation}
 #'   \item{spot_time}{Spot Time of the observation; this is essentially an amalgamation of settlement_date and settlement_period}
