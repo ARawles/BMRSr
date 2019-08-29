@@ -8,8 +8,9 @@ get_column_names(data_item)
 }
 \arguments{
 \item{data_item}{character string; data item for the dataset}
-
-\item{vector;}{a vector of character strings with the column headings}
+}
+\value{
+vector; a vector of character strings with the column headings
 }
 \description{
 Get the column names for a returned csv dataset

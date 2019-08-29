@@ -137,7 +137,7 @@ get_data_items <- function() {
 
 #' Get the column names for a returned csv dataset
 #' @param data_item character string; data item for the dataset
-#' @param vector; a vector of character strings with the column headings
+#' @return vector; a vector of character strings with the column headings
 #' @export
 get_column_names <- function(data_item){
   if (upper_case(data_item) %!in% get_data_items()){
