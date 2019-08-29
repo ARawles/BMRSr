@@ -15,10 +15,8 @@ Imports:
     xml2,
     stringr,
     tibble,
-    utils,
     readr,
-    methods,
-    testthat
+    methods
 RoxygenNote: 6.1.1
 URL: https://github.com/ARawles/BMRSr
 Suggests: 
@@ -27,6 +25,7 @@ Suggests:
     rmarkdown,
     ggplot2,
     dplyr,
-    tidyr
+    tidyr,
+    testthat
 VignetteBuilder:
     knitr
