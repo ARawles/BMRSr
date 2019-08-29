@@ -227,7 +227,7 @@ Now we've got the data, we can convert the dataset to the tidy format and then m
 generation_data <- generation_dataset_example
 ```
 
-```{r eval = TRUE}
+```{r eval = TRUE, fig.width=7, fig.height=7}
 #Load the libraries for a bit more cleaning and then plotting...
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
