@@ -4,7 +4,7 @@
 #' Create an API call for B-data flows
 #'
 #' @param data_item character string; the id of the B flow
-#' @param api_key character string; api key retreived from the Elexon portal
+#' @param api_key character string; api key retrieved from the Elexon portal
 #' @param settlement_date character string; settlement date (automatically cleaned by format_date)
 #' @param period character string; settlement period
 #' @param year character string; year
@@ -73,7 +73,7 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
 #' Create an API call for REMIT flows
 #'
 #' @param data_item character string; the id of the REMIT flow
-#' @param api_key character string; api key retreived from the Elexon portal
+#' @param api_key character string; api key retrieved from the Elexon portal
 #' @param event_start character string; event start (automatically cleaned by format_date)
 #' @param event_end character string; event end (automatically cleaned by format_date)
 #' @param publication_from character string; publication from (automatically cleaned by format_date)
@@ -156,7 +156,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' Create an API call for legacy data
 #'
 #' @param data_item character string; the id of the legacy data
-#' @param api_key character string; api key retreived from the Elexon portal
+#' @param api_key character string; api key retrieved from the Elexon portal
 #' @param from_date character string; from date (automatically cleaned by format_date)
 #' @param to_date character string; to date (automatically cleaned by format_date)
 #' @param settlement_date character string; settlement date (automatically cleaned by format_date)

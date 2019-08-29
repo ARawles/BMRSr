@@ -16,7 +16,7 @@
 * Added a new utility function `get_data_item_type()` to return the data item type ("B Flow", "REMIT" or "Legacy") of a data item
 * Updated README to update changes
 * Added first vignette - Using_BMRSr - which describes an end-to-end process and gives an in-depth example of how to use the package.
-* Implented a try statement into the column cleaning function to no longer error and stop if column conversion fails
+* Implemented a try statement into the column cleaning function to no longer error and stop if column conversion fails
 
 # BMRSr 0.1.1.9019
 

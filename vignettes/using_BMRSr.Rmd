@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-The BMRSr package provides a number of wrapper functions to make the Balancing Mechanism Reporting Service (BMRS) API provided by ELEXON easier to use. There's a massive repository of very useful and interesting data held in BMRS, but the API itself is not particular intuitive, and can result in the user needing to repeat lots of steps in order to retrive and the clean the data. This package is an effort to automate those boring steps, making it easier for the user to retrieve the data for their analysis.
+The BMRSr package provides a number of wrapper functions to make the Balancing Mechanism Reporting Service (BMRS) API provided by ELEXON easier to use. There's a massive repository of very useful and interesting data held in BMRS, but the API itself is not particular intuitive, and can result in the user needing to repeat lots of steps in order to retrieve and the clean the data. This package is an effort to automate those boring steps, making it easier for the user to retrieve the data for their analysis.
 
 The first step in using the BMRS API is to read the documentation currently available: [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf). This document tells you all of the available data items and what you can expect to get back. I've tried to include a couple of helper functions to list all data items, find what parameters you need for specific data items, but there's a lot so this document will always be more detailed.
 
@@ -97,7 +97,7 @@ The parameters for `parse_response()` are:
 * `response`
     + A response object returned from the API request (most likely the evaluated result of the `send_request()` function).
 * `format`
-    + The format of the content of the respose (i.e. did you ask for a "csv" or "xml"?)
+    + The format of the content of the response (i.e. did you ask for a "csv" or "xml"?)
 * `clean_dates`
     + Should columns that appear to be dates/times/datetimes be auto converted to the appropriate type? This is currently based on the name of the columns and so isn't full proof. For example, some response csvs contain a 'spot_time' column that's actually a datetime value.
     
@@ -121,7 +121,7 @@ In addition to the basic workflow of build, send, parse/clean, the package also 
     + When provided with a data item, this function will return a vector of the column headings for the csv response for that data item.
     + This function was created as Legacy data items do not have column headings when returned as a csv.
 * `clean_date_columns()`
-    + This function will attempt to auto-convert columns in the provided daaframe/tibble to the correct type. Often, the API will return date/time/datetime columns as plain text, and so this function will try to convert the type based on the column heading. This doesn't always work...
+    + This function will attempt to auto-convert columns in the provided dataframe/tibble to the correct type. Often, the API will return date/time/datetime columns as plain text, and so this function will try to convert the type based on the column heading. This doesn't always work...
     
 ## A Practical Example
 

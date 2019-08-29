@@ -14,7 +14,7 @@ build_remit_call(data_item, api_key, event_start = NULL,
 \arguments{
 \item{data_item}{character string; the id of the REMIT flow}
 
-\item{api_key}{character string; api key retreived from the Elexon portal}
+\item{api_key}{character string; api key retrieved from the Elexon portal}
 
 \item{event_start}{character string; event start (automatically cleaned by format_date)}
 

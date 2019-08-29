@@ -12,7 +12,7 @@ build_b_call(data_item, api_key, settlement_date = NULL, period = NULL,
 \arguments{
 \item{data_item}{character string; the id of the B flow}
 
-\item{api_key}{character string; api key retreived from the Elexon portal}
+\item{api_key}{character string; api key retrieved from the Elexon portal}
 
 \item{settlement_date}{character string; settlement date (automatically cleaned by format_date)}
 

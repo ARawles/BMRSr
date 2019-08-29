@@ -19,7 +19,7 @@ build_legacy_call(data_item, api_key, from_date = NULL, to_date = NULL,
 \arguments{
 \item{data_item}{character string; the id of the legacy data}
 
-\item{api_key}{character string; api key retreived from the Elexon portal}
+\item{api_key}{character string; api key retrieved from the Elexon portal}
 
 \item{from_date}{character string; from date (automatically cleaned by format_date)}
 
