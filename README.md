@@ -123,6 +123,7 @@ These functions support the functionality of the previous 3 types:
 -   `clean_data_columns()` reformats date/time/datetime columns based on their column names.
 -   `get_data_items()` returns all valid data items.
 -   `get_column_names()` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
+-   `get_data_item_type()` return the data item *type* of a particular data item. This is only really relevant to know which `build_x_call()` to use.
 
 Full example
 ------------
@@ -157,12 +158,10 @@ library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 #> Warning: package 'ggplot2' was built under R version 3.5.3
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 #> Warning: package 'dplyr' was built under R version 3.5.3
-library(lubridate, quietly = TRUE, warn.conflicts = FALSE)
 
 #Change the fuel types from columns to a grouping
 gen_data <- gen_data %>%
-  dplyr::mutate(spot_time = lubridate::ymd_hms(spot_time),
-                settlement_period = as.factor(settlement_period)) %>%
+  dplyr::mutate(settlement_period = as.factor(settlement_period)) %>%
   tidyr::gather(key = "fuel_type", value = "generation_mw", ccgt:intnem)
 
 #Make a line graph of the different generation types

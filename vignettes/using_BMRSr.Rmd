@@ -1,0 +1,243 @@
+---
+title: "Using BMRSr"
+author: "Adam Rawles"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(BMRSr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+The BMRSr package provides a number of wrapper functions to make the Balancing Mechanism Reporting Service (BMRS) API provided by ELEXON easier to use. There's a massive repository of very useful and interesting data held in BMRS, but the API itself is not particular intuitive, and can result in the user needing to repeat lots of steps in order to retrive and the clean the data. This package is an effort to automate those boring steps, making it easier for the user to retrieve the data for their analysis.
+
+The first step in using the BMRS API is to read the documentation currently available: [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf). This document tells you all of the available data items and what you can expect to get back. I've tried to include a couple of helper functions to list all data items, find what parameters you need for specific data items, but there's a lot so this document will always be more detailed.
+
+Second, to actually access the BMRS API, you'll need an API key. These are freely available by signing up through the ELEXON Portal: [ELEXON portal](https://www.elexonportal.co.uk).
+
+# Structure
+
+Querying the BMRS API can be broken down into 4 parts:
+
+* The request
+* The response
+* Parsing
+* Everything else...
+
+So, all together, we need to generate and send a request, get a response back and then parse it.
+
+## End-to-end
+
+To do all of these steps in one go and just get back the parsed response, use the `full_request()` function. We'll go into a bit more detail about what exactly this function does, but it will essentially just builds the request, send it, clean the received data and then return it.
+
+To use the `full_request()` function, you'll need to provide a few things:
+
+* `...`
+    + These are all of the values that are going to be passed to the `build_call()` function (discussed below), which builds the url for the data we want. Look at the Building requests part of the vignette for what parameters to include here.
+* `get_params`
+    + If you're behind a company proxy or something similar, you'll need to pass some extra parameters when you send your request. You can provide those parameters here as a named list, and the values will eventually be passed as parameters in the `httr::GET()` call.
+* `parse`
+    + Do you want the response from the request to be parsed automatically, or left as a response object? Default is `TRUE`
+* `clean_dates`
+    + The API will often return date/time/datetime columns that are formatted as text. When true, the `full_request()` function will try and auto-convert those columns to their appropriate type. If it fails, you will still get a response, but there will also be a warning telling you that it didn't work.
+    
+    
+## Building and Sending Requests
+
+### Building requests
+
+Building your API request is done through the `build_call()` function. Because there are three different _types_ of data items held in BMRS, the build_call actually calls one of the three different functions to produce the API request needed for your data item. On the surface of it however, build_call will handle all of that for you.
+
+The `build_call()` function has a few required arguments:
+
+* `data_item`
+    + This is the data item that you want to request - the code for this can be found in the BMRS documentation or by typing `get_data_items()`
+* `api_key`
+    + This is your API key that you've got from the ELEXON Portal
+* `...`
+    + You'll also need to provide the parameters that are required for your data item. So say you want to get temperature data for the last week, you're going to need to enter your start and end dates.
+    + The easiest way to find out which parameters to need for your data item is to use `get_parameters(your_data_item)`. This will return a vector of the parameters your data item accepts.
+    + If you enter a parameter that isn't accepted for your data item, you'll get an error. If you fail to enter a parameter that your data item does need however, you won't, so be careful.
+    
+Aside from the required arguments, `build_call()` has some further optional arguments:
+
+* `api_version`
+    + As of writing, the API is on version 1 so hopefully you won't need to change this.
+* `service_type`
+    + The API allows you to retrieve your data in either a CSV or XML format (with a few exceptions). The default for this value is "csv" but there are some data items that can only be returned in XML format, but you'll get a warning if that's the case.
+    
+### Sending requests
+
+The sending of the API requests is done via the `send_request()` function.This function is essentially a wrapper to the `httr::GET()` function with a couple of changes to the parameters. The arguments for `send_request()` are:
+
+* `request`
+    + This parameter should be a named list. The list itself must have at one named value: url. This url should be the url for the request you want to make. If you already have your url (i.e., you haven't used the `build_call()` function), you can pass this to as the request parameter (as long as it's in a named list).
+    + Alternatively, the `build_call()` function returns a named list (with one of the values being a url), so the result from a `build_call()` can be passed directly to `send_request()`.
+* `config_options`
+    + You may have to configure proxy settings in order to access the API, so here you can provide a named list of parameters to be passed to the `httr::GET()` function that actually sends the request.
+
+The `send_request()` function will then return a response() object, with an added `$data_item` attribute. This data item value will be the data item that was specified in the `request` list (if one was specified).
+
+## Parsing and Cleaning
+
+Parsing the `response` object returned from the `send_request()` function is handled by the `parse_response()` function. This will take the response object, extract the returned data and then do some cleaning.
+
+The parameters for `parse_response()` are:
+
+* `response`
+    + A response object returned from the API request (most likely the evaluated result of the `send_request()` function).
+* `format`
+    + The format of the content of the respose (i.e. did you ask for a "csv" or "xml"?)
+* `clean_dates`
+    + Should columns that appear to be dates/times/datetimes be auto converted to the appropriate type? This is currently based on the name of the columns and so isn't full proof. For example, some response csvs contain a 'spot_time' column that's actually a datetime value.
+    
+Depending on what format you specified, this function will either return a tibble (csv) or a list (xml). And there you have it, your complete API request and response!
+
+## Everything else...
+
+In addition to the basic workflow of build, send, parse/clean, the package also provides some utility functions:
+
+* `get_data_items()`
+    + This will return all of the available data items (the values that can be passed to the `full_request()` and `build_call()` functions.) This function just returns a list of the data item IDs, it doesn't tell you what is returned for each one.
+* `get_parameters()`
+    + When provided with a data item, this function will return all of parameters accepted by the API for that data item.
+* `get_function()`
+    + When provided with a data item, this function will return which of the `build_x_call()` functions will be called for that data item.
+* `get_data_item_type()`
+    + Returns the type of the data item provided. This is really only important to tell you which `build_x_call()` function to use but `build_call()` will work it out for you anyway so it's suggested you use that.
+* `check_data_item()`
+    + When provided with a data item and it's type (one of "B Flow", "REMIT" or "Legacy"), this function will return whether or not it is valid or not.
+* `get_column_names()`
+    + When provided with a data item, this function will return a vector of the column headings for the csv response for that data item.
+    + This function was created as Legacy data items do not have column headings when returned as a csv.
+* `clean_date_columns()`
+    + This function will attempt to auto-convert columns in the provided daaframe/tibble to the correct type. Often, the API will return date/time/datetime columns as plain text, and so this function will try to convert the type based on the column heading. This doesn't always work...
+    
+## A Practical Example
+
+Now we understand the workflow associated with an API request, let's do an example.
+
+We'll do it twice, once just using the `full_request()` function, and then again using the functions provided for each step to ensure we know what's going on under the hood.
+
+In this example, we'll get some generation data by fuel type between the dates of 1 July 2019 and 3 July 2019 and then plot it using ggplot2. The dataset used is available in the package as `generation_dataset_example`.
+
+
+### `full_request()` approach
+
+First things first, let's create a variable to hold our API key...
+
+```{r eval = FALSE}
+api_key <- "your_api_key_here"
+```
+
+Next, we've inspected the BMRS API documentation and found that we want the "FUELINST" data item. Let's find out what parameters we need to provide for this data item...
+
+```{r}
+get_parameters("FUELINST")
+```
+
+So we've got to provide from_datetime and to_datetime. Now let's create our request...
+
+```{r eval = FALSE}
+generation_data <- full_request(data_item = "FUELINST",
+                                api_key = api_key,
+                                from_datetime = "01 07 2019 00:00:00",
+                                to_datetime = "03 07 2019 00:00:00",
+                                parse = TRUE,
+                                clean_dates = TRUE)
+```
+
+
+### Step approach
+
+Again, let's create a variable to hold our API key and find out what parameters we need for our "FUELINST" data item...
+
+```{r eval = FALSE}
+api_key <- "your_api_key_here"
+
+get_parameters("FUELINST")
+```
+
+Next, let's build our call...
+
+```{r eval = FALSE}
+generation_data_request <- build_call(data_item = "FUELINST",
+                                      api_key = api_key,
+                                      from_datetime = "01 07 2019 00:00:00",
+                                      to_datetime = "03 07 2019 00:00:00",
+                                      service_type = "csv")
+```
+
+This is equivalent but shorter than...
+
+```{r eval = FALSE}
+get_data_item_type("FUELINST")
+#This tells us which build_x_call() function to use
+
+generation_data_request <- build_legacy_call(data_item = "FUELINST",
+                                             api_key = api_key,
+                                             from_datetime = "01 07 2019 00:00:00",
+                                             to_datetime = "03 07 2019 00:00:00",
+                                             service_type = "csv")
+```
+
+Now we've got our request, we can send it...
+
+```{r eval = FALSE}
+generation_data_response <- send_request(request = generation_data_request)
+```
+
+And then parse it...
+
+```{r eval = FALSE}
+generation_data <- parse_response(response = generation_data_response,
+                                  format = "csv",
+                                  clean_dates = TRUE)
+```
+
+
+Linking all these together using the pipe, we'd get...
+
+```{r eval = FALSE}
+generation_data <- build_call(data_item = "FUELINST",
+                              api_key = api_key,
+                              from_datetime = "01 07 2019 00:00:00",
+                              to_datetime = "03 07 2019 00:00:00",
+                              service_type = "csv") %>%
+  send_request() %>%
+  parse_response(format = "csv",
+                 clean_dates = TRUE)
+```
+
+### Plotting
+
+Now we've got the data, we can convert the dataset to the tidy format and then make a plot...
+
+```{r eval= TRUE, echo = FALSE}
+generation_data <- generation_dataset_example
+```
+
+```{r eval = TRUE}
+#Load the libraries for a bit more cleaning and then plotting...
+library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
+library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
+
+#Change the fuel types from columns to a grouping (tidy format)
+generation_data <- generation_data %>%
+  dplyr::mutate(settlement_period = as.factor(settlement_period)) %>%
+  tidyr::gather(key = "fuel_type", value = "generation_mw", ccgt:intnem)
+
+#Make a line graph of the different generation types
+ggplot2::ggplot(data = gen_data, aes(x = spot_time, y = generation_mw, colour = fuel_type)) +
+  ggplot2::geom_line()
+```
