@@ -1,4 +1,4 @@
-#BMRSr 1.0.0
+# BMRSr 1.0.0
 
 * Minor changes to prepare for CRAN publication
 
