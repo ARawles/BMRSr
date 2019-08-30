@@ -15,3 +15,6 @@ vector; a vector of character strings with the column headings
 \description{
 Get the column names for a returned csv dataset
 }
+\examples{
+get_column_names("TEMP")
+}

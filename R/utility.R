@@ -147,6 +147,8 @@ get_data_items <- function() {
 #' Get the column names for a returned csv dataset
 #' @param data_item character string; data item for the dataset
 #' @return vector; a vector of character strings with the column headings
+#' @examples
+#' get_column_names("TEMP")
 #' @export
 get_column_names <- function(data_item){
   if (upper_case(data_item) %!in% get_data_items()){
@@ -159,6 +161,8 @@ get_column_names <- function(data_item){
 #' Reformat date, time, and datetime columns
 #' @param x tibble/df; dataset with the columns to be formatted
 #' @return tibble/df; dataset with reformatted columns (if any needed reformatting)
+#' @examples
+#' clean_date_columns(generation_dataset_example)
 #' @export
 clean_date_columns <- function(x){
   for (i in 1:ncol(x)){

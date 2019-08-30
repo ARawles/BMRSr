@@ -15,3 +15,6 @@ tibble/df; dataset with reformatted columns (if any needed reformatting)
 \description{
 Reformat date, time, and datetime columns
 }
+\examples{
+clean_date_columns(generation_dataset_example)
+}
