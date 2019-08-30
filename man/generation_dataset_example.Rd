@@ -25,7 +25,6 @@
   \item{intew}{Generation from the Irish interconnector (MW)}
   \item{biomass}{Generation from biomass (MW)}
   \item{intnem}{Generation from Belgian interconnector (MW)}
-  ...
 }}
 \source{
 \url{https://www.bmreports.com/bmrs/?q=help/about-us}
