@@ -3,6 +3,7 @@
 #' @param data_item character string; data item to be retrieved
 #' @examples
 #' get_function("TEMP")
+#' @return function
 #' @export
 get_function <- function(data_item){
   if (data_item %in% c("B1720", "B1730", "B1740", "B1750", "B1760",

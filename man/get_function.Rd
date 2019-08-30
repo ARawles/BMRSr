@@ -9,6 +9,9 @@ get_function(data_item)
 \arguments{
 \item{data_item}{character string; data item to be retrieved}
 }
+\value{
+function
+}
 \description{
 Get the correct function to create the API call depending on the data item
 }
