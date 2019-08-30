@@ -5,7 +5,10 @@
 #' @param clean_dates boolean; whether to clean date/time columns
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
-#' tibble_example <- parse_response(send_request(build_call("TEMP", api_key = "12345", from_date = "01 Jun 2019", to_date = "10 Jun 2019", service_type = "xml")), "xml")
+#' tibble_example <- parse_response(
+#' send_request(
+#' build_call("TEMP", api_key = "12345", from_date = "01 Jun 2019", to_date = "10 Jun 2019", service_type = "xml")
+#' ), "xml")
 #' @export
 parse_response <- function(response, format, clean_dates = TRUE){
 
