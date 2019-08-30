@@ -13,5 +13,5 @@ get_data_item_type(data_item)
 Get the data item type of a data item
 }
 \examples{
-get_function("TEMP")
+get_data_item_type("TEMP")
 }
