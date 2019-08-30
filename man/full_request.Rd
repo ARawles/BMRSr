@@ -23,6 +23,8 @@ If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse =
 Create an API call, send the request and retrieve the results, and parse them
 }
 \examples{
+\donttest{
 full_request(data_item = "B1730", api_key = "12345",
 settlement_date = "14-12-2016", parse = TRUE, service_type = "xml")
+}
 }
