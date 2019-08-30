@@ -25,5 +25,5 @@
 #'   \item{intnem}{Generation from Belgian interconnector (MW)}
 #'   ...
 #' }
-#' @source \url{ttps://www.bmreports.com/bmrs/?q=help/about-us}
+#' @source \url{https://www.bmreports.com/bmrs/?q=help/about-us}
 "generation_dataset_example"
