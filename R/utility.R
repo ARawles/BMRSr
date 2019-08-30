@@ -125,6 +125,8 @@ check_data_item <- function(data_item, type){
 
 #' Get a vector containing all of the permissible data items
 #' @return vector; data items as character string
+#' @examples
+#' get_data_items()
 #' @export
 get_data_items <- function() {
   return(c("B1720", "B1730", "B1740", "B1750", "B1760",

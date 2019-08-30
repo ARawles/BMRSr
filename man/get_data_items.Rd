@@ -12,3 +12,6 @@ vector; data items as character string
 \description{
 Get a vector containing all of the permissible data items
 }
+\examples{
+get_data_items()
+}
