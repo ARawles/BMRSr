@@ -22,7 +22,8 @@
 #' @export
 #' @examples
 #' build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
-
+#' build_b_call(data_item = "B1510", api_key = "12345", start_date = "01 Jan 2019",
+#' start_time = "00:00:00", end_date = "02 Jan 2019", end_time = "24:00:00", service_type = "csv")
 build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NULL,
                          year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
                          end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", api_version = "v1") {
@@ -94,6 +95,8 @@ build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NU
 #' @examples
 #' build_remit_call(data_item = "MessageListRetrieval", api_key = "12345",
 #' event_start = "14-12-2016", event_end = "15-12-2016")
+#' build_remit_call(data_item = "MessageDetailRetrieval", api_key = "12345",
+#' participant_id = 21, service_type = "xml")
 #' @export
 
 build_remit_call <- function(data_item, api_key, event_start = NULL, event_end = NULL, publication_from = NULL, publication_to = NULL,
@@ -187,6 +190,8 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @examples
 #' build_legacy_call(data_item = "FUELINST", api_key = "12345",
 #' from_datetime = "14-12-201613:00:00", to_datetime = "14-12-201614:00:00")
+#' build_legacy_call(data_item = "QAS", api_key = "12345",
+#' settlement_date = "01 Jun 2019", service_type = "xml")
 #' @export
 
 build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL,
@@ -295,6 +300,8 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' @examples
 #' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018",
 #' to_date = "13 Jun 2018", service_type = "csv")
+#' build_call(data_item = "QAS", api_key = "12345",
+#' settlement_date = "01 Jun 2019", service_type = "xml")
 #' @export
 build_call <- function(data_item, api_key, service_type = "csv", api_version = "v1", ...){
 

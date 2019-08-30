@@ -46,6 +46,8 @@ Create an API call for B-data flows
 }
 \examples{
 build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
+build_b_call(data_item = "B1510", api_key = "12345", start_date = "01 Jan 2019",
+start_time = "00:00:00", end_date = "02 Jan 2019", end_time = "24:00:00", service_type = "csv")
 }
 \seealso{
 Other call-building functions: \code{\link{build_call}},

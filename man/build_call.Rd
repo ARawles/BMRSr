@@ -24,6 +24,8 @@ Build an API call (uses the appropriate function based on the data item)
 \examples{
 build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018",
 to_date = "13 Jun 2018", service_type = "csv")
+build_call(data_item = "QAS", api_key = "12345",
+settlement_date = "01 Jun 2019", service_type = "xml")
 }
 \seealso{
 \code{\link{build_b_call}}
