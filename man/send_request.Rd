@@ -18,5 +18,7 @@ A response() object with an added data_item attribute
 Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)
 }
 \examples{
-send_request(build_call(data_item = "TEMP", from_date = "01 Jun 2019", to_date = "10 Jun 2019", api_key = "test"))
+send_request(
+build_call(data_item = "TEMP", from_date = "01 Jun 2019", to_date = "10 Jun 2019", api_key = "test")
+)
 }

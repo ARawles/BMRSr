@@ -162,7 +162,9 @@ get_column_names <- function(data_item){
 #' @param x tibble/df; dataset with the columns to be formatted
 #' @return tibble/df; dataset with reformatted columns (if any needed reformatting)
 #' @examples
-#' generation_dataset_unclean <- as.data.frame(apply(generation_dataset_example, 2, as.character)) #Create a version of the example generation dataset with character columns
+#' generation_dataset_unclean <- as.data.frame(
+#' apply(generation_dataset_example, 2, as.character)
+#' ) #Create a version of the example generation dataset with character columns
 #' clean_date_columns(generation_dataset_unclean)
 #' @export
 clean_date_columns <- function(x){

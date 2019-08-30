@@ -4,7 +4,9 @@
 #' @param config_options list; a named list of config options to be passed to httr::GET
 #' @return A response() object with an added data_item attribute
 #' @examples
-#' send_request(build_call(data_item = "TEMP", from_date = "01 Jun 2019", to_date = "10 Jun 2019", api_key = "test"))
+#' send_request(
+#' build_call(data_item = "TEMP", from_date = "01 Jun 2019", to_date = "10 Jun 2019", api_key = "test")
+#' )
 #' @export
 send_request <- function(request, config_options = list()) {
   response <- httr::GET(request$url, do.call(httr::config, config_options))

@@ -20,8 +20,5 @@ A tibble if format == "csv", otherwise a list
 Parse the results of a call
 }
 \examples{
-\dontrun{
-tibble_example <- parse_response(response, "csv") #returns a tibble
-list_example <- parse_response(response, "xml") #returns a list
-}
+tibble_example <- parse_response(send_request(build_call("TEMP", api_key = "12345", from_date = "01 Jun 2019", to_date = "10 Jun 2019", service_type = "xml")), "xml")
 }
