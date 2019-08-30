@@ -13,3 +13,24 @@
 ## Downstream dependencies
 
 There are currently no downstream dependencies
+
+## Changes from previous submission on 29/08/2019
+
+* Edited description field in DESCRIPTION to not begin 'This package...'
+* Wrapped references to 'BMRS API' and 'Balancing Mechanism Reporting Service API' in DESCRIPTION file in single quotes
+* Added examples to
+    + `send_request()`
+    + `get_parameters()`
+    + `get_data_items()`
+    + `check_data_item()`
+    + `get_column_names()`
+    + `clean_date_columns()`
+* Added additional examples to
+    + `build_b_call()`
+    + `build_remit_call()`
+    + `build_legacy_call()`
+    + `build_call()`
+* Changed dontrun in `full_request()` example to donttest the example will return a response but no data as the API key is incorrect
+* Corrected example in `get_data_item_type()` documentation
+* Reformatted example in `parse_response()` to be runnable (and removed dontrun)
+
