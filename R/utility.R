@@ -162,18 +162,19 @@ get_column_names <- function(data_item){
 #' @param x tibble/df; dataset with the columns to be formatted
 #' @return tibble/df; dataset with reformatted columns (if any needed reformatting)
 #' @examples
-#' clean_date_columns(generation_dataset_example)
+#' generation_dataset_unclean <- as.data.frame(apply(generation_dataset_example, 2, as.character)) #Create a version of the example generation dataset with character columns
+#' clean_date_columns(generation_dataset_unclean)
 #' @export
 clean_date_columns <- function(x){
   for (i in 1:ncol(x)){
     if (stringr::str_detect(names(x)[i], "date") == TRUE & stringr::str_detect(names(x)[i], "date_time") == FALSE){
-      x[,i] <- as.Date(sapply(x[,i], as.character), format = "%Y%m%d")
+      x[,i] <- as.Date(sapply(x[,i], as.character), tryFormats =  c("%Y%m%d", "%Y-%m-%d"))
     }
     else if(stringr::str_detect(names(x)[i], "date") == TRUE & stringr::str_detect(names(x)[i], "date_time") == TRUE){
       x[,i] <- as.POSIXct(sapply(x[,i], as.character), format = "%Y-%m-%d %H:%M:%OS")
     }
     else if (stringr::str_detect(names(x)[i], "date") == FALSE & stringr::str_detect(names(x)[i], "time") == TRUE){
-      x[,i] <- as.POSIXct(sapply(x[,i], as.character), tryFormats = c("%H:%M:%OS", "%Y%m%d%H%M%OS"))
+      x[,i] <- as.POSIXct(sapply(x[,i], as.character), tryFormats = c("%H:%M:%OS", "%Y%m%d%H%M%OS", "%Y-%m-%d %H:%M:%OS"))
     }
   }
   return(x)

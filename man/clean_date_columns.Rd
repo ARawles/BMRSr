@@ -16,5 +16,6 @@ tibble/df; dataset with reformatted columns (if any needed reformatting)
 Reformat date, time, and datetime columns
 }
 \examples{
-clean_date_columns(generation_dataset_example)
+generation_dataset_unclean <- as.data.frame(apply(generation_dataset_example, 2, as.character)) #Create a version of the example generation dataset with character columns
+clean_date_columns(generation_dataset_unclean)
 }
