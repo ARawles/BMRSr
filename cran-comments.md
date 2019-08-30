@@ -30,7 +30,7 @@ There are currently no downstream dependencies
     + `build_remit_call()`
     + `build_legacy_call()`
     + `build_call()`
-* Changed dontrun in `full_request()` example to donttest the example will return a response but no data as the API key is incorrect
+* Changed dontrun in `full_request()` example to donttest as the example will return a response but no data as the API key is incorrect
 * Corrected example in `get_data_item_type()` documentation
 * Reformatted example in `parse_response()` to be runnable (and removed dontrun)
 
