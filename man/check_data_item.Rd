@@ -17,3 +17,8 @@ boolean: returns true if data_item is valid, false if it is not
 \description{
 Check the data item to ensure that it is a valid request
 }
+\examples{
+check_data_item("B1720", "B Flow") #valid
+check_data_item("B1720", "Legacy") #invalid - incorrect type
+check_data_item("B1111", "REMIT") #invalid - incorrect data item and type
+}

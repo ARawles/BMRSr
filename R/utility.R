@@ -66,6 +66,8 @@ get_data_item_type <- function(data_item){
 #' Get the required parameters for a data item
 #' @param data_item character; the data item to get the parameters for
 #' @return A list containing the named parameters required for that call
+#' @examples
+#' get_parameters("TEMP")
 #' @export
 get_parameters <- function(data_item){
   return(get_parameters_list[[upper_case(data_item)]])
@@ -77,6 +79,10 @@ get_parameters <- function(data_item){
 #' @param data_item character; the data item to check
 #' @param type character; the type of data_item - one of "B Flow", "Legacy", or "REMIT"
 #' @return boolean: returns true if data_item is valid, false if it is not
+#' @examples
+#' check_data_item("B1720", "B Flow") #valid
+#' check_data_item("B1720", "Legacy") #invalid - incorrect type
+#' check_data_item("B1111", "REMIT") #invalid - incorrect data item and type
 #' @export
 check_data_item <- function(data_item, type){
   if (type == "B Flow"){

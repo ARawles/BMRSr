@@ -15,3 +15,6 @@ A list containing the named parameters required for that call
 \description{
 Get the required parameters for a data item
 }
+\examples{
+get_parameters("TEMP")
+}
