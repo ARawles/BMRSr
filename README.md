@@ -13,7 +13,7 @@ The goal of BMRSr is to provide wrapper functions to make use of the [Balancing 
 Installation
 ------------
 
-You can install the released version of BMRSr from [GitHub](https://github.com/ARawles/BMRSr) with:
+You can install the development version of BMRSr from [GitHub](https://github.com/ARawles/BMRSr) with:
 
 ``` r
 devtools::install_github("BMRSr")
@@ -117,12 +117,12 @@ parse_response(
 
 ### Utility
 
-These functions support the functionality of the previous 3 types:
+These functions support the functionality of the previous 3 groups of functions:
 
 -   `get_function()` which returns the appropriate `build_x_call()` function needed for the `build_call()` function.
 -   `check_data_item()` ensures that the request is for a valid data item.
 -   `get_parameters()` returns a list with the allowed input parameters for the supplied data item.
--   `clean_data_columns()` reformats date/time/datetime columns based on their column names.
+-   `clean_date_columns()` reformats date/time/datetime columns based on their column names.
 -   `get_data_items()` returns all valid data items.
 -   `get_column_names()` retrieves the column headings for a particular data item (Legacy only as B flow responses already have column headings).
 -   `get_data_item_type()` return the data item *type* of a particular data item. This is only really relevant to know which `build_x_call()` to use.
@@ -159,10 +159,27 @@ gen_data <- full_request(data_item = "FUELINST",
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 
+head(gen_data)
+#> # A tibble: 6 x 19
+#>   record_type settlement_date settlement_peri~ spot_time            ccgt
+#>   <chr>       <date>                     <dbl> <dttm>              <dbl>
+#> 1 FUELINST    2019-07-01                     2 2019-07-01 00:00:00  4101
+#> 2 FUELINST    2019-07-01                     3 2019-07-01 00:05:00  4354
+#> 3 FUELINST    2019-07-01                     3 2019-07-01 00:10:00  4388
+#> 4 FUELINST    2019-07-01                     3 2019-07-01 00:15:00  4290
+#> 5 FUELINST    2019-07-01                     3 2019-07-01 00:20:00  4237
+#> 6 FUELINST    2019-07-01                     3 2019-07-01 00:25:00  4176
+#> # ... with 14 more variables: oil <dbl>, coal <dbl>, nuclear <dbl>,
+#> #   wind <dbl>, ps <dbl>, npshyd <dbl>, ocgt <dbl>, other <dbl>,
+#> #   intfr <dbl>, intirl <dbl>, intned <dbl>, intew <dbl>, biomass <dbl>,
+#> #   intnem <dbl>
+
 #Change the fuel types from columns to a grouping
 gen_data <- gen_data %>%
   dplyr::mutate(settlement_period = as.factor(settlement_period)) %>%
   tidyr::gather(key = "fuel_type", value = "generation_mw", ccgt:intnem)
+
+
 
 #Make a line graph of the different generation types
 ggplot2::ggplot(data = gen_data, aes(x = spot_time, y = generation_mw, colour = fuel_type)) +
