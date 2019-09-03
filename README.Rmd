@@ -25,6 +25,12 @@ The goal of BMRSr is to provide wrapper functions to make use of the [Balancing 
 
 ## Installation
 
+You can install BMRSr from CRAN with:
+
+``` r
+install.packages("BMRSr")
+```
+
 You can install the development version of BMRSr from [GitHub](https://github.com/ARawles/BMRSr) with:
 
 ``` r
