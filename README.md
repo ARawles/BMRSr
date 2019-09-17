@@ -3,7 +3,7 @@
 BMRSr
 =====
 
-[![Travis build status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr) [![Coverage status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master) [![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.rstudio.com/web/packages/BMRSr/index.html) [!](https://www.r-pkg.org/badges/version/BMRSr)
+[![Travis build status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr) [![Coverage status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master) [![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.rstudio.com/web/packages/BMRSr/index.html) \[![](https://www.r-pkg.org/badges/version/BMRSr)\]
 
 Overview
 --------
