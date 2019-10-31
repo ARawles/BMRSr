@@ -1,8 +1,15 @@
+# BMRSr 1.0.0.9004
+
+* Restructured the getting data items/data items types functions to pull from a single paired list of data items and types
+
+# BMRSr 1.0.0.9002/3
+
+* Fixed lingering typo issues
+
 # BMRSr 1.0.0.9001
 
 * Added `rename` parameter to `parse_response()` to avoid attempting to rename columns
 * Fixed typo in `get_data_items()` list (DISBSAD was incorrectly spelt DISBAD)
-
 
 # BMRSr 1.0.0
 
