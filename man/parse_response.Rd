@@ -4,7 +4,7 @@
 \alias{parse_response}
 \title{Parse the results of a call}
 \usage{
-parse_response(response, format, clean_dates = TRUE)
+parse_response(response, format, clean_dates = TRUE, rename = TRUE)
 }
 \arguments{
 \item{response}{A response object returned from the API request}
@@ -12,6 +12,8 @@ parse_response(response, format, clean_dates = TRUE)
 \item{format}{character string; format of the content of the response object; either "csv" or "xml"}
 
 \item{clean_dates}{boolean; whether to clean date/time columns}
+
+\item{rename}{boolean; whether to rename column headings (they are usually blank from the API)}
 }
 \value{
 A tibble if format == "csv", otherwise a list
