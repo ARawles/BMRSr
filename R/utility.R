@@ -52,7 +52,7 @@ get_parameters <- function(data_item){
 #' Check the data item to ensure that it is a valid request
 #' @param data_item character; the data item to check
 #' @param type character; the type of data_item - one of "B Flow", "Legacy", or "REMIT" or "any" for any type
-#' @param silent; boolean; whether to show a warning if not a valid data item
+#' @param silent boolean; whether to show a warning if not a valid data item
 #' @return boolean: returns true if data_item is valid, false if it is not
 #' @examples
 #' check_data_item("B1720", "B Flow") #valid
