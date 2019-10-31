@@ -1,4 +1,4 @@
-data_item_type_list <- list("B1720" = "B Flow",
+get_data_item_type_list <- list("B1720" = "B Flow",
                             "B1730" = "B Flow",
                             "B1740" = "B Flow",
                             "B1750" = "B Flow",

@@ -4,12 +4,14 @@
 \alias{check_data_item}
 \title{Check the data item to ensure that it is a valid request}
 \usage{
-check_data_item(data_item, type)
+check_data_item(data_item, type = "any", silent = FALSE)
 }
 \arguments{
 \item{data_item}{character; the data item to check}
 
-\item{type}{character; the type of data_item - one of "B Flow", "Legacy", or "REMIT"}
+\item{type}{character; the type of data_item - one of "B Flow", "Legacy", or "REMIT" or "any" for any type}
+
+\item{silent;}{boolean; whether to show a warning if not a valid data item}
 }
 \value{
 boolean: returns true if data_item is valid, false if it is not

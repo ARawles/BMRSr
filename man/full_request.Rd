@@ -5,7 +5,7 @@
 \title{Create an API call, send the request and retrieve the results, and parse them}
 \usage{
 full_request(..., get_params = list(), parse = TRUE,
-  clean_dates = TRUE)
+  clean_dates = TRUE, rename = TRUE)
 }
 \arguments{
 \item{...}{values to be passed to appropriate build_x_call function}
@@ -15,6 +15,8 @@ full_request(..., get_params = list(), parse = TRUE,
 \item{parse}{boolean; whether the results should be parsed or returned as a response() object}
 
 \item{clean_dates}{boolean; whether the csv response columns should be cleaned (reformatted to be correct date/time/datetime)}
+
+\item{rename}{boolean; whether blank columns should be renamed (not always accurate)}
 }
 \value{
 If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse == FALSE, a response() object is returned

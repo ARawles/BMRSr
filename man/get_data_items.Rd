@@ -4,7 +4,10 @@
 \alias{get_data_items}
 \title{Get a vector containing all of the permissible data items}
 \usage{
-get_data_items()
+get_data_items(type = "any")
+}
+\arguments{
+\item{type}{character; parameter to return only data items of a specific type ("Legacy", "B Flow", "REMIT", or "any")}
 }
 \value{
 vector; data items as character string

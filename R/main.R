@@ -4,6 +4,7 @@
 #' @param get_params list; parameters to be passed to the send_request function (which will pass those parameters to httr::get)
 #' @param parse boolean; whether the results should be parsed or returned as a response() object
 #' @param clean_dates boolean; whether the csv response columns should be cleaned (reformatted to be correct date/time/datetime)
+#' @param rename boolean; whether blank columns should be renamed (not always accurate)
 #' @return If parse == TRUE, a tibble if service_type = "csv", otherwise a list. If parse == FALSE, a response() object is returned
 #' @examples
 #' \donttest{
@@ -12,11 +13,11 @@
 #' }
 #' @export
 
-full_request <- function(..., get_params = list(), parse = TRUE, clean_dates = TRUE){
+full_request <- function(..., get_params = list(), parse = TRUE, clean_dates = TRUE, rename = TRUE){
   request <- do.call(build_call, args = list(...))
   results <- send_request(request, get_params)
   if (parse == TRUE){
-    ret <- parse_response(results, format = request$service_type, clean_dates = clean_dates)
+    ret <- parse_response(results, format = request$service_type, clean_dates = clean_dates, rename = rename)
   } else {
     ret <- results
   }
