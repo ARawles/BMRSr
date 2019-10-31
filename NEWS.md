@@ -1,3 +1,9 @@
+# BMRSr 1.0.0.9001
+
+* Added `rename` parameter to `parse_response()` to avoid attempting to rename columns
+* Fixed typo in `get_data_items()` list (DISBSAD was incorrectly spelt DISBAD)
+
+
 # BMRSr 1.0.0
 
 * Minor changes to prepare for CRAN publication

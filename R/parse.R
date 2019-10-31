@@ -3,6 +3,7 @@
 #' @param response A response object returned from the API request
 #' @param format character string; format of the content of the response object; either "csv" or "xml"
 #' @param clean_dates boolean; whether to clean date/time columns
+#' @param rename boolean; whether to rename column headings (they are usually blank from the API)
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
 #' list_example <- parse_response(
@@ -11,7 +12,7 @@
 #' to_date = "10 Jun 2019", service_type = "xml")
 #' ), "xml")
 #' @export
-parse_response <- function(response, format, clean_dates = TRUE){
+parse_response <- function(response, format, clean_dates = TRUE, rename = TRUE){
 
   if (httr::status_code(response) != 200){
     warning(paste("Parsing unsuccessful: response code was", httr::status_code(response)))
@@ -39,16 +40,18 @@ parse_response <- function(response, format, clean_dates = TRUE){
       ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
       ret <- droplevels(ret)
       ret <- ret[1:nrow(ret) - 1,]
-      if (ncol(ret) != length(get_column_names(response$data_item))){
-        warning("Number of columns in csv doesn't match expected; leaving names as default")
-      }
-      else {
-        names(ret) <- get_column_names(response$data_item)
+      if (rename){
+        if (ncol(ret) != length(get_column_names(response$data_item))){
+          warning("Number of columns in csv doesn't match expected; leaving names as default")
+        }
+        else {
+          names(ret) <- get_column_names(response$data_item)
+        }
       }
       if (clean_dates == TRUE){
         try({
-        ret <- clean_date_columns(ret)}
-        , TRUE)
+          ret <- clean_date_columns(ret)}
+          , TRUE)
       }
     }}
   else if (format == "xml"){
