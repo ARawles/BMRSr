@@ -12,6 +12,7 @@ send_request <- function(request, config_options = list()) {
   response <- httr::GET(request$url, do.call(httr::config, config_options))
   response$data_item_type <- get_data_item_type(request$data_item)
   response$data_item <- request$data_item
+  response$service_type <- request$service_type
   return(response)
 }
 

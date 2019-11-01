@@ -1,7 +1,7 @@
 #' Parse the results of a call
 #'
 #' @param response A response object returned from the API request
-#' @param format character string; format of the content of the response object; either "csv" or "xml"
+#' @param format character string; NULL to use response service type or "csv" or "xml" to force that format
 #' @param clean_dates boolean; whether to clean date/time columns
 #' @param rename boolean; whether to rename column headings (they are usually blank from the API)
 #' @return A tibble if format == "csv", otherwise a list
@@ -12,7 +12,11 @@
 #' to_date = "10 Jun 2019", service_type = "xml")
 #' ), "xml")
 #' @export
-parse_response <- function(response, format, clean_dates = TRUE, rename = TRUE){
+parse_response <- function(response, format = NULL, clean_dates = TRUE, rename = TRUE){
+
+  if (is.null(format)){
+    format <- response$service_type
+  }
 
   if (httr::status_code(response) != 200){
     warning(paste("Parsing unsuccessful: response code was", httr::status_code(response)))
