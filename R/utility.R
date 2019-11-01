@@ -94,15 +94,15 @@ get_data_items <- function(type = "any") {
   return(ret)
 }
 
-#' Get the column names for a returned csv dataset
+#' Get the column names for a returned CSV Legacy dataset
 #' @param data_item character string; data item for the dataset
 #' @return vector; a vector of character strings with the column headings
 #' @examples
 #' get_column_names("TEMP")
 #' @export
 get_column_names <- function(data_item){
-  if (!check_data_item(upper_case(data_item), silent = TRUE)){
-    stop("Not a valid data item")
+  if (!check_data_item(upper_case(data_item), type = "Legacy", silent = TRUE)){
+    stop("Not a valid Legacy data item")
   }
 
   return(get_column_names_list[[data_item]])

@@ -330,7 +330,7 @@ build_call <- function(data_item, api_key, service_type = "csv", api_version = "
   allowed_params <- get_parameters(data_item)
   prov_params <- list(...)
   if (length(prov_params) >= 1){
-    for (i in 1:length(prov_params)){
+    for (i in seq_along(prov_params)){
       if (names(prov_params)[i] %!in% allowed_params){
         stop(paste("invalid parameter:", names(prov_params[i]), "supplied for chosen data item"))
       }
