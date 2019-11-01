@@ -15,9 +15,6 @@ get_function <- function(data_item){
   else if(get_data_item_type(data_item) == "Legacy"){
     return(build_legacy_call)
   }
-  else{
-    stop("Data item not valid.")
-  }
 }
 
 
