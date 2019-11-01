@@ -103,11 +103,11 @@ To see which input parameter you need for your data item, use `get_parameters(yo
 
 This function - `send_request()` - sends the provided URL to the API and returns a response() object with the added attribute of data_item_type (one of "B Flow", "Remit", or "Legacy"). Config options can also be supplied via the config_options parameter as a named list, that will be passed to the `httr::GET()` function (implemented primarily for proxies and the like).
 
-This function can be used with a premade url, however the user will also have to respecify the data item from the URL:
+This function can be used with a premade url, however the user will also have to respecify the data item and service type (format) from the URL:
 
 ```{r eval = FALSE}
-send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv",
-             data_item = "B1720")
+send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                  data_item = "B1720", service_type = "csv"))
 ```
 
 ### Parse
@@ -116,9 +116,9 @@ This function - `parse_response()` - takes the response() object returned from t
 
 ```{r eval = FALSE}
 parse_response(
-  send_request("https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv",
-               data_item = "B1720"),
-  format  = "csv")
+  send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                    data_item = "B1720", service_type = "csv"))
+)
 ```
 
 

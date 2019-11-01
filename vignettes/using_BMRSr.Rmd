@@ -215,8 +215,7 @@ generation_data <- build_call(data_item = "FUELINST",
                               to_datetime = "03 07 2019 00:00:00",
                               service_type = "csv") %>%
   send_request() %>%
-  parse_response(format = "csv",
-                 clean_dates = TRUE)
+  parse_response()
 ```
 
 ### Plotting
