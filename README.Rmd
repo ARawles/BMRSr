@@ -23,7 +23,9 @@ knitr::opts_chunk$set(
 
 ##Overview
 
-The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users. The BMRS API allows access to a number of B flows, REMIT and Legacy data. This R package contains functions to build the API requests, send them, retrieve the requested data and parse it.
+The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users.
+The [Balancing Mechanism Reporting System](https://bmreports.com/bmrs/?q=eds/main) (or BMRS) is a platform for energy-related data in the UK. Here, data relating to energy generation, demand, transmission and balancing services can all be accessed for free. The BMRS is therefore a platform for enthusiasts, academic and professionals to extract energy data for analysis and modelling. Also associated with BMRS is an API which allows for access to all the data items currently available through the UI.
+This R package contains functions to help build the API requests, send them, retrieve the requested data and parse it.
 
 ## Installation
 
@@ -39,7 +41,7 @@ You can install the development version of BMRSr from [GitHub](https://github.co
 devtools::install_github("BMRSr")
 ```
 
-You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).
+**You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).**
 
 ## Usage
 
@@ -106,8 +108,11 @@ This function - `send_request()` - sends the provided URL to the API and returns
 This function can be used with a premade url, however the user will also have to respecify the data item and service type (format) from the URL:
 
 ```{r eval = FALSE}
-send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
-                  data_item = "B1720", service_type = "csv"))
+send_request(
+  list(
+    url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                  data_item = "B1720", service_type = "csv")
+)
 ```
 
 ### Parse
@@ -116,8 +121,11 @@ This function - `parse_response()` - takes the response() object returned from t
 
 ```{r eval = FALSE}
 parse_response(
-  send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
-                    data_item = "B1720", service_type = "csv"))
+  send_request(
+    list(
+      url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                    data_item = "B1720", service_type = "csv")
+  )
 )
 ```
 
