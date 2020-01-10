@@ -25,7 +25,7 @@ You can install the development version of BMRSr from [GitHub](https://github.co
 devtools::install_github("BMRSr")
 ```
 
-You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).
+*You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).*
 
 Usage
 -----
@@ -43,7 +43,7 @@ To perform a complete API request (build the call, send and receive the data, an
 
 ``` r
 full_request(data_item = "B1720",
-             api_key = "test",
+             api_key = "api_key", # This is where your own API key goes
              settlement_date = "12 Jun 2018",
              period = "1",
              service_type = "csv")
@@ -55,7 +55,7 @@ These functions build the URL for the API request. The main function `build_call
 
 ``` r
 build_call(data_item = "B1720",
-           api_key = "12345",
+           api_key = "your_api_key", # This is where your own API key goes
            settlement_date = "1 Jan 2018",
            period = "1",
            service_type = "csv")
@@ -73,7 +73,7 @@ actually calls
 
 ``` r
 build_b_call(data_item = "B1720",
-             api_key = "12345",
+             api_key = "your_api_key", # This is where your own API key goes
              settlement_date = "1 Jan 2018",
              period = "1",
              service_type = "csv")
@@ -106,8 +106,12 @@ This function - `send_request()` - sends the provided URL to the API and returns
 This function can be used with a premade url, however the user will also have to respecify the data item and service type (format) from the URL:
 
 ``` r
-send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
-                  data_item = "B1720", service_type = "csv"))
+send_request(
+  list(
+    url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                  data_item = "B1720",
+                  service_type = "csv")
+      )
 ```
 
 ### Parse
@@ -116,8 +120,12 @@ This function - `parse_response()` - takes the response() object returned from t
 
 ``` r
 parse_response(
-  send_request(list(url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
-                    data_item = "B1720", service_type = "csv"))
+  send_request(
+    list(
+      url = "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&SettlementDate=2018-01-01&Period=1&ServiceType=csv", 
+                    data_item = "B1720",
+                    service_type = "csv")
+        )
 )
 ```
 
@@ -140,7 +148,7 @@ Here's a full example, using the package to return generation by fuel type data 
 
 ``` r
 
-api <- "your_api_key_goes_here"
+api <- "your_api_key_goes_here" # This is where your own API key goes
 
 
 #We're requesting the FUELINST data item here.
