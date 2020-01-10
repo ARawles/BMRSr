@@ -8,7 +8,9 @@ BMRSr
 Overview
 --------
 
-The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users. The BMRS API allows access to a number of B flows, REMIT and Legacy data. This R package contains functions to build the API requests, send them, retrieve the requested data and parse it.
+The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users.
+The [Balancing Mechanism Reporting System](https://bmreports.com/bmrs/?q=eds/main) (or BMRS) is a platform for energy-related data in the UK. Here, data relating to energy generation, demand, transmission and balancing services can all be accessed for free. The BMRS is therefore a platform for enthusiasts, academic and professionals to extract energy data for analysis and modelling. Also associated with BMRS is an API which allows for access to all the data items currently available through the UI.
+This R package contains functions to help build the API requests, send them, retrieve the requested data and parse it.
 
 Installation
 ------------
