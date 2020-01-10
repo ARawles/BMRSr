@@ -25,7 +25,7 @@ You can install the development version of BMRSr from [GitHub](https://github.co
 devtools::install_github("BMRSr")
 ```
 
-*You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).*
+**You'll also need an API key. You can get this by registering on the [ELEXON portal](https://www.elexonportal.co.uk).**
 
 Usage
 -----
