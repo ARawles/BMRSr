@@ -103,12 +103,7 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/ARawles/BMRSr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -136,8 +131,27 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-full-request" class="hasAnchor"><a href="#section-full-request" class="anchor"></a>Full Request</h2>
+          <p class="section-desc"><p>Perform a full API request (build, send, parse and clean)</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="full_request.html">full_request()</a></code> </p>
+        </td>
+        <td><p>Create an API call, send the request and retrieve the results, and parse them</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-build" class="hasAnchor"><a href="#section-build" class="anchor"></a>Build</h2>
+          <p class="section-desc"><p>Functions for building API calls.</p></p>
         </th>
       </tr>
       
@@ -169,13 +183,58 @@
           <p><code><a href="build_remit_call.html">build_remit_call()</a></code> </p>
         </td>
         <td><p>Create an API call for REMIT flows</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-send" class="hasAnchor"><a href="#section-send" class="anchor"></a>Send</h2>
+          <p class="section-desc"><p>Functions for sending API requests.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="check_data_item.html">check_data_item()</a></code> </p>
+          <p><code><a href="send_request.html">send_request()</a></code> </p>
         </td>
-        <td><p>Check the data item to ensure that it is a valid request</p></td>
-      </tr><tr>
+        <td><p>Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-parse" class="hasAnchor"><a href="#section-parse" class="anchor"></a>Parse</h2>
+          <p class="section-desc"><p>Functions to parse API responses</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="parse_response.html">parse_response()</a></code> </p>
+        </td>
+        <td><p>Parse the results of a call</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utility" class="hasAnchor"><a href="#section-utility" class="anchor"></a>Utility</h2>
+          <p class="section-desc"><p>Utility functions.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="clean_date_columns.html">clean_date_columns()</a></code> </p>
@@ -184,9 +243,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="full_request.html">full_request()</a></code> </p>
+          <p><code><a href="check_data_item.html">check_data_item()</a></code> </p>
         </td>
-        <td><p>Create an API call, send the request and retrieve the results, and parse them</p></td>
+        <td><p>Check the data item to ensure that it is a valid request</p></td>
       </tr><tr>
         
         <td>
@@ -223,18 +282,6 @@
           <p><code><a href="get_parameters.html">get_parameters()</a></code> </p>
         </td>
         <td><p>Get the required parameters for a data item</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parse_response.html">parse_response()</a></code> </p>
-        </td>
-        <td><p>Parse the results of a call</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_request.html">send_request()</a></code> </p>
-        </td>
-        <td><p>Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)</p></td>
       </tr>
     </tbody>
     </table>

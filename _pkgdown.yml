@@ -1,27 +1,29 @@
 destination: docs
 reference:
+- title: "Full Request"
+  desc: "Perform a full API request (build, send, parse and clean)"
+- contents:
+  - full_request
 - title: "Build"
-  desc: >
-    Functions for building API calls.
+  desc: "Functions for building API calls."
 - contents:
   - starts_with("build")
 - title: "Send"
-  desc: >
-    Functions for sending API requests.
+  desc: "Functions for sending API requests."
 - contents:
   - send_request
 - title: "Parse"
-  desc: >
-    Functions to parse API responses
+  desc: "Functions to parse API responses"
 - contents:
   - parse_response
 - title: "Utility"
-  desc: >
-    Utility functions.
+  desc: "Utility functions."
 - contents:
   - clean_date_columns
+  - check_data_item
+  - generation_dataset_example
   - get_column_names
   - get_data_items
-  - get_data_items_type
+  - get_data_item_type
   - get_function
   - get_parameters
