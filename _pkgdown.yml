@@ -1,1 +1,27 @@
 destination: docs
+reference:
+- title: "Build"
+  desc: >
+    Functions for building API calls.
+- contents:
+  - starts_with("build")
+- title: "Send"
+  desc: >
+    Functions for sending API requests.
+- contents:
+  - send_request
+- title: "Parse"
+  desc: >
+    Functions to parse API responses
+- contents:
+  - parse_response
+- title: "Utility"
+  desc: >
+    Utility functions.
+- contents:
+  - clean_date_columns
+  - get_column_names
+  - get_data_items
+  - get_data_items_type
+  - get_function
+  - get_parameters
