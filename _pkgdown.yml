@@ -27,3 +27,6 @@ reference:
   - get_data_item_type
   - get_function
   - get_parameters
+authors:
+  Adam Rawles:
+    href: http://arawles.co.uk
