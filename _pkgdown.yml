@@ -33,10 +33,17 @@ authors:
 url: http://bmrsr.arawles.co.uk
 navbar:
   structure:
-    right:
-      - github
-      - arawles
-components:
-  arawles:
-    icon: icon("address-card")
-    href: http://arawles.co.uk
+    left: [home, intro, reference, articles, changelog]
+    right: [github, arawles]
+  title: BMRSr
+  components:
+    arawles:
+      icon: "fa-address-card"
+      href: http://arawles.co.uk
+    github:
+      icon: "fa-github"
+      href: https://github.com/arawles/bmrsr
+home:
+  links:
+  - text: Browse source code
+    href: https://github.com/arawles/bmrsr
