@@ -27,15 +27,16 @@ reference:
   - get_data_item_type
   - get_function
   - get_parameters
-developers:
+authors:
   Adam Rawles:
     href: http://arawles.co.uk
 url: http://bmrsr.arawles.co.uk
 navbar:
   structure:
-    left: [home, reference, articles, changelog]
-    right: [github, arawles]
+    right:
+      - github
+      - arawles
 components:
   arawles:
-    icon: "address-card"
+    icon: icon("address-card")
     href: http://arawles.co.uk
