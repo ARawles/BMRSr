@@ -2,7 +2,7 @@
 
 * New CRAN release
 * Bug fixes documented in versions 1.0.0 - 1.0.1
-* New documentation website hosted at [bmrs.arawles.co.uk](http://bmrs.arawles.co.uk)
+* New documentation website hosted at [bmrs.arawles.co.uk](http://bmrsr.arawles.co.uk)
 * Updated links to BMRS documentation
 
 # BMRSr 1.0.0.9004
