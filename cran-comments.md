@@ -5,9 +5,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-There are non-standard files and directories as the package uses `pkgdown` for its website.
+0 errors | 0 warnings | 0 notes
 
 ## Downstream dependencies
 
