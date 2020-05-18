@@ -17,16 +17,6 @@ test_that("Missing arguments", {
 
 test_that("Build output", {
 
-
-  # parameter_list <- purrr::map(purrr::map(get_data_items("B Flow"), get_parameters), as.list)
-  # names(parameter_list) <- get_data_items("B Flow")
-  # data_item_list <- purrr::map(parameter_list, function(x) {names(x) = x; return(x)})
-  # data_item_list <- purrr::map_depth(data_item_list, .depth = 2, function(x) ifelse(x == "settlement_date", "01 Sep 2019", ""))
-  #
-  # purrr::map2(.x = data_item_list, .y = names(data_item_list), .f = ~do.call(build_call, c(list(data_item = .y, api_key = "test", service_type = "csv", api_version = "v1"), .x)))
-
-
-
   expect_true(is.list(build_call(data_item = "B1030", api_key = "test")))
   expect_true(is.list(build_b_call(data_item = "B1030", api_key = "test")))
   expect_true(is.list(build_remit_call(data_item = "MessageDetailRetrieval", api_key = "test")))

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 The BMRSr package provides a number of wrapper functions to make the Balancing Mechanism Reporting Service (BMRS) API provided by ELEXON easier to use. There's a massive repository of very useful and interesting data held in BMRS, but the API itself is not particular intuitive, and can result in the user needing to repeat lots of steps in order to retrieve and the clean the data. This package is an effort to automate those boring steps, making it easier for the user to retrieve the data for their analysis.
 
-The first step in using the BMRS API is to read the documentation currently available: [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf). This document tells you all of the available data items and what you can expect to get back. I've tried to include a couple of helper functions to list all data items, find what parameters you need for specific data items, but there's a lot so this document will always be more detailed.
+The first step in using the BMRS API is to read the documentation currently available: [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/documents/training-guidance/bsc-guidance-notes/bmrs-api-and-data-push-user-guide-2/). This document tells you all of the available data items and what you can expect to get back. I've tried to include a couple of helper functions to list all data items, find what parameters you need for specific data items, but there's a lot so this document will always be more detailed.
 
 Second, to actually access the BMRS API, you'll need an API key. These are freely available by signing up through the ELEXON Portal: [ELEXON portal](https://www.elexonportal.co.uk).
 

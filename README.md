@@ -15,7 +15,7 @@ status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](http
 
 The goal of BMRSr is to provide wrapper functions to make use of the
 [Balancing Mechanism Reporting System
-API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf)
+API](https://www.elexon.co.uk/documents/training-guidance/bsc-guidance-notes/bmrs-api-and-data-push-user-guide-2/)
 easier for R users. <br> The [Balancing Mechanism Reporting
 System](https://bmreports.com/bmrs/?q=eds/main) (or BMRS) is a platform
 for energy-related data in the UK. Here, data relating to energy

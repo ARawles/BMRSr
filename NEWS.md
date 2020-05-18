@@ -1,3 +1,9 @@
+# BMRSr 1.0.1
+
+* New CRAN release
+* Bug fixes documented in versions 1.0.0 - 1.0.1
+* New documentation website hosted at [bmrs.arawles.co.uk](http://bmrs.arawles.co.uk)
+
 # BMRSr 1.0.0.9004
 
 * Restructured the getting data items/data items types functions to pull from a single paired list of data items and types
@@ -9,7 +15,7 @@
 # BMRSr 1.0.0.9001
 
 * Added `rename` parameter to `parse_response()` to avoid attempting to rename columns
-* Fixed typo in `get_data_items()` list (DISBSAD was incorrectly spelt DISBAD)
+* Fixed typo in `get_data_items()` list (DISBSAD was incorrectly spelt DISBAD) (#13)
 
 # BMRSr 1.0.0
 
