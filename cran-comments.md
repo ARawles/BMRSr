@@ -11,5 +11,6 @@ There are non-standard files and directories as the package uses `pkgdown` for i
 
 ## Downstream dependencies
 
+There are no downstream dependencies
 
 
