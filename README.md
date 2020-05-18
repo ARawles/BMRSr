@@ -11,7 +11,7 @@ status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-c
 status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.rstudio.com/web/packages/BMRSr/index.html)
 
-\#\#Overview
+## Overview
 
 The goal of BMRSr is to provide wrapper functions to make use of the
 [Balancing Mechanism Reporting System

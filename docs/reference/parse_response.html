@@ -8,6 +8,13 @@
 
 <title>Parse the results of a call — parse_response • BMRSr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Parse the results of a call — parse_response" />
 <meta property="og:description" content="Parse the results of a call" />
+<meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
 
@@ -138,7 +146,8 @@
     <p>Parse the results of a call</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_response</span>(<span class='no'>response</span>, <span class='no'>format</span>, <span class='kw'>clean_dates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rename</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_response</span>(<span class='no'>response</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clean_dates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>rename</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,7 +158,7 @@
     </tr>
     <tr>
       <th>format</th>
-      <td><p>character string; format of the content of the response object; either "csv" or "xml"</p></td>
+      <td><p>character string; NULL to use response service type or "csv" or "xml" to force that format</p></td>
     </tr>
     <tr>
       <th>clean_dates</th>

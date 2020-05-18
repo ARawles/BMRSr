@@ -8,6 +8,13 @@
 
 <title>Send an API request (basically a wrapper to httr:GET that adds a marker for the data item) — send_request • BMRSr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Send an API request (basically a wrapper to httr:GET that adds a marker for the data item) — send_request" />
 <meta property="og:description" content="Send an API request (basically a wrapper to httr:GET that adds a marker for the data item)" />
+<meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
 
@@ -161,7 +169,7 @@
     <pre class="examples"><div class='input'><span class='fu'>send_request</span>(
 <span class='fu'><a href='build_call.html'>build_call</a></span>(<span class='kw'>data_item</span> <span class='kw'>=</span> <span class='st'>"TEMP"</span>, <span class='kw'>from_date</span> <span class='kw'>=</span> <span class='st'>"01 Jun 2019"</span>, <span class='kw'>to_date</span> <span class='kw'>=</span> <span class='st'>"10 Jun 2019"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
 )</div><div class='output co'>#&gt; Response [https://api.bmreports.com/BMRS/TEMP/v1?APIKey=test&amp;FromDate=2019-06-01&amp;ToDate=2019-06-10&amp;ServiceType=csv]
-#&gt;   Date: 2020-04-28 13:53
+#&gt;   Date: 2020-05-18 10:19
 #&gt;   Status: 200
 #&gt;   Content-Type: text/xml;charset=UTF-8
 #&gt;   Size: 294 B

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.rstudio.com/web/packages/BMRSr/index.html)
 
 
-##Overview
+## Overview
 
 The goal of BMRSr is to provide wrapper functions to make use of the [Balancing Mechanism Reporting System API](https://www.elexon.co.uk/wp-content/uploads/2017/06/bmrs_api_data_push_user_guide_v1.1.pdf) easier for R users.
 <br>
