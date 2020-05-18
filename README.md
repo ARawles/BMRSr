@@ -9,7 +9,7 @@ status](https://www.r-pkg.org/badges/version/BMRSr)](https://cran.r-project.org/
 status](https://travis-ci.org/ARawles/BMRSr.svg?branch=master)](https://travis-ci.org/ARawles/BMRSr)
 [![Coverage
 status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master)
-[![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.rstudio.com/web/packages/BMRSr/index.html)
+[![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.r-project.org/package=BMRSr)
 
 ## Overview
 
@@ -219,18 +219,17 @@ library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 
 head(gen_data)
 #> # A tibble: 6 x 19
-#>   record_type settlement_date settlement_peri~ spot_time            ccgt
-#>   <chr>       <date>                     <dbl> <dttm>              <dbl>
-#> 1 FUELINST    2019-07-01                     2 2019-07-01 00:00:00  4101
-#> 2 FUELINST    2019-07-01                     3 2019-07-01 00:05:00  4354
-#> 3 FUELINST    2019-07-01                     3 2019-07-01 00:10:00  4388
-#> 4 FUELINST    2019-07-01                     3 2019-07-01 00:15:00  4290
-#> 5 FUELINST    2019-07-01                     3 2019-07-01 00:20:00  4237
-#> 6 FUELINST    2019-07-01                     3 2019-07-01 00:25:00  4176
-#> # ... with 14 more variables: oil <dbl>, coal <dbl>, nuclear <dbl>,
-#> #   wind <dbl>, ps <dbl>, npshyd <dbl>, ocgt <dbl>, other <dbl>,
-#> #   intfr <dbl>, intirl <dbl>, intned <dbl>, intew <dbl>, biomass <dbl>,
-#> #   intnem <dbl>
+#>   record_type settlement_date settlement_peri~ spot_time            ccgt   oil
+#>   <chr>       <date>                     <dbl> <dttm>              <dbl> <dbl>
+#> 1 FUELINST    2019-07-01                     2 2019-07-01 00:00:00  4101     0
+#> 2 FUELINST    2019-07-01                     3 2019-07-01 00:05:00  4354     0
+#> 3 FUELINST    2019-07-01                     3 2019-07-01 00:10:00  4388     0
+#> 4 FUELINST    2019-07-01                     3 2019-07-01 00:15:00  4290     0
+#> 5 FUELINST    2019-07-01                     3 2019-07-01 00:20:00  4237     0
+#> 6 FUELINST    2019-07-01                     3 2019-07-01 00:25:00  4176     0
+#> # ... with 13 more variables: coal <dbl>, nuclear <dbl>, wind <dbl>, ps <dbl>,
+#> #   npshyd <dbl>, ocgt <dbl>, other <dbl>, intfr <dbl>, intirl <dbl>,
+#> #   intned <dbl>, intew <dbl>, biomass <dbl>, intnem <dbl>
 
 #Change the fuel types from columns to a grouping
 gen_data <- gen_data %>%
