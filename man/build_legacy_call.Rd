@@ -4,17 +4,35 @@
 \alias{build_legacy_call}
 \title{Create an API call for legacy data}
 \usage{
-build_legacy_call(data_item, api_key, from_date = NULL, to_date = NULL,
-  settlement_date = NULL, settlement_period = NULL,
-  bm_unit_id = NULL, bm_unit_type = NULL, lead_party_name = NULL,
-  ngc_bm_unit_name = NULL, from_cleared_date = NULL,
-  to_cleared_date = NULL, is_two_day_window = NULL,
-  from_datetime = NULL, to_datetime = NULL,
-  from_settlement_date = NULL, to_settlement_date = NULL,
-  period = NULL, fuel_type = NULL, balancing_service_volume = NULL,
-  zone_identifier = NULL, start_time = NULL, end_time = NULL,
-  trade_name = NULL, trade_type = NULL, api_version = "v1",
-  service_type = "csv")
+build_legacy_call(
+  data_item,
+  api_key,
+  from_date = NULL,
+  to_date = NULL,
+  settlement_date = NULL,
+  settlement_period = NULL,
+  bm_unit_id = NULL,
+  bm_unit_type = NULL,
+  lead_party_name = NULL,
+  ngc_bm_unit_name = NULL,
+  from_cleared_date = NULL,
+  to_cleared_date = NULL,
+  is_two_day_window = NULL,
+  from_datetime = NULL,
+  to_datetime = NULL,
+  from_settlement_date = NULL,
+  to_settlement_date = NULL,
+  period = NULL,
+  fuel_type = NULL,
+  balancing_service_volume = NULL,
+  zone_identifier = NULL,
+  start_time = NULL,
+  end_time = NULL,
+  trade_name = NULL,
+  trade_type = NULL,
+  api_version = "v1",
+  service_type = "csv"
+)
 }
 \arguments{
 \item{data_item}{character string; the id of the legacy data}
@@ -84,7 +102,9 @@ build_legacy_call(data_item = "QAS", api_key = "12345",
 settlement_date = "01 Jun 2019", service_type = "xml")
 }
 \seealso{
-Other call-building functions: \code{\link{build_b_call}},
-  \code{\link{build_call}}, \code{\link{build_remit_call}}
+Other call-building functions: 
+\code{\link{build_b_call}()},
+\code{\link{build_call}()},
+\code{\link{build_remit_call}()}
 }
 \concept{call-building functions}

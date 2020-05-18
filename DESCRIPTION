@@ -17,7 +17,7 @@ Imports:
     tibble,
     readr,
     methods
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 URL: http://bmrsr.arawles.co.uk
 Suggests: 
     covr,

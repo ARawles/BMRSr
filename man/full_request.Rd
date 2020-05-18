@@ -4,8 +4,13 @@
 \alias{full_request}
 \title{Create an API call, send the request and retrieve the results, and parse them}
 \usage{
-full_request(..., get_params = list(), parse = TRUE,
-  clean_dates = TRUE, rename = TRUE)
+full_request(
+  ...,
+  get_params = list(),
+  parse = TRUE,
+  clean_dates = TRUE,
+  rename = TRUE
+)
 }
 \arguments{
 \item{...}{values to be passed to appropriate build_x_call function}

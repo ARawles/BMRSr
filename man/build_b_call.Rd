@@ -4,10 +4,22 @@
 \alias{build_b_call}
 \title{Create an API call for B-data flows}
 \usage{
-build_b_call(data_item, api_key, settlement_date = NULL, period = NULL,
-  year = NULL, month = NULL, week = NULL, process_type = NULL,
-  start_time = NULL, end_time = NULL, start_date = NULL,
-  end_date = NULL, service_type = "csv", api_version = "v1")
+build_b_call(
+  data_item,
+  api_key,
+  settlement_date = NULL,
+  period = NULL,
+  year = NULL,
+  month = NULL,
+  week = NULL,
+  process_type = NULL,
+  start_time = NULL,
+  end_time = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  service_type = "csv",
+  api_version = "v1"
+)
 }
 \arguments{
 \item{data_item}{character string; the id of the B flow}
@@ -50,8 +62,9 @@ build_b_call(data_item = "B1510", api_key = "12345", start_date = "01 Jan 2019",
 start_time = "00:00:00", end_date = "02 Jan 2019", end_time = "24:00:00", service_type = "csv")
 }
 \seealso{
-Other call-building functions: \code{\link{build_call}},
-  \code{\link{build_legacy_call}},
-  \code{\link{build_remit_call}}
+Other call-building functions: 
+\code{\link{build_call}()},
+\code{\link{build_legacy_call}()},
+\code{\link{build_remit_call}()}
 }
 \concept{call-building functions}

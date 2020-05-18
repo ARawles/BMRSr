@@ -4,12 +4,25 @@
 \alias{build_remit_call}
 \title{Create an API call for REMIT flows}
 \usage{
-build_remit_call(data_item, api_key, event_start = NULL,
-  event_end = NULL, publication_from = NULL, publication_to = NULL,
-  participant_id = NULL, asset_id = NULL, event_type = NULL,
-  fuel_type = NULL, message_type = NULL, message_id = NULL,
-  unavailability_type = NULL, active_flag = NULL, sequence_id = NULL,
-  service_type = "xml", api_version = "v1")
+build_remit_call(
+  data_item,
+  api_key,
+  event_start = NULL,
+  event_end = NULL,
+  publication_from = NULL,
+  publication_to = NULL,
+  participant_id = NULL,
+  asset_id = NULL,
+  event_type = NULL,
+  fuel_type = NULL,
+  message_type = NULL,
+  message_id = NULL,
+  unavailability_type = NULL,
+  active_flag = NULL,
+  sequence_id = NULL,
+  service_type = "xml",
+  api_version = "v1"
+)
 }
 \arguments{
 \item{data_item}{character string; the id of the REMIT flow}
@@ -59,7 +72,9 @@ build_remit_call(data_item = "MessageDetailRetrieval", api_key = "12345",
 participant_id = 21, service_type = "xml")
 }
 \seealso{
-Other call-building functions: \code{\link{build_b_call}},
-  \code{\link{build_call}}, \code{\link{build_legacy_call}}
+Other call-building functions: 
+\code{\link{build_b_call}()},
+\code{\link{build_call}()},
+\code{\link{build_legacy_call}()}
 }
 \concept{call-building functions}

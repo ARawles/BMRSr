@@ -4,8 +4,7 @@
 \alias{build_call}
 \title{Build an API call (uses the appropriate function based on the data item)}
 \usage{
-build_call(data_item, api_key, service_type = "csv",
-  api_version = "v1", ...)
+build_call(data_item, api_key, service_type = "csv", api_version = "v1", ...)
 }
 \arguments{
 \item{data_item}{character string; data item to be retrieved}
@@ -34,8 +33,9 @@ settlement_date = "01 Jun 2019", service_type = "xml")
 
 \code{\link{build_legacy_call}}
 
-Other call-building functions: \code{\link{build_b_call}},
-  \code{\link{build_legacy_call}},
-  \code{\link{build_remit_call}}
+Other call-building functions: 
+\code{\link{build_b_call}()},
+\code{\link{build_legacy_call}()},
+\code{\link{build_remit_call}()}
 }
 \concept{call-building functions}

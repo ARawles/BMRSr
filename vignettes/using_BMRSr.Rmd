@@ -229,6 +229,7 @@ generation_data <- generation_dataset_example
 ```{r eval = TRUE, fig.width=7, fig.height=7, warning=FALSE}
 #Load the libraries for a bit more cleaning and then plotting...
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
+library(tidyr, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 
 #Change the fuel types from columns to a grouping (tidy format)

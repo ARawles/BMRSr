@@ -4,8 +4,7 @@
 \alias{parse_response}
 \title{Parse the results of a call}
 \usage{
-parse_response(response, format = NULL, clean_dates = TRUE,
-  rename = TRUE)
+parse_response(response, format = NULL, clean_dates = TRUE, rename = TRUE)
 }
 \arguments{
 \item{response}{A response object returned from the API request}

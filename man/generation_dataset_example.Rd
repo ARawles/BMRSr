@@ -4,7 +4,8 @@
 \name{generation_dataset_example}
 \alias{generation_dataset_example}
 \title{An example dataset from BMRS showing generation by fuel type.}
-\format{A data frame with 8655 rows and 6 variables:
+\format{
+A data frame with 8655 rows and 6 variables:
 \describe{
   \item{record_type}{data item}
   \item{settlement_date}{Settlement Date of the observation}
@@ -25,7 +26,8 @@
   \item{intew}{Generation from the Irish interconnector (MW)}
   \item{biomass}{Generation from biomass (MW)}
   \item{intnem}{Generation from Belgian interconnector (MW)}
-}}
+}
+}
 \source{
 \url{https://www.bmreports.com/bmrs/?q=help/about-us}
 }
