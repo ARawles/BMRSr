@@ -4,12 +4,13 @@
 \alias{parse_response}
 \title{Parse the results of a call}
 \usage{
-parse_response(response, format, clean_dates = TRUE, rename = TRUE)
+parse_response(response, format = NULL, clean_dates = TRUE,
+  rename = TRUE)
 }
 \arguments{
 \item{response}{A response object returned from the API request}
 
-\item{format}{character string; format of the content of the response object; either "csv" or "xml"}
+\item{format}{character string; NULL to use response service type or "csv" or "xml" to force that format}
 
 \item{clean_dates}{boolean; whether to clean date/time columns}
 

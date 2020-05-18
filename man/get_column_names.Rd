@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility.R
 \name{get_column_names}
 \alias{get_column_names}
-\title{Get the column names for a returned csv dataset}
+\title{Get the column names for a returned CSV Legacy dataset}
 \usage{
 get_column_names(data_item)
 }
@@ -13,7 +13,7 @@ get_column_names(data_item)
 vector; a vector of character strings with the column headings
 }
 \description{
-Get the column names for a returned csv dataset
+Get the column names for a returned CSV Legacy dataset
 }
 \examples{
 get_column_names("TEMP")
