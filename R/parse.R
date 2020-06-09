@@ -32,7 +32,9 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
 
     if (response$data_item_type == "B Flow"){
       if (stringr::str_detect(parsed_content, "\\<EOF>")) {
-        ret <- parse_eof(parsed_content)
+        ret <- parse_eof_csv(parsed_content)
+      } else {
+        ret <- parse_clean_csv(parsed_content)
       }
       if (clean_dates == TRUE){
         try({
@@ -41,7 +43,7 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
       }
     }
     else if (response$data_item_type == "Legacy"){
-      ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1))
+      ret <- readr::read_delim(file = parsed_content, delim = ",", col_name = FALSE, na = "NA", skip = 1)
       ret <- droplevels(ret)
       ret <- ret[1:nrow(ret) - 1,]
       if (rename){
@@ -67,8 +69,56 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
   return(ret)
 }
 
-parse_eof <- function(content) {
-  end_ind <- stringr::str_locate(content, "\\<EOF>")
-  parsed_content <- substr(content, 1, end_ind-1)
-  tibble::as_tibble(readr::read_delim(file = content, delim = ",", skip = 4, na = "NA"))
+#' Parse a .csv response with a EOF tag left in
+#'
+#' Some .csv files returned from the API still have an EOF tag left at the bottom and contain 4 lines of nonsense.
+#' This function is used to parse these files, whereas the \code{parse_clean_csv()} function is used to
+#' parse .csv files without this tag and the junk lines.
+#' @param content character; the original response object parsed as a single text string.
+#' @return tibble; a tibble containing the data in the .csv file
+#' @family parsers
+parse_eof_csv <- function(content) {
+  try_parse({
+    end_ind <- stringr::str_locate(content, "\\<EOF>")
+    parsed_content <- substr(content, 1, end_ind-1)
+    readr::read_delim(file = content, delim = ",", skip = 4, na = "NA")
+  },
+  error_message = "Response could not be parsed using `parse_eof()` function.
+                        Returning an empty tibble."
+  )
+}
+
+
+#' Parse a 'clean' .csv response
+#'
+#' Some .csv files are returned without the EOF tag and with only 1 line before the data. This
+#' function is used to parse these files, whereas the \code{parse_eof_csv()} function is used
+#' to parse those files with the EOF tag and junk lines.
+#' @param content character; the original response object parsed as a single text string.
+#' @return tibble; a tibble containing the data in the .csv file
+#' @family parsers
+parse_clean_csv <- function(content) {
+  try_parse({
+    readr::read_delim(file = content, delim = ",", skip = 1, na = "NA")
+  },
+  error_message = "Response could not be parsed using `parse_clean_csv()` function.
+                        Returning an empty tibble."
+  )
+}
+
+#' Wrapper to the tryCatch version to be used for the parsing function
+#'
+#' This simple wrapper returns an empty tibble on error and returns a custom warning message.
+#' @param expr expression; expression to be evaluated for errors
+#' @param error_message character; character string to be displayed as a warning on error
+#' @param ... extra parameters to be passed to the \code{tryCatch()} function.
+#' @return evaluated expression on success or empty tibble on error
+try_parse <- function(expr, error_message, ...) {
+  tryCatch({
+    expr
+  }, error = function(e) {
+    warning(error_message)
+    tibble::tibble()
+  },
+  ...)
 }
