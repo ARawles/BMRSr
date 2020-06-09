@@ -31,9 +31,9 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
     }
 
     if (response$data_item_type == "B Flow"){
-      end_ind <- stringr::str_locate(parsed_content, "\\<EOF>")
-      parsed_content <- substr(parsed_content, 1, end_ind-1)
-      ret <- tibble::as_tibble(readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA"))
+      if (stringr::str_detect(parsed_content, "\\<EOF>")) {
+        ret <- parse_eof(parsed_content)
+      }
       if (clean_dates == TRUE){
         try({
           ret <- clean_date_columns(ret)}
@@ -65,4 +65,10 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
     stop("Invalid format specified")
   }
   return(ret)
+}
+
+parse_eof <- function(content) {
+  end_ind <- stringr::str_locate(content, "\\<EOF>")
+  parsed_content <- substr(content, 1, end_ind-1)
+  tibble::as_tibble(readr::read_delim(file = content, delim = ",", skip = 4, na = "NA"))
 }
