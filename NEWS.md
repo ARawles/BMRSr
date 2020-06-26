@@ -1,3 +1,9 @@
+# BMRSr 1.0.1.9000
+
+* Changes to the API return values mean that the returned .csv files do not always have the same structure (#15).
+    + This bred a change to the parser to be more dynamic and allow for the different structures.
+    + This initial change has been made but further changes will need to be made to account for more file structures.
+
 # BMRSr 1.0.1
 
 * New CRAN release
