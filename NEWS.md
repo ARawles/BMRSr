@@ -1,3 +1,11 @@
+# 08 NOV 2020 (temporary)
+*  Proposed changes to build_b_call() function
+*  Collect query parameters with list input_query
+*  Simply modify_url() usage
+*  Shorten long lines
+*  Added temporary tests to test_that
+*  Other cosmetic changes
+
 # BMRSr 1.0.1.9000
 
 * Changes to the API return values mean that the returned .csv files do not always have the same structure (#15).

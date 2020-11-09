@@ -5,7 +5,8 @@
 #'
 #' @param data_item character string; the id of the B flow
 #' @param api_key character string; api key retrieved from the Elexon portal
-#' @param settlement_date character string; settlement date (automatically cleaned by format_date)
+#' @param settlement_date character string; 
+#'   settlement date (automatically cleaned by format_date)
 #' @param period character string; settlement period
 #' @param year character string; year
 #' @param month character string; month
@@ -16,58 +17,101 @@
 #' @param start_date character string; start date
 #' @param end_date character string; end date
 #' @param service_type character string; file format (csv or xml)
-#' @param api_version character string; version of the api to use (currently on v1)
+#' @param api_version character string; 
+#'   version of the api to use (currently on v1)
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @export
 #' @examples
-#' build_b_call(data_item = "B1730", api_key = "12345", settlement_date = "14-12-2016")
-#' build_b_call(data_item = "B1510", api_key = "12345", start_date = "01 Jan 2019",
-#' start_time = "00:00:00", end_date = "02 Jan 2019", end_time = "24:00:00", service_type = "csv")
-build_b_call <- function(data_item, api_key, settlement_date = NULL, period = NULL,
-                         year = NULL, month = NULL, week = NULL, process_type = NULL, start_time = NULL,
-                         end_time = NULL, start_date = NULL, end_date = NULL, service_type = "csv", api_version = "v1") {
-  request <- list()
-  request$url = paste0("https://api.bmreports.com/BMRS/", data_item, "/", api_version, "?APIKey=", api_key)
+#' \dontrun{
+#'     build_b_call(data_item = "B1730", 
+#'     api_key = "12345", settlement_date = "14-12-2016")
+#'
+#'     build_b_call(data_item = "B1510", 
+#'     api_key = "12345", start_date = "01 Jan 2019",
+#'     start_time = "00:00:00", end_date = "02 Jan 2019", 
+#'     end_time = "24:00:00", service_type = "csv")
+#' }
+#'
+build_b_call <- function( data_item,
+                          api_key, 
+                          settlement_date = NULL, 
+                          period = NULL,
+                          year = NULL, 
+                          month = NULL, 
+                          week = NULL, 
+                          process_type = NULL, 
+                          start_time = NULL,
+                          end_time = NULL, 
+                          start_date = NULL, 
+                          end_date = NULL, 
+                          service_type = "csv", 
+                          api_version = "v1") {
+  base_url  <- "https://api.bmreports.com"
+  the_url <- httr::modify_url(base_url, 
+                              path= paste0("BMRS/", data_item,"/", api_version)
+   )
+
+  # construct query params
+  input_params  <- list()
+  input_params$APIKey  <- api_key
+
   check_data_item(data_item, "B Flow")
+
   if (!is.null(settlement_date)) {
-    request$url = paste0(request$url, "&SettlementDate=", format_date(settlement_date))
+    input_params$SettlementDate  <- format_date(settlement_date)
   }
+
   if (!is.null(period)){
     if (period <= 0 | period > 50){
       if (period != "*"){
       stop("invalid period value")
       }
     }
-    request$url = paste0(request$url, "&Period=", as.character(period))
+  input_params$Period  <-  as.character(period)
   }
+
   if (!is.null(process_type)){
-    request$url = paste0(request$url, "&ProcessType", process_type)
+    input_params$ProcessType  <- process_type
   }
+
   if (!is.null(year)){
-    request$url = paste0(request$url, "&Year=", year)
+    input_params$Year  <- year
   }
+
   if (!is.null(month)){
-    request$url = paste0(request$url, "&Month=", format_month(month))
+    input_params$Month  <- format_month(month)
   }
   if (!is.null(week)){
-    request$url = paste0(request$url, "&Week=", week)
+    input_params$Week  <- week
   }
+
   if (!is.null(start_date)){
-    request$url = paste0(request$url, "&StartDate=", format_date(start_date))
+    input_params$StartDate  <- format_date(start_date)
   }
+
+
   if (!is.null(end_date)){
-    request$url = paste0(request$url, "&EndDate=", format_date(end_date))
+    input_params$EndDate  <- format_date(end_date)
   }
+
   if (!is.null(start_time)){
-    request$url = paste0(request$url, "&StartTime=", format_time(start_time))
+    input_params$StartTime  <- format_time(start_time)
   }
+
   if (!is.null(end_time)){
-    request$url = paste0(request$url, "&EndTime=", format_time(end_time))
+    input_params$EndTime  <- format_time(end_time)
   }
-  request$url = paste0(request$url, "&ServiceType=", service_type)
-  request$service_type <- service_type
-  request$data_item <- data_item
+
+  input_params$ServiceType  <- service_type
+
+  # return with list of complete url, service_type, data_item
+ 
+  request  <- list()
+  request$url  <- httr::modify_url(the_url, query=input_params)
+  request$service_type  <- service_type
+  request$data_item  <- data_item
+
   return(request)
 }
 
