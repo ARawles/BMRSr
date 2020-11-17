@@ -1,30 +1,25 @@
 context("Build accuracy")
 
-# ===========
-# JR: REMOVE
-# Temporary tests
-# ===========
-# 
+
+test_that("Typical Request", {
 # "https://api.bmreports.com/BMRS/B1720/v1?APIKey=4rs1u6b3ror2wjg&Period=*&SettlementDate=2019-10-13"
+
   api_key  <- Sys.getenv("scripting_key")
   data_item  <- "B1720"
-  api_version  <- "v1" 
+  api_version  <- "v1"
   settlement_date  <-  "13-10-2019" #DD-MM-YYYY
-  period = "*"
+  period <- "*"
 
-request  <- build_b_call(data_item = data_item,
+  request  <- build_b_call(data_item = data_item,
              api_version = api_version,
              settlement_date = settlement_date,
              period = period,
              api_key = api_key)
 
-request
-r  <- httr::GET(request[[1]])
-r
-
-# END: Temporary Tests
-# ===========
-
+  expect_true(is.list(request))
+  expect_true(length(request) == 3)
+             }
+)
 
 test_that("Invalid data items", {
   expect_warning(build_b_call(data_item = "test", api_key = "test"))

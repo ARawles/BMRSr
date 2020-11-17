@@ -1,9 +1,10 @@
-# 08 NOV 2020 (temporary)
-*  Proposed changes to build_b_call() function
-*  Collect query parameters with list input_query
-*  Simply modify_url() usage
+# BMRSr 1.0.1.9001 
+
+*  Changes to build_b_call() function
+*  Collect query parameters using list input_query
+*  Use httr::modify_url() to build query
 *  Shorten long lines
-*  Added temporary tests to test_that
+*  Added test 'Typical Request' to test_that
 *  Other cosmetic changes
 
 # BMRSr 1.0.1.9000
