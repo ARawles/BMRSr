@@ -1,3 +1,12 @@
+# BMRSr 1.0.1.9001 
+
+*  Changes to build_b_call() function
+*  Collect query parameters using list input_query
+*  Use httr::modify_url() to build query
+*  Shorten long lines
+*  Added test 'Typical Request' to test_that
+*  Other cosmetic changes
+
 # BMRSr 1.0.1.9000
 
 * Changes to the API return values mean that the returned .csv files do not always have the same structure (#15).
