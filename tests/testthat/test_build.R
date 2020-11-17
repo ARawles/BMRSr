@@ -4,7 +4,7 @@ context("Build accuracy")
 test_that("Typical Request", {
 # "https://api.bmreports.com/BMRS/B1720/v1?APIKey=4rs1u6b3ror2wjg&Period=*&SettlementDate=2019-10-13"
 
-  api_key  <- Sys.getenv("scripting_key")
+  api_key  <- "12345"
   data_item  <- "B1720"
   api_version  <- "v1"
   settlement_date  <-  "13-10-2019" #DD-MM-YYYY
@@ -18,6 +18,7 @@ test_that("Typical Request", {
 
   expect_true(is.list(request))
   expect_true(length(request) == 3)
+  expect_equal(request$url, "https://api.bmreports.com/BMRS/B1720/v1?APIKey=4rs1u6b3ror2wjg&Period=*&SettlementDate=2019-10-13")
              }
 )
 
