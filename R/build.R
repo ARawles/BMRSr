@@ -60,9 +60,9 @@ build_b_call <- function( data_item,
 
   input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
 
-  check_period(period)
+  period <- check_period(period)
 
-  input_params$Period  <- fix_parameter(period, as.character)
+  input_params$Period  <- fix_parameter(period)
   input_params$ProcessType  <- fix_parameter(process_type)
   input_params$Year  <- fix_parameter(year)
   input_params$Month  <- fix_parameter(month, format_month)
