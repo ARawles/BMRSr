@@ -5,7 +5,7 @@
 #'
 #' @param data_item character string; the id of the B flow
 #' @param api_key character string; api key retrieved from the Elexon portal
-#' @param settlement_date character string; 
+#' @param settlement_date character string;
 #'   settlement date (automatically cleaned by format_date)
 #' @param period character string; settlement period
 #' @param year character string; year
@@ -17,40 +17,40 @@
 #' @param start_date character string; start date
 #' @param end_date character string; end date
 #' @param service_type character string; file format (csv or xml)
-#' @param api_version character string; 
+#' @param api_version character string;
 #'   version of the api to use (currently on v1)
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @export
 #' @examples
 #' \dontrun{
-#'     build_b_call(data_item = "B1730", 
+#'     build_b_call(data_item = "B1730",
 #'     api_key = "12345", settlement_date = "14-12-2016")
 #'
-#'     build_b_call(data_item = "B1510", 
+#'     build_b_call(data_item = "B1510",
 #'     api_key = "12345", start_date = "01 Jan 2019",
-#'     start_time = "00:00:00", end_date = "02 Jan 2019", 
+#'     start_time = "00:00:00", end_date = "02 Jan 2019",
 #'     end_time = "24:00:00", service_type = "csv")
 #' }
 #'
 build_b_call <- function( data_item,
-                          api_key, 
-                          settlement_date = NULL, 
+                          api_key,
+                          settlement_date = NULL,
                           period = NULL,
-                          year = NULL, 
-                          month = NULL, 
-                          week = NULL, 
-                          process_type = NULL, 
+                          year = NULL,
+                          month = NULL,
+                          week = NULL,
+                          process_type = NULL,
                           start_time = NULL,
-                          end_time = NULL, 
-                          start_date = NULL, 
-                          end_date = NULL, 
-                          service_type = "csv", 
+                          end_time = NULL,
+                          start_date = NULL,
+                          end_date = NULL,
+                          service_type = "csv",
                           api_version = "v1") {
   base_url  <- "https://api.bmreports.com"
-  the_url <- httr::modify_url(base_url, 
+  the_url <- httr::modify_url(base_url,
                               path= paste0("BMRS/", data_item,"/", api_version)
-   )
+  )
 
   # construct query params
   input_params  <- list()
@@ -58,55 +58,23 @@ build_b_call <- function( data_item,
 
   check_data_item(data_item, "B Flow")
 
-  if (!is.null(settlement_date)) {
-    input_params$SettlementDate  <- format_date(settlement_date)
-  }
+  input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
 
-  if (!is.null(period)){
-    if (period <= 0 | period > 50){
-      if (period != "*"){
-      stop("invalid period value")
-      }
-    }
-  input_params$Period  <-  as.character(period)
-  }
+  check_period(period)
 
-  if (!is.null(process_type)){
-    input_params$ProcessType  <- process_type
-  }
-
-  if (!is.null(year)){
-    input_params$Year  <- year
-  }
-
-  if (!is.null(month)){
-    input_params$Month  <- format_month(month)
-  }
-  if (!is.null(week)){
-    input_params$Week  <- week
-  }
-
-  if (!is.null(start_date)){
-    input_params$StartDate  <- format_date(start_date)
-  }
-
-
-  if (!is.null(end_date)){
-    input_params$EndDate  <- format_date(end_date)
-  }
-
-  if (!is.null(start_time)){
-    input_params$StartTime  <- format_time(start_time)
-  }
-
-  if (!is.null(end_time)){
-    input_params$EndTime  <- format_time(end_time)
-  }
-
+  input_params$Period  <- fix_parameter(period, as.character)
+  input_params$ProcessType  <- fix_parameter(process_type)
+  input_params$Year  <- fix_parameter(year)
+  input_params$Month  <- fix_parameter(month, format_month)
+  input_params$Week  <- fix_parameter(week)
+  input_params$StartDate  <- fix_parameter(start_date, format_date)
+  input_params$EndDate  <- fix_parameter(end_date, format_date)
+  input_params$StartTime  <- fix_parameter(start_time, format_time)
+  input_params$EndTime  <- fix_parameter(end_time, format_time)
   input_params$ServiceType  <- service_type
 
   # return with list of complete url, service_type, data_item
- 
+
   request  <- list()
   request$url  <- httr::modify_url(the_url, query=input_params)
   request$service_type  <- service_type
@@ -350,24 +318,24 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 build_call <- function(data_item, api_key, service_type = "csv", api_version = "v1", ...){
 
 
-                       # settlement_date = NULL, period = NULL,
-                       # year = NULL, month = NULL, week = NULL, process_type = NULL,
-                       # start_time = NULL, end_time = NULL, start_date = NULL,
-                       # end_date = NULL, event_start = NULL, event_end = NULL,
-                       # publication_from = NULL, publication_to = NULL,
-                       # participant_id = NULL, asset_id =  NULL, event_type = NULL,
-                       # fuel_type = NULL, message_type = NULL, message_id = NULL,
-                       # unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL,
-                       # from_date = NULL, to_date = NULL, settlement_period =  NULL,
-                       # bm_unit_id = NULL, bm_unit_type = NULL,
-                       # lead_party_name = NULL, ngc_bm_unit_name = NULL,
-                       # from_cleared_date = NULL, to_cleared_date = NULL,
-                       # is_two_day_window = NULL, from_datetime = NULL,
-                       # to_datetime = NULL, from_settlement_date = NULL,
-                       # to_settlement_date = NULL, period = NULL, fuel_type = NULL,
-                       # balancing_service_volume = NULL, zone_identifier = NULL,
-                       # trade_name = NULL, trade_type = NULL,
-                       # service_type = "csv", api_version = "v1"){
+  # settlement_date = NULL, period = NULL,
+  # year = NULL, month = NULL, week = NULL, process_type = NULL,
+  # start_time = NULL, end_time = NULL, start_date = NULL,
+  # end_date = NULL, event_start = NULL, event_end = NULL,
+  # publication_from = NULL, publication_to = NULL,
+  # participant_id = NULL, asset_id =  NULL, event_type = NULL,
+  # fuel_type = NULL, message_type = NULL, message_id = NULL,
+  # unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL,
+  # from_date = NULL, to_date = NULL, settlement_period =  NULL,
+  # bm_unit_id = NULL, bm_unit_type = NULL,
+  # lead_party_name = NULL, ngc_bm_unit_name = NULL,
+  # from_cleared_date = NULL, to_cleared_date = NULL,
+  # is_two_day_window = NULL, from_datetime = NULL,
+  # to_datetime = NULL, from_settlement_date = NULL,
+  # to_settlement_date = NULL, period = NULL, fuel_type = NULL,
+  # balancing_service_volume = NULL, zone_identifier = NULL,
+  # trade_name = NULL, trade_type = NULL,
+  # service_type = "csv", api_version = "v1"){
   if (service_type %!in% c("csv", "xml", "CSV", "XML")){
     stop("Invalid service type specified")
   }
