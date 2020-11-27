@@ -88,8 +88,7 @@ check_period <- function(period) {
   as.character(period)
 }
 
-get_build_arguments <- function(env) {
-  params <- as.list(env)
+get_build_arguments <- function(params) {
   params <- params[!names(params) %in% c("data_item", "api_version")]
   params[!sapply(params, is.null)]
 }
