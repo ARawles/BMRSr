@@ -31,8 +31,10 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
         
-      - name: Install libcurl
-        run: sudo apt-get install libcurl4-openssl-dev
+      - name: Install libcurl and libfribidi
+        run: |
+        sudo apt-get install libcurl4-openssl-dev
+        sudo apt-get install libharfbuzz-dev libfribidi-dev
         
       - name: Cache R packages
         if: runner.os != 'Windows'
