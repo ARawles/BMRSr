@@ -165,7 +165,7 @@ get_cleaning_function <- function(parameter, format = c("argument", "url")) {
   if (format == "url") {
     parameter <- change_parameter_name(parameter, from = "url", to = "argument")
   }
-  ret <- dplyr::filter(parameter_clean_functions_map, name == parameter)[["function"]]
+  ret <- dplyr::filter(parameter_clean_functions_map, name == parameter)[["fn"]]
   if(length(ret) == 0 || is.na(ret)) {
     ret <- NULL
   }

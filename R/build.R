@@ -64,21 +64,8 @@ build_b_call <- function( data_item,
   fixed_params <- fix_all_parameters(input_params)
 
 
-  # input_params$APIKey  <- api_key
-  # input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
-  # input_params$Period  <- fix_parameter(period, check_period)
-  # input_params$ProcessType  <- fix_parameter(process_type)
-  # input_params$Year  <- fix_parameter(year)
-  # input_params$Month  <- fix_parameter(month, format_month)
-  # input_params$Week  <- fix_parameter(week)
-  # input_params$StartDate  <- fix_parameter(start_date, format_date)
-  # input_params$EndDate  <- fix_parameter(end_date, format_date)
-  # input_params$StartTime  <- fix_parameter(start_time, format_time)
-  # input_params$EndTime  <- fix_parameter(end_time, format_time)
-  # input_params$ServiceType  <- service_type
   additional_params <- list(...)
 
-  # return with list of complete url, service_type, data_item
 
   request  <- list()
   request$url  <- httr::modify_url(base_url, query=c(fixed_params, additional_params))
@@ -122,34 +109,29 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
                              unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1", ...){
 
   check_data_item(data_item, "REMIT")
+  input_params  <- as.list(as.environment(-1))
+  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
+  input_params <- input_params[!sapply(input_params, is.null)]
+
   base_url  <- httr::modify_url("https://api.bmreports.com",
-                           path= paste0("BMRS/", data_item,"/", api_version)
+                                path= paste0("BMRS/", data_item,"/", api_version)
   )
 
-  input_params$APIKey <- api_key
+  # construct query params
+
+  fixed_params <- fix_all_parameters(input_params)
+
 
   if (service_type == "csv"){
     warning("Remit files cannot be returned as .csv - file will be returned as xml")
     service_type <- "xml"
   }
-  input_params$EventStart = fix_parameter(event_start = event_start, format_date)
-  input_params$EventEnd = fix_parameter(event_end = event_end, format_date)
-  input_params$PublicationFrom = fix_parameter(publication_from = publication_from, format_date)
-  input_params$PublicationTo = fix_parameter(publication_to, format_date)
-  input_params$ParticipantID= fix_parameter(participant_id = participant_id)
-  input_params$AssetID = fix_parameter(asset_id = asset_id)
-  input_params$EventType=fix_parameter(event_type = event_type)
-  input_params$FuelType=fix_parameter(fuel_type = fuel_type)
-  input_params$MessageType=fix_parameter(message_type = message_type)
-  input_params$MessageID=fix_parameter(message_id = message_id)
-  input_params$UnavailabilityType=fix_parameter(unavailability_type = unavailability_type)
-  input_params$ActiveFlag=fix_parameter(active_flag = active_flag)
-  input_params$SequenceId=fix_parameter(sequence_id = sequence_id)
-  input_params$ServiceType=fix_parameter(service_type = service_type)
+
   additional_params <- list(...)
+  fixed_params <- fix_all_parameters(input_params)
 
   request <- list()
-  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(fixed_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
@@ -200,40 +182,20 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
   check_data_item(data_item, "Legacy")
-  base_url  <- httr::modify_url("https://api.bmreports.com",
-                           path= paste0("BMRS/", data_item,"/", api_version)
-  )
-  input_params <- list()
-  input_params$APIKey <- api_key
+  input_params  <- as.list(as.environment(-1))
+  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
+  input_params <- input_params[!sapply(input_params, is.null)]
 
-  input_params$FromDate=fix_parameter(from_date, format_date)
-  input_params$ToDate=fix_parameter(to_date, format_date)
-  input_params$SettlementDate=fix_parameter(settlement_date, format_date)
-  input_params$SettlementPeriod=fix_parameter(settlement_period, check_period)
-  input_params$BMUnitID=fix_parameter(bm_unit_id)
-  input_params$BMUnitType=fix_parameter(bm_unit_type)
-  input_params$LeadPartName=fix_parameter(lead_party_name)
-  input_params$NGCBMUnitName=fix_parameter(ngc_bm_unit_name)
-  input_params$FromClearedDate=fix_parameter(from_cleared_date, format_date)
-  input_params$ToClearedDate=fix_parameter(to_cleared_date, format_date)
-  input_params$IsTwoDayWindow=fix_parameter(is_two_day_window)
-  input_params$FromDateTime=fix_parameter(from_datetime, format_datetime)
-  input_params$ToDateTime=fix_parameter(to_datetime, format_datetime)
-  input_params$FromSettlementDate=fix_parameter(from_settlement_date, format_date)
-  input_params$ToSettlementDate=fix_parameter(to_settlement_date, format_date)
-  input_params$Period=fix_parameter(period, check_period)
-  input_params$FuelType=fix_parameter(fuel_type)
-  input_params$BalancingServiceVolume=fix_parameter(balancing_service_volume)
-  input_params$ZoneIdentifier=fix_parameter(zone_identifier)
-  input_params$StartTime=fix_parameter(start_time, format_time)
-  input_params$EndTime=fix_parameter(end_time, format_time)
-  input_params$TradeName=fix_parameter(trade_name)
-  input_params$TradeType=fix_parameter(trade_type)
-  input_params$ServiceType=fix_parameter(service_type)
+  base_url  <- httr::modify_url("https://api.bmreports.com",
+                                path= paste0("BMRS/", data_item,"/", api_version)
+  )
+
   additional_params <- list(...)
 
+  fixed_params <- fix_all_parameters(input_params)
+
   request <- list()
-  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(fixed_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
