@@ -5,7 +5,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/BMRSr)](https://cran.r-project.org/package=BMRSr)
-[![R-CMD-Check](https://github.com/ARawles/BMRSr/workflows/R-CMD-Check/badge.svg)](https://github.com/ARawles/BMRSr/actions)
+[![R-CMD-Check](https://github.com/ARawles/BMRSr/workflows/R-CMD-check/badge.svg)](https://github.com/ARawles/BMRSr/actions)
 [![Coverage
 status](https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg)](https://codecov.io/github/ARawles/BMRSr?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/BMRSr)](https://cran.r-project.org/package=BMRSr)
