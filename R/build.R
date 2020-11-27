@@ -128,7 +128,6 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
   }
 
   additional_params <- list(...)
-  fixed_params <- fix_all_parameters(input_params)
 
   request <- list()
   request$url  <- httr::modify_url(base_url, query=c(fixed_params, additional_params))
