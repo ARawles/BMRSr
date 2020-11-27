@@ -124,7 +124,7 @@ check_period <- function(period) {
 #' @param parameter character; name of the parameter. Either the parameter as it's passed to the `build()` functions or the name of the parameter in the URL
 #' depending on the value of `format`
 #' @param format character; what format is `parameter` in? One of "argument" (default) or "url"
-#' @return character; name of the cleaning function
+#' @return character; name of the cleaning function. If there is no associated cleaning function, then `NULL`
 get_cleaning_function <- function(parameter, format = c("argument", "url")) {
   format <- match.arg(format)
   if (format == "url") {

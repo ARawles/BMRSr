@@ -13,7 +13,7 @@ depending on the value of \code{format}}
 \item{format}{character; what format is \code{parameter} in? One of "argument" (default) or "url"}
 }
 \value{
-character; name of the cleaning function
+character; name of the cleaning function. If there is no associated cleaning function, then \code{NULL}
 }
 \description{
 Before a parameter can be added to a request, it often needs to be cleaned. This function returns the appropriate function for a parameter.
