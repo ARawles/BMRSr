@@ -47,7 +47,7 @@ jobs:
       - name: Build site
         run: |
           install.packages("pkgdown")
-          pkgdown::build_site()
+          pkgdown::build_site(new_process = FALSE)
         shell: Rscript {0}
         
       - name: Deploy to GitHub Pages
