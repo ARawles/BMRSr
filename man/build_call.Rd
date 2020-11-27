@@ -37,11 +37,11 @@ build_call(data_item = "QAS", api_key = "12345",
 settlement_date = "01 Jun 2019", service_type = "xml")
 }
 \seealso{
-\code{\link{build_b_call}}
+\code{\link[=build_b_call]{build_b_call()}}
 
-\code{\link{build_remit_call}}
+\code{\link[=build_remit_call]{build_remit_call()}}
 
-\code{\link{build_legacy_call}}
+\code{\link[=build_legacy_call]{build_legacy_call()}}
 
 Other call-building functions: 
 \code{\link{build_b_call}()},

@@ -24,5 +24,5 @@
 #'   \item{biomass}{Generation from biomass (MW)}
 #'   \item{intnem}{Generation from Belgian interconnector (MW)}
 #' }
-#' @source \url{https://www.bmreports.com/bmrs/?q=help/about-us}
+#' @source <https://www.bmreports.com/bmrs/?q=help/about-us>
 "generation_dataset_example"

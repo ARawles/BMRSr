@@ -244,9 +244,9 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' Default is TRUE.
 #' @param ... values to be passed to appropriate build_x_call function
 #' @family call-building functions
-#' @seealso \code{\link{build_b_call}}
-#' @seealso \code{\link{build_remit_call}}
-#' @seealso \code{\link{build_legacy_call}}
+#' @seealso [build_b_call()]
+#' @seealso [build_remit_call()]
+#' @seealso [build_legacy_call()]
 #' @examples
 #' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018",
 #' to_date = "13 Jun 2018", service_type = "csv")

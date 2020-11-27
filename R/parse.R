@@ -72,7 +72,7 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
 #' Parse a .csv response with a EOF tag left in
 #'
 #' Some .csv files returned from the API still have an EOF tag left at the bottom and contain 4 lines of nonsense.
-#' This function is used to parse these files, whereas the \code{parse_clean_csv()} function is used to
+#' This function is used to parse these files, whereas the `parse_clean_csv()` function is used to
 #' parse .csv files without this tag and the junk lines.
 #' @param content character; the original response object parsed as a single text string.
 #' @return tibble; a tibble containing the data in the .csv file
@@ -92,7 +92,7 @@ parse_eof_csv <- function(content) {
 #' Parse a 'clean' .csv response
 #'
 #' Some .csv files are returned without the EOF tag and with only 1 line before the data. This
-#' function is used to parse these files, whereas the \code{parse_eof_csv()} function is used
+#' function is used to parse these files, whereas the `parse_eof_csv()` function is used
 #' to parse those files with the EOF tag and junk lines.
 #' @param content character; the original response object parsed as a single text string.
 #' @return tibble; a tibble containing the data in the .csv file
@@ -111,7 +111,7 @@ parse_clean_csv <- function(content) {
 #' This simple wrapper returns an empty tibble on error and returns a custom warning message.
 #' @param expr expression; expression to be evaluated for errors
 #' @param error_message character; character string to be displayed as a warning on error
-#' @param ... extra parameters to be passed to the \code{tryCatch()} function.
+#' @param ... extra parameters to be passed to the `tryCatch()` function.
 #' @return evaluated expression on success or empty tibble on error
 try_parse <- function(expr, error_message, ...) {
   tryCatch({

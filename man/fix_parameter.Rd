@@ -2,21 +2,21 @@
 % Please edit documentation in R/non_export_util.R
 \name{fix_parameter}
 \alias{fix_parameter}
-\title{Fixes parameters provided in the `build_x_call()` functions}
+\title{Fixes parameters provided in the \code{build_x_call()} functions}
 \usage{
 fix_parameter(param, before = NULL, ...)
 }
 \arguments{
 \item{param}{object; parameter to fix}
 
-\item{before}{function; function to fix the parameter. `param` will be passed as the first argument to this function.
+\item{before}{function; function to fix the parameter. \code{param} will be passed as the first argument to this function.
 Default NULL does nothing}
 
-\item{...}{additional arguments passed to the `before` function}
+\item{...}{additional arguments passed to the \code{before} function}
 }
 \value{
-modified `param` object (if `before` isn't NULL)
+modified \code{param} object (if \code{before} isn't NULL)
 }
 \description{
-Fixes parameters provided in the `build_x_call()` functions
+Fixes parameters provided in the \code{build_x_call()} functions
 }
