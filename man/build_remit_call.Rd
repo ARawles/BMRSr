@@ -21,7 +21,8 @@ build_remit_call(
   active_flag = NULL,
   sequence_id = NULL,
   service_type = "xml",
-  api_version = "v1"
+  api_version = "v1",
+  ...
 )
 }
 \arguments{
@@ -58,6 +59,8 @@ build_remit_call(
 \item{service_type}{character string; file format (csv or xml)}
 
 \item{api_version}{character string; version of the api to use (currently on v1)}
+
+\item{...}{additional parameters that will be appended onto the query string}
 }
 \value{
 list; created url for the call, service type and data item

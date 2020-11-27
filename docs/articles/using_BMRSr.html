@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
       </span>
     </div>
 
@@ -92,13 +92,14 @@
 
       
 
-      </header><div class="row">
+      </header><link href="using_BMRSr_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="using_BMRSr_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using BMRSr</h1>
                         <h4 class="author">Adam Rawles</h4>
             
-            <h4 class="date">2020-05-18</h4>
+            <h4 class="date">2020-11-27</h4>
       
       
       <div class="hidden name"><code>using_BMRSr.Rmd</code></div>
@@ -314,71 +315,82 @@
 <h3 class="hasAnchor">
 <a href="#full_request-approach" class="anchor"></a><code>full_request()</code> approach</h3>
 <p>First things first, let’s create a variable to hold our API key…</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">api_key</span> <span class="kw">&lt;-</span> <span class="st">"your_api_key_here"</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="va">api_key</span> <span class="op">&lt;-</span> <span class="st">"your_api_key_here"</span></pre></div>
 <p>Next, we’ve inspected the BMRS API documentation and found that we want the “FUELINST” data item. Let’s find out what parameters we need to provide for this data item…</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/get_parameters.html">get_parameters</a></span>(<span class="st">"FUELINST"</span>)
-<span class="co">#&gt; [1] "from_datetime" "to_datetime"</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/get_parameters.html">get_parameters</a></span><span class="op">(</span><span class="st">"FUELINST"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "from_datetime" "to_datetime"</span></pre></div>
 <p>So we’ve got to provide from_datetime and to_datetime. Now let’s create our request…</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">generation_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/full_request.html">full_request</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"FUELINST"</span>,
-                                <span class="kw">api_key</span> <span class="kw">=</span> <span class="no">api_key</span>,
-                                <span class="kw">from_datetime</span> <span class="kw">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
-                                <span class="kw">to_datetime</span> <span class="kw">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
-                                <span class="kw">parse</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                                <span class="kw">clean_dates</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">generation_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/full_request.html">full_request</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"FUELINST"</span>,
+                                api_key <span class="op">=</span> <span class="va">api_key</span>,
+                                from_datetime <span class="op">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
+                                to_datetime <span class="op">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
+                                parse <span class="op">=</span> <span class="cn">TRUE</span>,
+                                clean_dates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </div>
 <div id="step-approach" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-approach" class="anchor"></a>Step approach</h3>
 <p>Again, let’s create a variable to hold our API key and find out what parameters we need for our “FUELINST” data item…</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">api_key</span> <span class="kw">&lt;-</span> <span class="st">"your_api_key_here"</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">api_key</span> <span class="op">&lt;-</span> <span class="st">"your_api_key_here"</span>
 
-<span class="fu"><a href="../reference/get_parameters.html">get_parameters</a></span>(<span class="st">"FUELINST"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/get_parameters.html">get_parameters</a></span><span class="op">(</span><span class="st">"FUELINST"</span><span class="op">)</span></pre></div>
 <p>Next, let’s build our call…</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">generation_data_request</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/build_call.html">build_call</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"FUELINST"</span>,
-                                      <span class="kw">api_key</span> <span class="kw">=</span> <span class="no">api_key</span>,
-                                      <span class="kw">from_datetime</span> <span class="kw">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
-                                      <span class="kw">to_datetime</span> <span class="kw">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
-                                      <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">generation_data_request</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_call.html">build_call</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"FUELINST"</span>,
+                                      api_key <span class="op">=</span> <span class="va">api_key</span>,
+                                      from_datetime <span class="op">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
+                                      to_datetime <span class="op">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
+                                      service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></pre></div>
 <p>This is equivalent but shorter than…</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/get_data_item_type.html">get_data_item_type</a></span>(<span class="st">"FUELINST"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../reference/get_data_item_type.html">get_data_item_type</a></span><span class="op">(</span><span class="st">"FUELINST"</span><span class="op">)</span>
 <span class="co">#This tells us which build_x_call() function to use</span>
 
-<span class="no">generation_data_request</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/build_legacy_call.html">build_legacy_call</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"FUELINST"</span>,
-                                             <span class="kw">api_key</span> <span class="kw">=</span> <span class="no">api_key</span>,
-                                             <span class="kw">from_datetime</span> <span class="kw">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
-                                             <span class="kw">to_datetime</span> <span class="kw">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
-                                             <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)</pre></body></html></div>
+<span class="va">generation_data_request</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_legacy_call.html">build_legacy_call</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"FUELINST"</span>,
+                                             api_key <span class="op">=</span> <span class="va">api_key</span>,
+                                             from_datetime <span class="op">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
+                                             to_datetime <span class="op">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
+                                             service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></pre></div>
 <p>Now we’ve got our request, we can send it…</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">generation_data_response</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/send_request.html">send_request</a></span>(<span class="kw">request</span> <span class="kw">=</span> <span class="no">generation_data_request</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="va">generation_data_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/send_request.html">send_request</a></span><span class="op">(</span>request <span class="op">=</span> <span class="va">generation_data_request</span><span class="op">)</span></pre></div>
 <p>And then parse it…</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">generation_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/parse_response.html">parse_response</a></span>(<span class="kw">response</span> <span class="kw">=</span> <span class="no">generation_data_response</span>,
-                                  <span class="kw">format</span> <span class="kw">=</span> <span class="st">"csv"</span>,
-                                  <span class="kw">clean_dates</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">generation_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parse_response.html">parse_response</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">generation_data_response</span>,
+                                  format <span class="op">=</span> <span class="st">"csv"</span>,
+                                  clean_dates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 <p>Linking all these together using the pipe, we’d get…</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">generation_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/build_call.html">build_call</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"FUELINST"</span>,
-                              <span class="kw">api_key</span> <span class="kw">=</span> <span class="no">api_key</span>,
-                              <span class="kw">from_datetime</span> <span class="kw">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
-                              <span class="kw">to_datetime</span> <span class="kw">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
-                              <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/send_request.html">send_request</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/parse_response.html">parse_response</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">generation_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_call.html">build_call</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"FUELINST"</span>,
+                              api_key <span class="op">=</span> <span class="va">api_key</span>,
+                              from_datetime <span class="op">=</span> <span class="st">"01 07 2019 00:00:00"</span>,
+                              to_datetime <span class="op">=</span> <span class="st">"03 07 2019 00:00:00"</span>,
+                              service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/send_request.html">send_request</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/parse_response.html">parse_response</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="plotting" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plotting" class="anchor"></a>Plotting</h3>
 <p>Now we’ve got the data, we can convert the dataset to the tidy format and then make a plot…</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co">#Load the libraries for a bit more cleaning and then plotting...</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="co">#Load the libraries for a bit more cleaning and then plotting...</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co">#Change the fuel types from columns to a grouping (tidy format)</span>
-<span class="no">generation_data</span> <span class="kw">&lt;-</span> <span class="no">generation_data</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">settlement_period</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">settlement_period</span>)) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="st">"fuel_type"</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="st">"generation_mw"</span>, <span class="no">ccgt</span>:<span class="no">intnem</span>)
+<span class="va">generation_data</span> <span class="op">&lt;-</span> <span class="va">generation_data</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>settlement_period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">settlement_period</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"fuel_type"</span>, value <span class="op">=</span> <span class="st">"generation_mw"</span>, <span class="va">ccgt</span><span class="op">:</span><span class="va">intnem</span><span class="op">)</span>
 
 <span class="co">#Make a line graph of the different generation types</span>
-<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">generation_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">spot_time</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">generation_mw</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">fuel_type</span>)) +
-  <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>()</pre></body></html></div>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">generation_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">spot_time</span>, y <span class="op">=</span> <span class="va">generation_mw</span>, colour <span class="op">=</span> <span class="va">fuel_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="using_BMRSr_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 </div>
@@ -400,7 +412,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

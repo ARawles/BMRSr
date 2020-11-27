@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
       </span>
     </div>
 
@@ -146,8 +146,7 @@
     <p>Parse the results of a call</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_response</span>(<span class='no'>response</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clean_dates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>rename</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_response</span><span class='op'>(</span><span class='va'>response</span>, format <span class='op'>=</span> <span class='cn'>NULL</span>, clean_dates <span class='op'>=</span> <span class='cn'>TRUE</span>, rename <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,11 +174,12 @@
     <p>A tibble if format == "csv", otherwise a list</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>list_example</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_response</span>(
-<span class='fu'><a href='send_request.html'>send_request</a></span>(
-<span class='fu'><a href='build_call.html'>build_call</a></span>(<span class='st'>"TEMP"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"12345"</span>, <span class='kw'>from_date</span> <span class='kw'>=</span> <span class='st'>"01 Jun 2019"</span>,
-<span class='kw'>to_date</span> <span class='kw'>=</span> <span class='st'>"10 Jun 2019"</span>, <span class='kw'>service_type</span> <span class='kw'>=</span> <span class='st'>"xml"</span>)
-), <span class='st'>"xml"</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>list_example</span> <span class='op'>&lt;-</span> <span class='fu'>parse_response</span><span class='op'>(</span>
+<span class='fu'><a href='send_request.html'>send_request</a></span><span class='op'>(</span>
+<span class='fu'><a href='build_call.html'>build_call</a></span><span class='op'>(</span><span class='st'>"TEMP"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>, from_date <span class='op'>=</span> <span class='st'>"01 Jun 2019"</span>,
+to_date <span class='op'>=</span> <span class='st'>"10 Jun 2019"</span>, service_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>
+<span class='op'>)</span>, <span class='st'>"xml"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -195,7 +195,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -15,7 +15,14 @@ reference:
 - title: "Parse"
   desc: "Functions to parse API responses"
 - contents:
-  - parse_response
+  - parse_clean_csv
+  - parse_eof_csv
+  - try_parse
+- title: "Clean"
+  desc: "Functions to clean parameters before they are added to the request"
+- contents:
+  - check_period
+  - fix_parameter
 - title: "Utility"
   desc: "Utility functions."
 - contents:

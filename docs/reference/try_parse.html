@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build an API call (uses the appropriate function based on the data item) — build_call • BMRSr</title>
+<title>Wrapper to the tryCatch version to be used for the parsing function — try_parse • BMRSr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Build an API call (uses the appropriate function based on the data item) — build_call" />
-<meta property="og:description" content="Build an API call (uses the appropriate function based on the data item)" />
+<meta property="og:title" content="Wrapper to the tryCatch version to be used for the parsing function — try_parse" />
+<meta property="og:description" content="This simple wrapper returns an empty tibble on error and returns a custom warning message." />
 <meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
@@ -137,70 +137,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build an API call (uses the appropriate function based on the data item)</h1>
+    <h1>Wrapper to the tryCatch version to be used for the parsing function</h1>
     
-    <div class="hidden name"><code>build_call.Rd</code></div>
+    <div class="hidden name"><code>try_parse.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Build an API call (uses the appropriate function based on the data item)</p>
+    <p>This simple wrapper returns an empty tibble on error and returns a custom warning message.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_call</span><span class='op'>(</span>
-  <span class='va'>data_item</span>,
-  <span class='va'>api_key</span>,
-  service_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"csv"</span>, <span class='st'>"xml"</span><span class='op'>)</span>,
-  api_version <span class='op'>=</span> <span class='st'>"v1"</span>,
-  warn <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>try_parse</span><span class='op'>(</span><span class='va'>expr</span>, <span class='va'>error_message</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data_item</th>
-      <td><p>character string; data item to be retrieved</p></td>
+      <th>expr</th>
+      <td><p>expression; expression to be evaluated for errors</p></td>
     </tr>
     <tr>
-      <th>api_key</th>
-      <td><p>character string; user's API key</p></td>
-    </tr>
-    <tr>
-      <th>service_type</th>
-      <td><p>character string; one of "csv" or "xml" to define return format</p></td>
-    </tr>
-    <tr>
-      <th>api_version</th>
-      <td><p>character string; API version to use - currently only on version 1</p></td>
-    </tr>
-    <tr>
-      <th>warn</th>
-      <td><p>logical; should you be warned if any of the parameters you've supplied may not be appropriate for that data item?
-Default is TRUE.</p></td>
+      <th>error_message</th>
+      <td><p>character; character string to be displayed as a warning on error</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>values to be passed to appropriate build_x_call function</p></td>
+      <td><p>extra parameters to be passed to the <code><a href='https://rdrr.io/r/base/conditions.html'>tryCatch()</a></code> function.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><code><a href='build_b_call.html'>build_b_call</a></code></p>
-<p><code><a href='build_remit_call.html'>build_remit_call</a></code></p>
-<p><code><a href='build_legacy_call.html'>build_legacy_call</a></code></p>
-<p>Other call-building functions: 
-<code><a href='build_b_call.html'>build_b_call</a>()</code>,
-<code><a href='build_legacy_call.html'>build_legacy_call</a>()</code>,
-<code><a href='build_remit_call.html'>build_remit_call</a>()</code></p></div>
+    <p>evaluated expression on success or empty tibble on error</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>build_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"TEMP"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>, from_date <span class='op'>=</span> <span class='st'>"12 Jun 2018"</span>,
-to_date <span class='op'>=</span> <span class='st'>"13 Jun 2018"</span>, service_type <span class='op'>=</span> <span class='st'>"csv"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div><div class='input'><span class='fu'>build_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"QAS"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
-settlement_date <span class='op'>=</span> <span class='st'>"01 Jun 2019"</span>, service_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

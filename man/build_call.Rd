@@ -4,7 +4,14 @@
 \alias{build_call}
 \title{Build an API call (uses the appropriate function based on the data item)}
 \usage{
-build_call(data_item, api_key, service_type = "csv", api_version = "v1", ...)
+build_call(
+  data_item,
+  api_key,
+  service_type = c("csv", "xml"),
+  api_version = "v1",
+  warn = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data_item}{character string; data item to be retrieved}
@@ -14,6 +21,9 @@ build_call(data_item, api_key, service_type = "csv", api_version = "v1", ...)
 \item{service_type}{character string; one of "csv" or "xml" to define return format}
 
 \item{api_version}{character string; API version to use - currently only on version 1}
+
+\item{warn}{logical; should you be warned if any of the parameters you've supplied may not be appropriate for that data item?
+Default is TRUE.}
 
 \item{...}{values to be passed to appropriate build_x_call function}
 }

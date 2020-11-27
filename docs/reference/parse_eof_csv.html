@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build an API call (uses the appropriate function based on the data item) — build_call • BMRSr</title>
+<title>Parse a .csv response with a EOF tag left in — parse_eof_csv • BMRSr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Build an API call (uses the appropriate function based on the data item) — build_call" />
-<meta property="og:description" content="Build an API call (uses the appropriate function based on the data item)" />
+<meta property="og:title" content="Parse a .csv response with a EOF tag left in — parse_eof_csv" />
+<meta property="og:description" content="Some .csv files returned from the API still have an EOF tag left at the bottom and contain 4 lines of nonsense.
+This function is used to parse these files, whereas the parse_clean_csv() function is used to
+parse .csv files without this tag and the junk lines." />
 <meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
@@ -137,70 +139,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build an API call (uses the appropriate function based on the data item)</h1>
+    <h1>Parse a .csv response with a EOF tag left in</h1>
     
-    <div class="hidden name"><code>build_call.Rd</code></div>
+    <div class="hidden name"><code>parse_eof_csv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Build an API call (uses the appropriate function based on the data item)</p>
+    <p>Some .csv files returned from the API still have an EOF tag left at the bottom and contain 4 lines of nonsense.
+This function is used to parse these files, whereas the <code><a href='parse_clean_csv.html'>parse_clean_csv()</a></code> function is used to
+parse .csv files without this tag and the junk lines.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_call</span><span class='op'>(</span>
-  <span class='va'>data_item</span>,
-  <span class='va'>api_key</span>,
-  service_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"csv"</span>, <span class='st'>"xml"</span><span class='op'>)</span>,
-  api_version <span class='op'>=</span> <span class='st'>"v1"</span>,
-  warn <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>parse_eof_csv</span><span class='op'>(</span><span class='va'>content</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data_item</th>
-      <td><p>character string; data item to be retrieved</p></td>
-    </tr>
-    <tr>
-      <th>api_key</th>
-      <td><p>character string; user's API key</p></td>
-    </tr>
-    <tr>
-      <th>service_type</th>
-      <td><p>character string; one of "csv" or "xml" to define return format</p></td>
-    </tr>
-    <tr>
-      <th>api_version</th>
-      <td><p>character string; API version to use - currently only on version 1</p></td>
-    </tr>
-    <tr>
-      <th>warn</th>
-      <td><p>logical; should you be warned if any of the parameters you've supplied may not be appropriate for that data item?
-Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>values to be passed to appropriate build_x_call function</p></td>
+      <th>content</th>
+      <td><p>character; the original response object parsed as a single text string.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>tibble; a tibble containing the data in the .csv file</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='build_b_call.html'>build_b_call</a></code></p>
-<p><code><a href='build_remit_call.html'>build_remit_call</a></code></p>
-<p><code><a href='build_legacy_call.html'>build_legacy_call</a></code></p>
-<p>Other call-building functions: 
-<code><a href='build_b_call.html'>build_b_call</a>()</code>,
-<code><a href='build_legacy_call.html'>build_legacy_call</a>()</code>,
-<code><a href='build_remit_call.html'>build_remit_call</a>()</code></p></div>
+    <div class='dont-index'><p>Other parsers: 
+<code><a href='parse_clean_csv.html'>parse_clean_csv</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>build_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"TEMP"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>, from_date <span class='op'>=</span> <span class='st'>"12 Jun 2018"</span>,
-to_date <span class='op'>=</span> <span class='st'>"13 Jun 2018"</span>, service_type <span class='op'>=</span> <span class='st'>"csv"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div><div class='input'><span class='fu'>build_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"QAS"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
-settlement_date <span class='op'>=</span> <span class='st'>"01 Jun 2019"</span>, service_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

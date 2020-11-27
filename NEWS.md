@@ -1,3 +1,8 @@
+# BMRSr 1.0.1.9002
+
+* Expanded changes from `build_b_call()` to other `build` functions
+* Allowed for additional arbitrary parameters to the build calls (with warnings or without)
+
 # BMRSr 1.0.1.9001 
 
 *  Changes to build_b_call() function

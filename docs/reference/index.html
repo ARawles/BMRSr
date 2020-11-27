@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
       </span>
     </div>
 
@@ -237,9 +237,46 @@
       <tr>
         
         <td>
-          <p><code><a href="parse_response.html">parse_response()</a></code> </p>
+          <p><code><a href="parse_clean_csv.html">parse_clean_csv()</a></code> </p>
         </td>
-        <td><p>Parse the results of a call</p></td>
+        <td><p>Parse a 'clean' .csv response</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="parse_eof_csv.html">parse_eof_csv()</a></code> </p>
+        </td>
+        <td><p>Parse a .csv response with a EOF tag left in</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="try_parse.html">try_parse()</a></code> </p>
+        </td>
+        <td><p>Wrapper to the tryCatch version to be used for the parsing function</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-clean" class="hasAnchor"><a href="#section-clean" class="anchor"></a>Clean</h2>
+          <p class="section-desc"><p>Functions to clean parameters before they are added to the request</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="check_period.html">check_period()</a></code> </p>
+        </td>
+        <td><p>Check the the provided Settlement Period value is valid</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fix_parameter.html">fix_parameter()</a></code> </p>
+        </td>
+        <td><p>Fixes parameters provided in the `build_x_call()` functions</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -320,7 +357,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

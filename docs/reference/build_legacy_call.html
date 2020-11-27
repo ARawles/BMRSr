@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
       </span>
     </div>
 
@@ -146,17 +146,36 @@
     <p>Create an API call for legacy data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_legacy_call</span>(<span class='no'>data_item</span>, <span class='no'>api_key</span>, <span class='kw'>from_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>settlement_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>settlement_period</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bm_unit_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bm_unit_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lead_party_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ngc_bm_unit_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>from_cleared_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>to_cleared_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>is_two_day_window</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>from_datetime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_datetime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>from_settlement_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_settlement_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>period</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fuel_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>balancing_service_volume</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zone_identifier</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trade_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trade_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>api_version</span> <span class='kw'>=</span> <span class='st'>"v1"</span>,
-  <span class='kw'>service_type</span> <span class='kw'>=</span> <span class='st'>"csv"</span>)</pre>
+    <pre class="usage"><span class='fu'>build_legacy_call</span><span class='op'>(</span>
+  <span class='va'>data_item</span>,
+  <span class='va'>api_key</span>,
+  from_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  to_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  settlement_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  settlement_period <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bm_unit_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bm_unit_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lead_party_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ngc_bm_unit_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  from_cleared_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  to_cleared_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  is_two_day_window <span class='op'>=</span> <span class='cn'>NULL</span>,
+  from_datetime <span class='op'>=</span> <span class='cn'>NULL</span>,
+  to_datetime <span class='op'>=</span> <span class='cn'>NULL</span>,
+  from_settlement_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  to_settlement_date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  period <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fuel_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  balancing_service_volume <span class='op'>=</span> <span class='cn'>NULL</span>,
+  zone_identifier <span class='op'>=</span> <span class='cn'>NULL</span>,
+  start_time <span class='op'>=</span> <span class='cn'>NULL</span>,
+  end_time <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trade_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trade_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  api_version <span class='op'>=</span> <span class='st'>"v1"</span>,
+  service_type <span class='op'>=</span> <span class='st'>"csv"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -269,6 +288,10 @@
       <th>service_type</th>
       <td><p>character string; file format (csv or xml)</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters that will be appended onto the query string</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -276,29 +299,17 @@
     <p>list; created url for the call, service type and data item</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other call-building functions: <code><a href='build_b_call.html'>build_b_call</a></code>,
-  <code><a href='build_call.html'>build_call</a></code>, <code><a href='build_remit_call.html'>build_remit_call</a></code></p></div>
+    <div class='dont-index'><p>Other call-building functions: 
+<code><a href='build_b_call.html'>build_b_call</a>()</code>,
+<code><a href='build_call.html'>build_call</a>()</code>,
+<code><a href='build_remit_call.html'>build_remit_call</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>build_legacy_call</span>(<span class='kw'>data_item</span> <span class='kw'>=</span> <span class='st'>"FUELINST"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"12345"</span>,
-<span class='kw'>from_datetime</span> <span class='kw'>=</span> <span class='st'>"14-12-201613:00:00"</span>, <span class='kw'>to_datetime</span> <span class='kw'>=</span> <span class='st'>"14-12-201614:00:00"</span>)</div><div class='output co'>#&gt; $url
-#&gt; [1] "https://api.bmreports.com/BMRS/FUELINST/v1?APIKey=12345&amp;FromDateTime=2016-12-14%2013:00:00&amp;ToDateTime=2016-12-14%2014:00:00&amp;ServiceType=csv"
-#&gt; 
-#&gt; $service_type
-#&gt; [1] "csv"
-#&gt; 
-#&gt; $data_item
-#&gt; [1] "FUELINST"
-#&gt; </div><div class='input'><span class='fu'>build_legacy_call</span>(<span class='kw'>data_item</span> <span class='kw'>=</span> <span class='st'>"QAS"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"12345"</span>,
-<span class='kw'>settlement_date</span> <span class='kw'>=</span> <span class='st'>"01 Jun 2019"</span>, <span class='kw'>service_type</span> <span class='kw'>=</span> <span class='st'>"xml"</span>)</div><div class='output co'>#&gt; $url
-#&gt; [1] "https://api.bmreports.com/BMRS/QAS/v1?APIKey=12345&amp;SettlementDate=2019-06-01&amp;ServiceType=xml"
-#&gt; 
-#&gt; $service_type
-#&gt; [1] "xml"
-#&gt; 
-#&gt; $data_item
-#&gt; [1] "QAS"
-#&gt; </div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>build_legacy_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"FUELINST"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
+from_datetime <span class='op'>=</span> <span class='st'>"14-12-201613:00:00"</span>, to_datetime <span class='op'>=</span> <span class='st'>"14-12-201614:00:00"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div><div class='input'><span class='fu'>build_legacy_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"QAS"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
+settlement_date <span class='op'>=</span> <span class='st'>"01 Jun 2019"</span>, service_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in httr::modify_url(the_url, query = c(input_params, additional_params)): object 'the_url' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -314,7 +325,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

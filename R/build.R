@@ -62,10 +62,7 @@ build_b_call <- function( data_item,
   check_data_item(data_item, "B Flow")
 
   input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
-
-  period <- check_period(period)
-
-  input_params$Period  <- fix_parameter(period)
+  input_params$Period  <- fix_parameter(period, check_period)
   input_params$ProcessType  <- fix_parameter(process_type)
   input_params$Year  <- fix_parameter(year)
   input_params$Month  <- fix_parameter(month, format_month)
@@ -184,6 +181,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @param trade_type character string; trade type
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
+#' @param ... additional parameters that will be appended onto the query string
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @examples
@@ -197,90 +195,42 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
                               bm_unit_type = NULL, lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
                               is_two_day_window = NULL, from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, to_settlement_date = NULL,
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
-                              trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv"){
-  request <- list()
+                              trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
   check_data_item(data_item, "Legacy")
-  request$url = paste0("https://api.bmreports.com/BMRS/", data_item, "/", api_version, "?APIKey=", api_key)
-  if (!is.null(from_date)) {
-    request$url = paste0(request$url, "&FromDate=", format_date(from_date))
-  }
-  if (!is.null(to_date)) {
-    request$url = paste0(request$url, "&ToDate=", format_date(to_date))
-  }
-  if (!is.null(settlement_date)) {
-    request$url = paste0(request$url, "&SettlementDate=", format_date(settlement_date))
-  }
-  if (!is.null(settlement_period)){
-    if (settlement_period <= 0 | settlement_period > 50){
-      if (settlement_period != "*"){
-        stop("invalid settlemet_period value")
-      }
-    }
-    request$url = paste0(request$url, "&SettlementPeriod=", settlement_period)
-  }
-  if (!is.null(bm_unit_id)){
-    request$url = paste0(request$url, "&BMUnitID=", bm_unit_id)
-  }
-  if (!is.null(bm_unit_type)){
-    request$url = paste0(request$url, "&BMUnitType=", bm_unit_type)
-  }
-  if (!is.null(lead_party_name)){
-    request$url = paste0(request$url, "&LeadPartName=", lead_party_name)
-  }
-  if (!is.null(ngc_bm_unit_name)){
-    request$url = paste0(request$url, "&NGCBMUnitName=", ngc_bm_unit_name)
-  }
-  if (!is.null(from_cleared_date)){
-    request$url = paste0(request$url, "&FromClearedDate=", format_date(from_cleared_date))
-  }
-  if (!is.null(to_cleared_date)){
-    request$url = paste0(request$url, "&ToClearedDate=", format_date(to_cleared_date))
-  }
-  if (!is.null(is_two_day_window)){
-    request$url = paste0(request$url, "&IsTwoDayWindow=", is_two_day_window)
-  }
-  if (!is.null(from_datetime)){
-    request$url = paste0(request$url, "&FromDateTime=", format_datetime(from_datetime))
-  }
-  if (!is.null(to_datetime)){
-    request$url = paste0(request$url, "&ToDateTime=", format_datetime(to_datetime))
-  }
-  if (!is.null(from_settlement_date)){
-    request$url = paste0(request$url, "&FromSettlementDate=", format_date(from_settlement_date))
-  }
-  if (!is.null(to_settlement_date)){
-    request$url = paste0(request$url, "&ToSettlementDate=", format_date(to_settlement_date))
-  }
-  if (!is.null(period)){
-    if (period <= 0 | period > 50){
-      stop("invalid period value")
-    }
-    request$url = paste0(request$url, "&Period=", period)
-  }
-  if (!is.null(fuel_type)){
-    request$url = paste0(request$url, "&FuelType=", fuel_type)
-  }
-  if (!is.null(balancing_service_volume)){
-    request$url = paste0(request$url, "&BalancingServiceVolume=", balancing_service_volume)
-  }
-  if (!is.null(zone_identifier)){
-    request$url = paste0(request$url, "&ZoneIdentifier=", zone_identifier)
-  }
-  if (!is.null(start_time)){
-    request$url = paste0(request$url, "&StartTime=", format_time(start_time))
-  }
-  if (!is.null(end_time)){
-    request$url = paste0(request$url, "&EndTime=", format_time(end_time))
-  }
-  if (!is.null(trade_name)){
-    request$url = paste0(request$url, "&TradeName=", trade_name)
-  }
-  if (!is.null(trade_type)){
-    request$url = paste0(request$url, "&TradeType=", trade_type)
-  }
-  if (!is.null(service_type)){
-    request$url = paste0(request$url, "&ServiceType=", service_type)
-  }
+  url  <- httr::modify_url("https://api.bmreports.com",
+                           path= paste0("BMRS/", data_item,"/", api_version)
+  )
+  input_params <- list()
+  input_params$APIKey <- api_key
+
+  input_params$FromDate=fix_parameter(from_date, format_date)
+  input_params$ToDate=fix_parameter(to_date, format_date)
+  input_params$SettlementDate=fix_parameter(settlement_date, format_date)
+  input_params$SettlementPeriod=fix_parameter(settlement_period, check_period)
+  input_params$BMUnitID=fix_parameter(bm_unit_id)
+  input_params$BMUnitType=fix_parameter(bm_unit_type)
+  input_params$LeadPartName=fix_parameter(lead_party_name)
+  input_params$NGCBMUnitName=fix_parameter(ngc_bm_unit_name)
+  input_params$FromClearedDate=fix_parameter(from_cleared_date, format_date)
+  input_params$ToClearedDate=fix_parameter(to_cleared_date, format_date)
+  input_params$IsTwoDayWindow=fix_parameter(is_two_day_window)
+  input_params$FromDateTime=fix_parameter(from_datetime, format_datetime)
+  input_params$ToDateTime=fix_parameter(to_datetime, format_datetime)
+  input_params$FromSettlementDate=fix_parameter(from_settlement_date, format_date)
+  input_params$ToSettlementDate=fix_parameter(to_settlement_date, format_date)
+  input_params$Period=fix_parameter(period, check_period)
+  input_params$FuelType=fix_parameter(fuel_type)
+  input_params$BalancingServiceVolume=fix_parameter(balancing_service_volume)
+  input_params$ZoneIdentifier=fix_parameter(zone_identifier)
+  input_params$StartTime=fix_parameter(start_time, format_time)
+  input_params$EndTime=fix_parameter(end_time, format_time)
+  input_params$TradeName=fix_parameter(trade_name)
+  input_params$TradeType=fix_parameter(trade_type)
+  input_params$ServiceType=fix_parameter(service_type)
+  additional_params <- list(...)
+
+  request <- list()
+  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
@@ -311,7 +261,12 @@ build_call <- function(data_item, api_key, service_type = c("csv", "xml"), api_v
   if (length(prov_params) > 0){
     for (i in seq_along(prov_params)){
       if (names(prov_params)[i] %!in% allowed_params){
-        warning(paste("Additional parameter:", names(prov_params[i]), "supplied for chosen data item.\nSuppress this warning with `warn = FALSE`."))
+        warn_params <- names(prov_params[i])
+      }
+    }
+    if (warn) {
+      if (length(warn_params > 0)) {
+        warning(paste("Additional parameter(s):", paste0(warn_params, collapse = ", "), "supplied for chosen data item.\nSuppress this warning with `warn = FALSE`."))
       }
     }
   }
