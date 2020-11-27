@@ -39,7 +39,6 @@ jobs:
         shell: Rscript {0}
         
       - name: Deploy to GitHub Pages
-        if: runner.os == 'Windows'
         # You may pin to the exact commit or the version.
         # uses: JamesIves/github-pages-deploy-action@132898c54c57c7cc6b80eb3a89968de8fc283505
         uses: JamesIves/github-pages-deploy-action@3.7.1
