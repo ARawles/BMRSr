@@ -19,6 +19,7 @@
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string;
 #'   version of the api to use (currently on v1)
+#' @param ... additional parameters that will be appended onto the query string
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @export
@@ -45,8 +46,10 @@ build_b_call <- function( data_item,
                           end_time = NULL,
                           start_date = NULL,
                           end_date = NULL,
-                          service_type = "csv",
-                          api_version = "v1") {
+                          service_type = c("csv", "xml"),
+                          api_version = "v1",
+                          ...) {
+  service_type <- match.arg(service_type)
   base_url  <- "https://api.bmreports.com"
   the_url <- httr::modify_url(base_url,
                               path= paste0("BMRS/", data_item,"/", api_version)
@@ -72,11 +75,12 @@ build_b_call <- function( data_item,
   input_params$StartTime  <- fix_parameter(start_time, format_time)
   input_params$EndTime  <- fix_parameter(end_time, format_time)
   input_params$ServiceType  <- service_type
+  additional_params <- list(...)
 
   # return with list of complete url, service_type, data_item
 
   request  <- list()
-  request$url  <- httr::modify_url(the_url, query=input_params)
+  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
   request$service_type  <- service_type
   request$data_item  <- data_item
 
@@ -102,6 +106,7 @@ build_b_call <- function( data_item,
 #' @param sequence_id character string; sequence id
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
+#' @param ... additional parameters that will be appended onto the query string
 #' @return list; created url for the call, service type and data item
 #' @family call-building functions
 #' @examples
@@ -113,56 +118,38 @@ build_b_call <- function( data_item,
 
 build_remit_call <- function(data_item, api_key, event_start = NULL, event_end = NULL, publication_from = NULL, publication_to = NULL,
                              participant_id = NULL, asset_id =  NULL, event_type = NULL, fuel_type = NULL, message_type = NULL, message_id = NULL,
-                             unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1"){
-  request <- list()
+                             unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1", ...){
+
   check_data_item(data_item, "REMIT")
-  request$url = paste0("https://api.bmreports.com/BMRS/", data_item, "/", api_version, "?APIKey=", api_key)
+  url  <- httr::modify_url("https://api.bmreports.com",
+                           path= paste0("BMRS/", data_item,"/", api_version)
+  )
+
+  input_params <- list()
+  input_params$APIKey <- api_key
+
   if (service_type == "csv"){
     warning("Remit files cannot be returned as .csv - file will be returned as xml")
     service_type <- "xml"
   }
-  if (!is.null(event_start)) {
-    request$url = paste0(request$url, "&EventStart=", format_date(event_start))
-  }
-  if (!is.null(event_end)) {
-    request$url = paste0(request$url, "&EventEnd=", format_date(event_end))
-  }
-  if (!is.null(publication_from)) {
-    request$url = paste0(request$url, "&PublicationFrom=", format_date(publication_from))
-  }
-  if (!is.null(publication_to)) {
-    request$url = paste0(request$url, "&PublicationTo=", format_date(publication_to))
-  }
-  if (!is.null(participant_id)) {
-    request$url = paste0(request$url, "&ParticipantID=", participant_id)
-  }
-  if (!is.null(asset_id)) {
-    request$url = paste0(request$url, "&AssetID=", asset_id)
-  }
-  if (!is.null(event_type)) {
-    request$url = paste0(request$url, "&EventType=", event_type)
-  }
-  if (!is.null(fuel_type)) {
-    request$url = paste0(request$url, "&FuelType=", fuel_type)
-  }
-  if (!is.null(message_type)) {
-    request$url = paste0(request$url, "&MessageType=", message_type)
-  }
-  if (!is.null(message_id)) {
-    request$url = paste0(request$url, "&MessageID=", message_id)
-  }
-  if (!is.null(unavailability_type)) {
-    request$url = paste0(request$url, "&UnavailabilityType=", unavailability_type)
-  }
-  if (!is.null(active_flag)) {
-    request$url = paste0(request$url, "&ActiveFlag=", active_flag)
-  }
-  if (!is.null(sequence_id)) {
-    request$url = paste0(request$url, "&SequenceId=", sequence_id)
-  }
-  if (!is.null(service_type)){
-    request$url = paste0(request$url, "&ServiceType=", service_type)
-  }
+  input_params$EventStart = fix_parameter(event_start, format_date)
+  input_params$EventEnd = fix_parameter(event_end, format_date)
+  input_params$PublicationFrom = fix_parameter(event_end, format_date)
+  input_params$PublicationTo = fix_parameter(publication_to, format_date)
+  input_params$ParticipantID= fix_parameter(participant_id)
+  input_params$AssetID = fix_parameter(asset_id)
+  input_params$EventType=fix_parameter(event_type)
+  input_params$FuelType=fix_parameter(fuel_type)
+  input_params$MessageType=fix_parameter(message_type)
+  input_params$MessageID=fix_parameter(message_id)
+  input_params$UnavailabilityType=fix_parameter(unavailability_type)
+  input_params$ActiveFlag=fix_parameter(active_flag)
+  input_params$SequenceId=fix_parameter(sequence_id)
+  input_params$ServiceType=fix_parameter(service_type)
+  additional_params <- list(...)
+
+  request <- list()
+  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
@@ -304,6 +291,8 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' @param api_key character string; user's API key
 #' @param service_type character string; one of "csv" or "xml" to define return format
 #' @param api_version character string; API version to use - currently only on version 1
+#' @param warn logical; should you be warned if any of the parameters you've supplied may not be appropriate for that data item?
+#' Default is TRUE.
 #' @param ... values to be passed to appropriate build_x_call function
 #' @family call-building functions
 #' @seealso \code{\link{build_b_call}}
@@ -315,36 +304,14 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' build_call(data_item = "QAS", api_key = "12345",
 #' settlement_date = "01 Jun 2019", service_type = "xml")
 #' @export
-build_call <- function(data_item, api_key, service_type = "csv", api_version = "v1", ...){
-
-
-  # settlement_date = NULL, period = NULL,
-  # year = NULL, month = NULL, week = NULL, process_type = NULL,
-  # start_time = NULL, end_time = NULL, start_date = NULL,
-  # end_date = NULL, event_start = NULL, event_end = NULL,
-  # publication_from = NULL, publication_to = NULL,
-  # participant_id = NULL, asset_id =  NULL, event_type = NULL,
-  # fuel_type = NULL, message_type = NULL, message_id = NULL,
-  # unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL,
-  # from_date = NULL, to_date = NULL, settlement_period =  NULL,
-  # bm_unit_id = NULL, bm_unit_type = NULL,
-  # lead_party_name = NULL, ngc_bm_unit_name = NULL,
-  # from_cleared_date = NULL, to_cleared_date = NULL,
-  # is_two_day_window = NULL, from_datetime = NULL,
-  # to_datetime = NULL, from_settlement_date = NULL,
-  # to_settlement_date = NULL, period = NULL, fuel_type = NULL,
-  # balancing_service_volume = NULL, zone_identifier = NULL,
-  # trade_name = NULL, trade_type = NULL,
-  # service_type = "csv", api_version = "v1"){
-  if (service_type %!in% c("csv", "xml", "CSV", "XML")){
-    stop("Invalid service type specified")
-  }
+build_call <- function(data_item, api_key, service_type = c("csv", "xml"), api_version = "v1", warn = TRUE, ...){
+  service_type <- match.arg(service_type)
   allowed_params <- get_parameters(data_item)
   prov_params <- list(...)
-  if (length(prov_params) >= 1){
+  if (length(prov_params) > 0){
     for (i in seq_along(prov_params)){
       if (names(prov_params)[i] %!in% allowed_params){
-        stop(paste("invalid parameter:", names(prov_params[i]), "supplied for chosen data item"))
+        warning(paste("Additional parameter:", names(prov_params[i]), "supplied for chosen data item.\nSuppress this warning with `warn = FALSE`."))
       }
     }
   }
