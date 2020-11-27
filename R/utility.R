@@ -148,7 +148,7 @@ change_parameter_name <- function(parameter, from = c("argument", "url"), to = c
   from_col <- rlang::sym(paste0(from, "_name"))
   to_col <- rlang::sym(paste0(to, "_name"))
   results <- dplyr::filter(parameter_name_map,  {{ from_col }} == parameter)
-  dplyr::pull(results, {{ to_col }})
+  dplyr::pull(results, {{ to_col }})[[1]]
 }
 
 #' Get the cleaning function required for a parameter
@@ -165,5 +165,9 @@ get_cleaning_function <- function(parameter, format = c("argument", "url")) {
   if (format == "url") {
     parameter <- change_parameter_name(parameter, from = "url", to = "argument")
   }
-  dplyr::filter(parameter_clean_functions_map, name == parameter)[["function"]]
+  ret <- dplyr::filter(parameter_clean_functions_map, name == parameter)[["function"]]
+  if(length(ret) == 0 || is.na(ret)) {
+    ret <- NULL
+  }
+  ret[[1]]
 }

@@ -32,7 +32,7 @@ format_datetime <- function(dattime){
                                                         "%d%m%Y%H%M%OS",
                                                         "%d%b%Y%H%M%OS",
                                                         "%d%B%Y%H%M%OS"
-                                                        ))
+  ))
 
   datetime_return <- format(datetime_return, format = "%Y-%m-%d%%20%H:%M:%OS")
   return(datetime_return)
@@ -40,9 +40,9 @@ format_datetime <- function(dattime){
 
 format_time <- function(time){
   time_return <- as.POSIXct(time, tryFormats = c("%H%M%OS",
-                                  "%H:%M:%OS",
-                                  "%H-%M-%OS"
-                                  ))
+                                                 "%H:%M:%OS",
+                                                 "%H-%M-%OS"
+  ))
   return(format(time_return, format = "%H:%M:%OS"))
 }
 
@@ -72,21 +72,32 @@ upper_case <- function(x){
 
 #' Fixes parameters provided in the `build_x_call()` functions
 #'
-#' @param param object; parameter to fix
+#' @param param list; named list with the parameter name and value (e.g. `list(settlement_date = "01/01/2020")`)
 #' @param before function; function to fix the parameter. `param` will be passed as the first argument to this function.
 #' Default NULL does nothing
 #' @param ... additional arguments passed to the `before` function
 #' @return modified `param` object (if `before` isn't NULL)
 fix_parameter <- function(param, before = NULL, ...) {
-  # If it's null, just return it because we're assigning this to a list, it won't be added anyway
-  if (is.null(param)) {
-    return(param)
+  if (is.null(names(param))) {
+    stop("param must be a named list.")
+  }
+  if (is.null(before)) {
+      before <- get_cleaning_function(names(param))
   }
 
   if (!is.null(before)) {
-    param <- do.call(before, args = list(param, ...))
+    param <- do.call(before, args = list(unlist(param), ...))
+  } else {
+    param <- unname(unlist(param))
   }
   param
+}
+
+fix_all_parameters <- function(params = list()) {
+  param_values  <- purrr::map2(params, names(params),
+                              ~ fix_parameter(rlang::list2(!!.y := .x)))
+  names(param_values) <- unlist(purrr::map(names(param_values), ~change_parameter_name(.x)))
+  param_values
 }
 
 

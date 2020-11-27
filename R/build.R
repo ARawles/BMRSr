@@ -50,33 +50,38 @@ build_b_call <- function( data_item,
                           api_version = "v1",
                           ...) {
   service_type <- match.arg(service_type)
+  check_data_item(data_item, "B Flow")
+  input_params  <- as.list(as.environment(-1))
+  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
+  input_params <- input_params[!sapply(input_params, is.null)]
+
   base_url  <- httr::modify_url("https://api.bmreports.com",
                               path= paste0("BMRS/", data_item,"/", api_version)
   )
 
   # construct query params
-  input_params  <- list()
-  input_params$APIKey  <- api_key
 
-  check_data_item(data_item, "B Flow")
+  fixed_params <- fix_all_parameters(input_params)
 
-  input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
-  input_params$Period  <- fix_parameter(period, check_period)
-  input_params$ProcessType  <- fix_parameter(process_type)
-  input_params$Year  <- fix_parameter(year)
-  input_params$Month  <- fix_parameter(month, format_month)
-  input_params$Week  <- fix_parameter(week)
-  input_params$StartDate  <- fix_parameter(start_date, format_date)
-  input_params$EndDate  <- fix_parameter(end_date, format_date)
-  input_params$StartTime  <- fix_parameter(start_time, format_time)
-  input_params$EndTime  <- fix_parameter(end_time, format_time)
-  input_params$ServiceType  <- service_type
+
+  # input_params$APIKey  <- api_key
+  # input_params$SettlementDate  <- fix_parameter(settlement_date, format_date)
+  # input_params$Period  <- fix_parameter(period, check_period)
+  # input_params$ProcessType  <- fix_parameter(process_type)
+  # input_params$Year  <- fix_parameter(year)
+  # input_params$Month  <- fix_parameter(month, format_month)
+  # input_params$Week  <- fix_parameter(week)
+  # input_params$StartDate  <- fix_parameter(start_date, format_date)
+  # input_params$EndDate  <- fix_parameter(end_date, format_date)
+  # input_params$StartTime  <- fix_parameter(start_time, format_time)
+  # input_params$EndTime  <- fix_parameter(end_time, format_time)
+  # input_params$ServiceType  <- service_type
   additional_params <- list(...)
 
   # return with list of complete url, service_type, data_item
 
   request  <- list()
-  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(fixed_params, additional_params))
   request$service_type  <- service_type
   request$data_item  <- data_item
 
@@ -121,27 +126,26 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
                            path= paste0("BMRS/", data_item,"/", api_version)
   )
 
-  input_params <- list()
   input_params$APIKey <- api_key
 
   if (service_type == "csv"){
     warning("Remit files cannot be returned as .csv - file will be returned as xml")
     service_type <- "xml"
   }
-  input_params$EventStart = fix_parameter(event_start, format_date)
-  input_params$EventEnd = fix_parameter(event_end, format_date)
-  input_params$PublicationFrom = fix_parameter(event_end, format_date)
+  input_params$EventStart = fix_parameter(event_start = event_start, format_date)
+  input_params$EventEnd = fix_parameter(event_end = event_end, format_date)
+  input_params$PublicationFrom = fix_parameter(publication_from = publication_from, format_date)
   input_params$PublicationTo = fix_parameter(publication_to, format_date)
-  input_params$ParticipantID= fix_parameter(participant_id)
-  input_params$AssetID = fix_parameter(asset_id)
-  input_params$EventType=fix_parameter(event_type)
-  input_params$FuelType=fix_parameter(fuel_type)
-  input_params$MessageType=fix_parameter(message_type)
-  input_params$MessageID=fix_parameter(message_id)
-  input_params$UnavailabilityType=fix_parameter(unavailability_type)
-  input_params$ActiveFlag=fix_parameter(active_flag)
-  input_params$SequenceId=fix_parameter(sequence_id)
-  input_params$ServiceType=fix_parameter(service_type)
+  input_params$ParticipantID= fix_parameter(participant_id = participant_id)
+  input_params$AssetID = fix_parameter(asset_id = asset_id)
+  input_params$EventType=fix_parameter(event_type = event_type)
+  input_params$FuelType=fix_parameter(fuel_type = fuel_type)
+  input_params$MessageType=fix_parameter(message_type = message_type)
+  input_params$MessageID=fix_parameter(message_id = message_id)
+  input_params$UnavailabilityType=fix_parameter(unavailability_type = unavailability_type)
+  input_params$ActiveFlag=fix_parameter(active_flag = active_flag)
+  input_params$SequenceId=fix_parameter(sequence_id = sequence_id)
+  input_params$ServiceType=fix_parameter(service_type = service_type)
   additional_params <- list(...)
 
   request <- list()
