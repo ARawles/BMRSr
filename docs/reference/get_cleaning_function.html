@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fixes parameters provided in the <code>build_x_call()</code> functions — fix_parameter • BMRSr</title>
+<title>Get the cleaning function required for a parameter — get_cleaning_function • BMRSr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Fixes parameters provided in the <code>build_x_call()</code> functions — fix_parameter" />
-<meta property="og:description" content="Fixes parameters provided in the build_x_call() functions" />
+<meta property="og:title" content="Get the cleaning function required for a parameter — get_cleaning_function" />
+<meta property="og:description" content="Before a parameter can be added to a request, it often needs to be cleaned. This function returns the appropriate function for a parameter.
+Parameters can be supplied with their name used in the build() functions (&quot;argument&quot;) or in the URL" />
 <meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
@@ -137,38 +138,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fixes parameters provided in the <code>build_x_call()</code> functions</h1>
+    <h1>Get the cleaning function required for a parameter</h1>
     
-    <div class="hidden name"><code>fix_parameter.Rd</code></div>
+    <div class="hidden name"><code>get_cleaning_function.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fixes parameters provided in the <code>build_x_call()</code> functions</p>
+    <p>Before a parameter can be added to a request, it often needs to be cleaned. This function returns the appropriate function for a parameter.
+Parameters can be supplied with their name used in the <code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build()</a></code> functions ("argument") or in the URL</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fix_parameter</span>(<span class='no'>param</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_cleaning_function</span>(<span class='no'>parameter</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argument"</span>, <span class='st'>"url"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>param</th>
-      <td><p>list; named list with the parameter name and value (e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(settlement_date = "01/01/2020")</a></code>)</p></td>
+      <th>parameter</th>
+      <td><p>character; name of the parameter. Either the parameter as it's passed to the <code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build()</a></code> functions or the name of the parameter in the URL
+depending on the value of <code>format</code></p></td>
     </tr>
     <tr>
-      <th>before</th>
-      <td><p>function; function to fix the parameter. <code>param</code> will be passed as the first argument to this function.
-Default NULL does nothing</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to the <code>before</code> function</p></td>
+      <th>format</th>
+      <td><p>character; what format is <code>parameter</code> in? One of "argument" (default) or "url"</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>modified <code>param</code> object (if <code>before</code> isn't NULL)</p>
+    <p>character; name of the cleaning function. If there is no associated cleaning function, then <code>NULL</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

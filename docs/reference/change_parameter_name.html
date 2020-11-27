@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fixes parameters provided in the <code>build_x_call()</code> functions — fix_parameter • BMRSr</title>
+<title>Convert a parameter name to a different format — change_parameter_name • BMRSr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Fixes parameters provided in the <code>build_x_call()</code> functions — fix_parameter" />
-<meta property="og:description" content="Fixes parameters provided in the build_x_call() functions" />
+<meta property="og:title" content="Convert a parameter name to a different format — change_parameter_name" />
+<meta property="og:description" content="The names of the parameters that are used in the R functions do not perfectly correspond with the parameter name expected by the API. This
+function converts an argument parameter name (e.g. settlement_date) to the URL argument name (e.g. SettlementDate) or the other way around" />
 <meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
@@ -137,38 +138,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fixes parameters provided in the <code>build_x_call()</code> functions</h1>
+    <h1>Convert a parameter name to a different format</h1>
     
-    <div class="hidden name"><code>fix_parameter.Rd</code></div>
+    <div class="hidden name"><code>change_parameter_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fixes parameters provided in the <code>build_x_call()</code> functions</p>
+    <p>The names of the parameters that are used in the R functions do not perfectly correspond with the parameter name expected by the API. This
+function converts an argument parameter name (e.g. <code>settlement_date</code>) to the URL argument name (e.g. <code>SettlementDate</code>) or the other way around</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fix_parameter</span>(<span class='no'>param</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>change_parameter_name</span>(
+  <span class='no'>parameter</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argument"</span>, <span class='st'>"url"</span>),
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"url"</span>, <span class='st'>"argument"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>param</th>
-      <td><p>list; named list with the parameter name and value (e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(settlement_date = "01/01/2020")</a></code>)</p></td>
+      <th>parameter</th>
+      <td><p>character; name of the parameter provided to the relevant <code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build()</a></code> function</p></td>
     </tr>
     <tr>
-      <th>before</th>
-      <td><p>function; function to fix the parameter. <code>param</code> will be passed as the first argument to this function.
-Default NULL does nothing</p></td>
+      <th>from</th>
+      <td><p>character; one of "argument" or "url" depending on whether <code>parameter</code> is in the argument or URL format</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to the <code>before</code> function</p></td>
+      <th>to</th>
+      <td><p>character; one of "argument" or "url"</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>modified <code>param</code> object (if <code>before</code> isn't NULL)</p>
+    <p>character; name of the parameter used in the URL request or <code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build()</a></code> function. If no match is found, <code><a href='https://rdrr.io/r/base/character.html'>character(0)</a></code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

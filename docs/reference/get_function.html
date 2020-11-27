@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9003</span>
       </span>
     </div>
 
@@ -146,7 +146,7 @@
     <p>Get the correct function to create the API call depending on the data item</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_function</span><span class='op'>(</span><span class='va'>data_item</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_function</span>(<span class='no'>data_item</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,51 +162,115 @@
     <p>function</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_function</span><span class='op'>(</span><span class='st'>"TEMP"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; function(data_item, api_key, from_date = NULL, to_date = NULL, settlement_date = NULL, settlement_period =  NULL, bm_unit_id = NULL,
-#&gt;                               bm_unit_type = NULL, lead_party_name = NULL, ngc_bm_unit_name = NULL, from_cleared_date = NULL, to_cleared_date = NULL,
-#&gt;                               is_two_day_window = NULL, from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, to_settlement_date = NULL,
-#&gt;                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
-#&gt;                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
-#&gt;   check_data_item(data_item, "Legacy")
-#&gt;   base_url  &lt;- httr::modify_url("https://api.bmreports.com",
-#&gt;                            path= paste0("BMRS/", data_item,"/", api_version)
-#&gt;   )
-#&gt;   input_params &lt;- list()
-#&gt;   input_params$APIKey &lt;- api_key
-#&gt; 
-#&gt;   input_params$FromDate=fix_parameter(from_date, format_date)
-#&gt;   input_params$ToDate=fix_parameter(to_date, format_date)
-#&gt;   input_params$SettlementDate=fix_parameter(settlement_date, format_date)
-#&gt;   input_params$SettlementPeriod=fix_parameter(settlement_period, check_period)
-#&gt;   input_params$BMUnitID=fix_parameter(bm_unit_id)
-#&gt;   input_params$BMUnitType=fix_parameter(bm_unit_type)
-#&gt;   input_params$LeadPartName=fix_parameter(lead_party_name)
-#&gt;   input_params$NGCBMUnitName=fix_parameter(ngc_bm_unit_name)
-#&gt;   input_params$FromClearedDate=fix_parameter(from_cleared_date, format_date)
-#&gt;   input_params$ToClearedDate=fix_parameter(to_cleared_date, format_date)
-#&gt;   input_params$IsTwoDayWindow=fix_parameter(is_two_day_window)
-#&gt;   input_params$FromDateTime=fix_parameter(from_datetime, format_datetime)
-#&gt;   input_params$ToDateTime=fix_parameter(to_datetime, format_datetime)
-#&gt;   input_params$FromSettlementDate=fix_parameter(from_settlement_date, format_date)
-#&gt;   input_params$ToSettlementDate=fix_parameter(to_settlement_date, format_date)
-#&gt;   input_params$Period=fix_parameter(period, check_period)
-#&gt;   input_params$FuelType=fix_parameter(fuel_type)
-#&gt;   input_params$BalancingServiceVolume=fix_parameter(balancing_service_volume)
-#&gt;   input_params$ZoneIdentifier=fix_parameter(zone_identifier)
-#&gt;   input_params$StartTime=fix_parameter(start_time, format_time)
-#&gt;   input_params$EndTime=fix_parameter(end_time, format_time)
-#&gt;   input_params$TradeName=fix_parameter(trade_name)
-#&gt;   input_params$TradeType=fix_parameter(trade_type)
-#&gt;   input_params$ServiceType=fix_parameter(service_type)
-#&gt;   additional_params &lt;- list(...)
-#&gt; 
-#&gt;   request &lt;- list()
-#&gt;   request$url  &lt;- httr::modify_url(base_url, query=c(input_params, additional_params))
-#&gt;   request$service_type &lt;- service_type
-#&gt;   request$data_item &lt;- data_item
-#&gt;   return(request)
+    <pre class="examples"><div class='input'><span class='fu'>get_function</span>(<span class='st'>"TEMP"</span>)</div><div class='output co'>#&gt; function (data_item, api_key, from_date = NULL, to_date = NULL, 
+#&gt;     settlement_date = NULL, settlement_period = NULL, bm_unit_id = NULL, 
+#&gt;     bm_unit_type = NULL, lead_party_name = NULL, ngc_bm_unit_name = NULL, 
+#&gt;     from_cleared_date = NULL, to_cleared_date = NULL, is_two_day_window = NULL, 
+#&gt;     from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, 
+#&gt;     to_settlement_date = NULL, period = NULL, fuel_type = NULL, 
+#&gt;     balancing_service_volume = NULL, zone_identifier = NULL, 
+#&gt;     start_time = NULL, end_time = NULL, trade_name = NULL, trade_type = NULL, 
+#&gt;     api_version = "v1", service_type = "csv") 
+#&gt; {
+#&gt;     request &lt;- list()
+#&gt;     check_data_item(data_item, "Legacy")
+#&gt;     request$url = paste0("https://api.bmreports.com/BMRS/", data_item, 
+#&gt;         "/", api_version, "?APIKey=", api_key)
+#&gt;     if (!is.null(from_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;FromDate=", format_date(from_date))
+#&gt;     }
+#&gt;     if (!is.null(to_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;ToDate=", format_date(to_date))
+#&gt;     }
+#&gt;     if (!is.null(settlement_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;SettlementDate=", 
+#&gt;             format_date(settlement_date))
+#&gt;     }
+#&gt;     if (!is.null(settlement_period)) {
+#&gt;         if (settlement_period &lt;= 0 | settlement_period &gt; 50) {
+#&gt;             if (settlement_period != "*") {
+#&gt;                 stop("invalid settlemet_period value")
+#&gt;             }
+#&gt;         }
+#&gt;         request$url = paste0(request$url, "&amp;SettlementPeriod=", 
+#&gt;             settlement_period)
+#&gt;     }
+#&gt;     if (!is.null(bm_unit_id)) {
+#&gt;         request$url = paste0(request$url, "&amp;BMUnitID=", bm_unit_id)
+#&gt;     }
+#&gt;     if (!is.null(bm_unit_type)) {
+#&gt;         request$url = paste0(request$url, "&amp;BMUnitType=", bm_unit_type)
+#&gt;     }
+#&gt;     if (!is.null(lead_party_name)) {
+#&gt;         request$url = paste0(request$url, "&amp;LeadPartName=", lead_party_name)
+#&gt;     }
+#&gt;     if (!is.null(ngc_bm_unit_name)) {
+#&gt;         request$url = paste0(request$url, "&amp;NGCBMUnitName=", 
+#&gt;             ngc_bm_unit_name)
+#&gt;     }
+#&gt;     if (!is.null(from_cleared_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;FromClearedDate=", 
+#&gt;             format_date(from_cleared_date))
+#&gt;     }
+#&gt;     if (!is.null(to_cleared_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;ToClearedDate=", 
+#&gt;             format_date(to_cleared_date))
+#&gt;     }
+#&gt;     if (!is.null(is_two_day_window)) {
+#&gt;         request$url = paste0(request$url, "&amp;IsTwoDayWindow=", 
+#&gt;             is_two_day_window)
+#&gt;     }
+#&gt;     if (!is.null(from_datetime)) {
+#&gt;         request$url = paste0(request$url, "&amp;FromDateTime=", format_datetime(from_datetime))
+#&gt;     }
+#&gt;     if (!is.null(to_datetime)) {
+#&gt;         request$url = paste0(request$url, "&amp;ToDateTime=", format_datetime(to_datetime))
+#&gt;     }
+#&gt;     if (!is.null(from_settlement_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;FromSettlementDate=", 
+#&gt;             format_date(from_settlement_date))
+#&gt;     }
+#&gt;     if (!is.null(to_settlement_date)) {
+#&gt;         request$url = paste0(request$url, "&amp;ToSettlementDate=", 
+#&gt;             format_date(to_settlement_date))
+#&gt;     }
+#&gt;     if (!is.null(period)) {
+#&gt;         if (period &lt;= 0 | period &gt; 50) {
+#&gt;             stop("invalid period value")
+#&gt;         }
+#&gt;         request$url = paste0(request$url, "&amp;Period=", period)
+#&gt;     }
+#&gt;     if (!is.null(fuel_type)) {
+#&gt;         request$url = paste0(request$url, "&amp;FuelType=", fuel_type)
+#&gt;     }
+#&gt;     if (!is.null(balancing_service_volume)) {
+#&gt;         request$url = paste0(request$url, "&amp;BalancingServiceVolume=", 
+#&gt;             balancing_service_volume)
+#&gt;     }
+#&gt;     if (!is.null(zone_identifier)) {
+#&gt;         request$url = paste0(request$url, "&amp;ZoneIdentifier=", 
+#&gt;             zone_identifier)
+#&gt;     }
+#&gt;     if (!is.null(start_time)) {
+#&gt;         request$url = paste0(request$url, "&amp;StartTime=", format_time(start_time))
+#&gt;     }
+#&gt;     if (!is.null(end_time)) {
+#&gt;         request$url = paste0(request$url, "&amp;EndTime=", format_time(end_time))
+#&gt;     }
+#&gt;     if (!is.null(trade_name)) {
+#&gt;         request$url = paste0(request$url, "&amp;TradeName=", trade_name)
+#&gt;     }
+#&gt;     if (!is.null(trade_type)) {
+#&gt;         request$url = paste0(request$url, "&amp;TradeType=", trade_type)
+#&gt;     }
+#&gt;     if (!is.null(service_type)) {
+#&gt;         request$url = paste0(request$url, "&amp;ServiceType=", service_type)
+#&gt;     }
+#&gt;     request$service_type &lt;- service_type
+#&gt;     request$data_item &lt;- data_item
+#&gt;     return(request)
 #&gt; }
+#&gt; &lt;bytecode: 0x0000000013303f40&gt;
 #&gt; &lt;environment: namespace:BMRSr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -223,7 +287,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

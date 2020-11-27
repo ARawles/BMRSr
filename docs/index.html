@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9003</span>
       </span>
     </div>
 
@@ -109,11 +109,9 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install BMRSr from CRAN with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BMRSr"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BMRSr"</span>)</pre></div>
 <p>You can install the development version of BMRSr from <a href="https://github.com/ARawles/BMRSr">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"BMRSr"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"BMRSr"</span>)</pre></div>
 <p><strong>You’ll also need an API key. You can get this by registering on the <a href="https://www.elexonportal.co.uk">ELEXON portal</a>.</strong></p>
 </div>
 <div id="usage" class="section level2">
@@ -130,23 +128,21 @@
 <h3 class="hasAnchor">
 <a href="#end-to-end" class="anchor"></a>End-to-End</h3>
 <p>To perform a complete API request (build the call, send and receive the data, and then parse it), use the <code><a href="reference/full_request.html">full_request()</a></code> function.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="reference/full_request.html">full_request</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"B1720"</span>,
-             api_key <span class="op">=</span> <span class="st">"test"</span>,
-             settlement_date <span class="op">=</span> <span class="st">"12 Jun 2018"</span>,
-             period <span class="op">=</span> <span class="st">"1"</span>,
-             service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/full_request.html">full_request</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"B1720"</span>,
+             <span class="kw">api_key</span> <span class="kw">=</span> <span class="st">"test"</span>,
+             <span class="kw">settlement_date</span> <span class="kw">=</span> <span class="st">"12 Jun 2018"</span>,
+             <span class="kw">period</span> <span class="kw">=</span> <span class="st">"1"</span>,
+             <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)</pre></div>
 </div>
 <div id="build" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build" class="anchor"></a>Build</h3>
 <p>These functions build the URL for the API request. The main function <code><a href="reference/build_call.html">build_call()</a></code> is the one you’ll likely be calling, but all this does is call the appropriate <code>build_x_call()</code> function for the data item you’ve requested. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="reference/build_call.html">build_call</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"B1720"</span>,
-           api_key <span class="op">=</span> <span class="st">"12345"</span>,
-           settlement_date <span class="op">=</span> <span class="st">"1 Jan 2018"</span>,
-           period <span class="op">=</span> <span class="st">"1"</span>,
-           service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/build_call.html">build_call</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"B1720"</span>,
+           <span class="kw">api_key</span> <span class="kw">=</span> <span class="st">"12345"</span>,
+           <span class="kw">settlement_date</span> <span class="kw">=</span> <span class="st">"1 Jan 2018"</span>,
+           <span class="kw">period</span> <span class="kw">=</span> <span class="st">"1"</span>,
+           <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)
 <span class="co">#&gt; $url</span>
 <span class="co">#&gt; [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>
 <span class="co">#&gt; </span>
@@ -156,12 +152,11 @@
 <span class="co">#&gt; $data_item</span>
 <span class="co">#&gt; [1] "B1720"</span></pre></div>
 <p>actually calls</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="reference/build_b_call.html">build_b_call</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"B1720"</span>,
-             api_key <span class="op">=</span> <span class="st">"12345"</span>,
-             settlement_date <span class="op">=</span> <span class="st">"1 Jan 2018"</span>,
-             period <span class="op">=</span> <span class="st">"1"</span>,
-             service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="reference/build_b_call.html">build_b_call</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"B1720"</span>,
+             <span class="kw">api_key</span> <span class="kw">=</span> <span class="st">"12345"</span>,
+             <span class="kw">settlement_date</span> <span class="kw">=</span> <span class="st">"1 Jan 2018"</span>,
+             <span class="kw">period</span> <span class="kw">=</span> <span class="st">"1"</span>,
+             <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)
 <span class="co">#&gt; $url</span>
 <span class="co">#&gt; [1] "https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>
 <span class="co">#&gt; </span>
@@ -185,25 +180,23 @@
 <a href="#send--receive" class="anchor"></a>Send &amp; Receive</h3>
 <p>This function - <code><a href="reference/send_request.html">send_request()</a></code> - sends the provided URL to the API and returns a response() object with the added attribute of data_item_type (one of “B Flow”, “Remit”, or “Legacy”). Config options can also be supplied via the config_options parameter as a named list, that will be passed to the <code><a href="https://httr.r-lib.org/reference/GET.html">httr::GET()</a></code> function (implemented primarily for proxies and the like).</p>
 <p>This function can be used with a premade url, however the user will also have to respecify the data item and service type (format) from the URL:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="reference/send_request.html">send_request</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    url <span class="op">=</span> <span class="st">"https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>, 
-                  data_item <span class="op">=</span> <span class="st">"B1720"</span>, service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>
-<span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="reference/send_request.html">send_request</a></span>(
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    <span class="kw">url</span> <span class="kw">=</span> <span class="st">"https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>,
+                  <span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"B1720"</span>, <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)
+)</pre></div>
 </div>
 <div id="parse" class="section level3">
 <h3 class="hasAnchor">
 <a href="#parse" class="anchor"></a>Parse</h3>
 <p>This function - <code><a href="reference/parse_response.html">parse_response()</a></code> - takes the response() object returned from the send_request() function, and parses the response base on the service_type parameter (whether it was “csv” or “xml”). CSVs return tibbles, and XMLs return lists. The returned CSVs from many of the calls contain unnecessary or incorrect data, so this parsing function will remove that data before returning a corrected response.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="reference/parse_response.html">parse_response</a></span><span class="op">(</span>
-  <span class="fu"><a href="reference/send_request.html">send_request</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      url <span class="op">=</span> <span class="st">"https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>, 
-                    data_item <span class="op">=</span> <span class="st">"B1720"</span>, service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/parse_response.html">parse_response</a></span>(
+  <span class="fu"><a href="reference/send_request.html">send_request</a></span>(
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+      <span class="kw">url</span> <span class="kw">=</span> <span class="st">"https://api.bmreports.com/BMRS/B1720/v1?APIKey=12345&amp;SettlementDate=2018-01-01&amp;Period=1&amp;ServiceType=csv"</span>,
+                    <span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"B1720"</span>, <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)
+  )
+)</pre></div>
 </div>
 <div id="utility" class="section level3">
 <h3 class="hasAnchor">
@@ -231,30 +224,27 @@
 <h2 class="hasAnchor">
 <a href="#full-example" class="anchor"></a>Full example</h2>
 <p>Here’s a full example, using the package to return generation by fuel type data and then plotting it using ggplot2.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-
-<span class="va">api</span> <span class="op">&lt;-</span> <span class="st">"your_api_key_goes_here"</span>
+<div class="sourceCode" id="cb8"><pre class="r">
+<span class="no">api</span> <span class="kw">&lt;-</span> <span class="st">"your_api_key_goes_here"</span>
 
 
 <span class="co">#We're requesting the FUELINST data item here.</span>
 <span class="co">#A full list of all the data items can be returned using the get_data_items() function</span>
 
 <span class="co">#Find out which parameters we need to provide for the data item we've chosen...</span>
-<span class="fu"><a href="reference/get_parameters.html">get_parameters</a></span><span class="op">(</span><span class="st">"FUELINST"</span><span class="op">)</span>
+<span class="fu"><a href="reference/get_parameters.html">get_parameters</a></span>(<span class="st">"FUELINST"</span>)
 <span class="co">#&gt; [1] "from_datetime" "to_datetime"</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co">#Perform the full request and ask for a CSV back</span>
-<span class="va">gen_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/full_request.html">full_request</a></span><span class="op">(</span>data_item <span class="op">=</span> <span class="st">"FUELINST"</span>,
-                         api_key <span class="op">=</span> <span class="va">api</span>,
-                         from_datetime <span class="op">=</span> <span class="st">"2019-07-01 00:00:00"</span>,
-                         to_datetime <span class="op">=</span> <span class="st">"2019-07-03 00:00:00"</span>,
-                         service_type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co">#Load the libraries for a bit more cleaning and then plotting...</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="co">#Perform the full request and ask for a CSV back</span>
+<span class="no">gen_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/full_request.html">full_request</a></span>(<span class="kw">data_item</span> <span class="kw">=</span> <span class="st">"FUELINST"</span>,
+                         <span class="kw">api_key</span> <span class="kw">=</span> <span class="no">api</span>,
+                         <span class="kw">from_datetime</span> <span class="kw">=</span> <span class="st">"2019-07-01 00:00:00"</span>,
+                         <span class="kw">to_datetime</span> <span class="kw">=</span> <span class="st">"2019-07-03 00:00:00"</span>,
+                         <span class="kw">service_type</span> <span class="kw">=</span> <span class="st">"csv"</span>)</pre></div>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="co">#Load the libraries for a bit more cleaning and then plotting...</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gen_data</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">gen_data</span>)
 <span class="co">#&gt; # A tibble: 6 x 19</span>
 <span class="co">#&gt;   record_type settlement_date settlement_peri~ spot_time            ccgt   oil</span>
 <span class="co">#&gt;   &lt;chr&gt;       &lt;date&gt;                     &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -269,15 +259,15 @@
 <span class="co">#&gt; #   intned &lt;dbl&gt;, intew &lt;dbl&gt;, biomass &lt;dbl&gt;, intnem &lt;dbl&gt;</span>
 
 <span class="co">#Change the fuel types from columns to a grouping</span>
-<span class="va">gen_data</span> <span class="op">&lt;-</span> <span class="va">gen_data</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>settlement_period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">settlement_period</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"fuel_type"</span>, value <span class="op">=</span> <span class="st">"generation_mw"</span>, <span class="va">ccgt</span><span class="op">:</span><span class="va">intnem</span><span class="op">)</span>
+<span class="no">gen_data</span> <span class="kw">&lt;-</span> <span class="no">gen_data</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">settlement_period</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">settlement_period</span>)) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="st">"fuel_type"</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="st">"generation_mw"</span>, <span class="no">ccgt</span>:<span class="no">intnem</span>)
 
 
 
 <span class="co">#Make a line graph of the different generation types</span>
-<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">gen_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">spot_time</span>, y <span class="op">=</span> <span class="va">generation_mw</span>, colour <span class="op">=</span> <span class="va">fuel_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">gen_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">spot_time</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">generation_mw</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">fuel_type</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>()</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
 </div>
 </div>
@@ -311,7 +301,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=BMRSr"><img src="https://www.r-pkg.org/badges/version/BMRSr" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/ARawles/BMRSr"><img src="https://travis-ci.org/ARawles/BMRSr.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://github.com/ARawles/BMRSr/actions"><img src="https://github.com/ARawles/BMRSr/workflows/R-CMD-check/badge.svg" alt="R-CMD-Check"></a></li>
 <li><a href="https://codecov.io/github/ARawles/BMRSr?branch=master"><img src="https://codecov.io/gh/ARawles/BMRSr/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="https://cran.r-project.org/package=BMRSr"><img src="https://cranlogs.r-pkg.org/badges/BMRSr"></a></li>
 </ul>
@@ -325,7 +315,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

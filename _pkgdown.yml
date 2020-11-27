@@ -35,6 +35,8 @@ reference:
   - get_data_item_type
   - get_function
   - get_parameters
+  - change_parameter_name
+  - get_cleaning_function
 authors:
   Adam Rawles:
     href: http://arawles.co.uk

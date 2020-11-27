@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BMRSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9003</span>
       </span>
     </div>
 
@@ -146,26 +146,26 @@
     <p>Create an API call for REMIT flows</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_remit_call</span><span class='op'>(</span>
-  <span class='va'>data_item</span>,
-  <span class='va'>api_key</span>,
-  event_start <span class='op'>=</span> <span class='cn'>NULL</span>,
-  event_end <span class='op'>=</span> <span class='cn'>NULL</span>,
-  publication_from <span class='op'>=</span> <span class='cn'>NULL</span>,
-  publication_to <span class='op'>=</span> <span class='cn'>NULL</span>,
-  participant_id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  asset_id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  event_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  fuel_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  message_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  message_id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  unavailability_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  active_flag <span class='op'>=</span> <span class='cn'>NULL</span>,
-  sequence_id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  service_type <span class='op'>=</span> <span class='st'>"xml"</span>,
-  api_version <span class='op'>=</span> <span class='st'>"v1"</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>build_remit_call</span>(
+  <span class='no'>data_item</span>,
+  <span class='no'>api_key</span>,
+  <span class='kw'>event_start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>event_end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>publication_from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>publication_to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>participant_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>asset_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>event_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fuel_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>message_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>message_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unavailability_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>active_flag</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sequence_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>service_type</span> <span class='kw'>=</span> <span class='st'>"xml"</span>,
+  <span class='kw'>api_version</span> <span class='kw'>=</span> <span class='st'>"v1"</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,19 +255,17 @@
 <code><a href='build_legacy_call.html'>build_legacy_call</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>build_remit_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"MessageListRetrieval"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
-event_start <span class='op'>=</span> <span class='st'>"14-12-2016"</span>, event_end <span class='op'>=</span> <span class='st'>"15-12-2016"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $url
-#&gt; [1] "https://api.bmreports.com/BMRS/MessageListRetrieval/v1?APIKey=12345&amp;EventStart=2016-12-14&amp;EventEnd=2016-12-15&amp;PublicationFrom=2016-12-15&amp;ServiceType=xml"
+    <pre class="examples"><div class='input'><span class='fu'>build_remit_call</span>(<span class='kw'>data_item</span> <span class='kw'>=</span> <span class='st'>"MessageListRetrieval"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"12345"</span>,
+<span class='kw'>event_start</span> <span class='kw'>=</span> <span class='st'>"14-12-2016"</span>, <span class='kw'>event_end</span> <span class='kw'>=</span> <span class='st'>"15-12-2016"</span>)</div><div class='output co'>#&gt; $url
+#&gt; [1] "https://api.bmreports.com/BMRS/MessageListRetrieval/v1?APIKey=12345&amp;EventStart=2016-12-14&amp;EventEnd=2016-12-15&amp;ServiceType=xml"
 #&gt; 
 #&gt; $service_type
 #&gt; [1] "xml"
 #&gt; 
 #&gt; $data_item
 #&gt; [1] "MessageListRetrieval"
-#&gt; </div><div class='input'><span class='fu'>build_remit_call</span><span class='op'>(</span>data_item <span class='op'>=</span> <span class='st'>"MessageDetailRetrieval"</span>, api_key <span class='op'>=</span> <span class='st'>"12345"</span>,
-participant_id <span class='op'>=</span> <span class='fl'>21</span>, service_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $url
+#&gt; </div><div class='input'><span class='fu'>build_remit_call</span>(<span class='kw'>data_item</span> <span class='kw'>=</span> <span class='st'>"MessageDetailRetrieval"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"12345"</span>,
+<span class='kw'>participant_id</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>service_type</span> <span class='kw'>=</span> <span class='st'>"xml"</span>)</div><div class='output co'>#&gt; $url
 #&gt; [1] "https://api.bmreports.com/BMRS/MessageDetailRetrieval/v1?APIKey=12345&amp;ParticipantID=21&amp;ServiceType=xml"
 #&gt; 
 #&gt; $service_type
@@ -291,7 +289,7 @@ participant_id <span class='op'>=</span> <span class='fl'>21</span>, service_typ
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

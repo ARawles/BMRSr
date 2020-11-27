@@ -16,6 +16,9 @@
     <loc>http://bmrsr.arawles.co.uk/reference/build_remit_call.html</loc>
   </url>
   <url>
+    <loc>http://bmrsr.arawles.co.uk/reference/change_parameter_name.html</loc>
+  </url>
+  <url>
     <loc>http://bmrsr.arawles.co.uk/reference/check_data_item.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
   </url>
   <url>
     <loc>http://bmrsr.arawles.co.uk/reference/generation_dataset_example.html</loc>
+  </url>
+  <url>
+    <loc>http://bmrsr.arawles.co.uk/reference/get_cleaning_function.html</loc>
   </url>
   <url>
     <loc>http://bmrsr.arawles.co.uk/reference/get_column_names.html</loc>
