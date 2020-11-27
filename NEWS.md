@@ -1,3 +1,8 @@
+# BMRSr 1.0.1.9003
+
+* Added automatic cleaning of all parameters passed to the `build()` functions
+* Added `rlang` and `purrr` dependencies
+
 # BMRSr 1.0.1.9002
 
 * Expanded changes from `build_b_call()` to other `build` functions

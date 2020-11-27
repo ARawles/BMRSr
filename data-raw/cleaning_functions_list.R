@@ -39,8 +39,6 @@ parameter_clean_functions_map <- tibble::enframe(
     fuel_type = NA_character_,
     balancing_service_volume = NA_character_,
     zone_identifier = NA_character_,
-    start_time = "format_time",
-    end_time = "format_time",
     trade_name = NA_character_,
     trade_type = NA_character_
   ), name = "name", value = "fn"

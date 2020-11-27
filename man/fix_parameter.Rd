@@ -7,7 +7,7 @@
 fix_parameter(param, before = NULL, ...)
 }
 \arguments{
-\item{param}{object; parameter to fix}
+\item{param}{list; named list with the parameter name and value (e.g. \code{list(settlement_date = "01/01/2020")})}
 
 \item{before}{function; function to fix the parameter. \code{param} will be passed as the first argument to this function.
 Default NULL does nothing}

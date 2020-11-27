@@ -155,7 +155,7 @@ change_parameter_name <- function(parameter, from = c("argument", "url"), to = c
 #'
 #' Before a parameter can be added to a request, it often needs to be cleaned. This function returns the appropriate function for a parameter.
 #' Parameters can be supplied with their name used in the `build()` functions ("argument") or in the URL
-#' @param character; name of the parameter. Either the parameter as it's passed to the `build()` functions or the name of the parameter in the URL
+#' @param parameter character; name of the parameter. Either the parameter as it's passed to the `build()` functions or the name of the parameter in the URL
 #' depending on the value of `format`
 #' @param format character; what format is `parameter` in? One of "argument" (default) or "url"
 #' @return character; name of the cleaning function
@@ -165,7 +165,7 @@ get_cleaning_function <- function(parameter, format = c("argument", "url")) {
   if (format == "url") {
     parameter <- change_parameter_name(parameter, from = "url", to = "argument")
   }
-  ret <- dplyr::filter(parameter_clean_functions_map, name == parameter)[["fn"]]
+  ret <- dplyr::filter(parameter_clean_functions_map, .data$name == parameter)[["fn"]]
   if(length(ret) == 0 || is.na(ret)) {
     ret <- NULL
   }

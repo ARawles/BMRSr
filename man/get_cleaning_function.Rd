@@ -7,10 +7,10 @@
 get_cleaning_function(parameter, format = c("argument", "url"))
 }
 \arguments{
-\item{format}{character; what format is \code{parameter} in? One of "argument" (default) or "url"}
-
-\item{character;}{name of the parameter. Either the parameter as it's passed to the \code{build()} functions or the name of the parameter in the URL
+\item{parameter}{character; name of the parameter. Either the parameter as it's passed to the \code{build()} functions or the name of the parameter in the URL
 depending on the value of \code{format}}
+
+\item{format}{character; what format is \code{parameter} in? One of "argument" (default) or "url"}
 }
 \value{
 character; name of the cleaning function
