@@ -169,7 +169,7 @@
 #&gt;                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
 #&gt;                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
 #&gt;   check_data_item(data_item, "Legacy")
-#&gt;   url  &lt;- httr::modify_url("https://api.bmreports.com",
+#&gt;   base_url  &lt;- httr::modify_url("https://api.bmreports.com",
 #&gt;                            path= paste0("BMRS/", data_item,"/", api_version)
 #&gt;   )
 #&gt;   input_params &lt;- list()
@@ -202,12 +202,11 @@
 #&gt;   additional_params &lt;- list(...)
 #&gt; 
 #&gt;   request &lt;- list()
-#&gt;   request$url  &lt;- httr::modify_url(the_url, query=c(input_params, additional_params))
+#&gt;   request$url  &lt;- httr::modify_url(base_url, query=c(input_params, additional_params))
 #&gt;   request$service_type &lt;- service_type
 #&gt;   request$data_item &lt;- data_item
 #&gt;   return(request)
 #&gt; }
-#&gt; &lt;bytecode: 0x00000253a2e29c78&gt;
 #&gt; &lt;environment: namespace:BMRSr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

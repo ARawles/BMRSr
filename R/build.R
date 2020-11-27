@@ -50,8 +50,7 @@ build_b_call <- function( data_item,
                           api_version = "v1",
                           ...) {
   service_type <- match.arg(service_type)
-  base_url  <- "https://api.bmreports.com"
-  the_url <- httr::modify_url(base_url,
+  base_url  <- httr::modify_url("https://api.bmreports.com",
                               path= paste0("BMRS/", data_item,"/", api_version)
   )
 
@@ -77,7 +76,7 @@ build_b_call <- function( data_item,
   # return with list of complete url, service_type, data_item
 
   request  <- list()
-  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
   request$service_type  <- service_type
   request$data_item  <- data_item
 
@@ -118,7 +117,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
                              unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1", ...){
 
   check_data_item(data_item, "REMIT")
-  url  <- httr::modify_url("https://api.bmreports.com",
+  base_url  <- httr::modify_url("https://api.bmreports.com",
                            path= paste0("BMRS/", data_item,"/", api_version)
   )
 
@@ -146,7 +145,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
   additional_params <- list(...)
 
   request <- list()
-  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
@@ -197,7 +196,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
   check_data_item(data_item, "Legacy")
-  url  <- httr::modify_url("https://api.bmreports.com",
+  base_url  <- httr::modify_url("https://api.bmreports.com",
                            path= paste0("BMRS/", data_item,"/", api_version)
   )
   input_params <- list()
@@ -230,7 +229,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
   additional_params <- list(...)
 
   request <- list()
-  request$url  <- httr::modify_url(the_url, query=c(input_params, additional_params))
+  request$url  <- httr::modify_url(base_url, query=c(input_params, additional_params))
   request$service_type <- service_type
   request$data_item <- data_item
   return(request)
@@ -259,9 +258,10 @@ build_call <- function(data_item, api_key, service_type = c("csv", "xml"), api_v
   allowed_params <- get_parameters(data_item)
   prov_params <- list(...)
   if (length(prov_params) > 0){
+    warn_params <- c()
     for (i in seq_along(prov_params)){
       if (names(prov_params)[i] %!in% allowed_params){
-        warn_params <- names(prov_params[i])
+        warn_params <- c(warn_params, names(prov_params[i]))
       }
     }
     if (warn) {

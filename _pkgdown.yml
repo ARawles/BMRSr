@@ -15,6 +15,7 @@ reference:
 - title: "Parse"
   desc: "Functions to parse API responses"
 - contents:
+  - parse_response
   - parse_clean_csv
   - parse_eof_csv
   - try_parse

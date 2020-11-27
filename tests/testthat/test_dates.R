@@ -14,9 +14,9 @@ test_that("Time format correct",{
 })
 
 test_that("Datetime format correct", {
-  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12 Jun 2018 12:50:55")$url, "&FromDateTime=2018-06-12%2012:50:55", fixed = TRUE)
-  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12-Jun-2018 125055")$url, "&FromDateTime=2018-06-12%2012:50:55", fixed = TRUE)
-  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12Jun2018 125055")$url, "&FromDateTime=2018-06-12%2012:50:55", fixed = TRUE)
+  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12 Jun 2018 12:50:55")$url, "&FromDateTime=2018-06-12%252012%3A50%3A55", fixed = TRUE)
+  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12-Jun-2018 125055")$url, "&FromDateTime=2018-06-12%252012%3A50%3A55", fixed = TRUE)
+  expect_match(build_call(data_item = "FREQ", api_key = "test", from_datetime = "12Jun2018 125055")$url, "&FromDateTime=2018-06-12%252012%3A50%3A55", fixed = TRUE)
 })
 
 test_that("Month format warning", {

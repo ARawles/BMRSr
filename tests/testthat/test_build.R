@@ -55,8 +55,8 @@ test_that("Invalid service type", {
 })
 
 test_that("Incorrect parameters", {
-  expect_error(build_call(data_item = "B1720", api_key = "test", from_date = "1 Jun 2018"))
-  expect_error(build_call(data_item = "MessageDetailRetrieval", api_key = "test", settlement_date = "12 Jun 2018"))
-  expect_error(build_call(data_item = "TEMP", api_key = "test", message_id = "1"))
+  expect_warning(build_call(data_item = "B1720", api_key = "test", from_date = "1 Jun 2018"))
+  expect_warning(build_call(data_item = "MessageDetailRetrieval", api_key = "test", settlement_date = "12 Jun 2018"))
+  expect_warning(build_call(data_item = "TEMP", api_key = "test", message_id = "1"))
   expect_error(build_call(data_item = "B1720", api_key = "test", period = 60))
 })
