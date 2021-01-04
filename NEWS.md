@@ -1,3 +1,8 @@
+# BMRSr 1.0.2
+
+* Third CRAN release
+* Changes documented in 1.0.1 - 1.0.2 updates
+
 # BMRSr 1.0.1.9003
 
 * Added automatic cleaning of all parameters passed to the `build()` functions
