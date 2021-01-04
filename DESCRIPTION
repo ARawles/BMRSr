@@ -1,7 +1,7 @@
 Package: BMRSr
 Type: Package
 Title: Wrapper Functions to the 'BMRS API'
-Version: 1.0.1.9002
+Version: 1.0.1.9003
 Authors@R: person("Adam", "Rawles", email = "adamrawles@hotmail.co.uk", role = c("aut", "cre"))
 Description: A set of wrapper functions to better interact with the 'Balancing Mechanism
     Reporting System API'.
@@ -16,7 +16,10 @@ Imports:
     stringr,
     tibble,
     readr,
-    methods
+    methods,
+    purrr,
+    dplyr,
+    rlang
 RoxygenNote: 7.1.1
 URL: http://bmrsr.arawles.co.uk
 Suggests: 
@@ -24,7 +27,6 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2,
-    dplyr,
     tidyr,
     testthat
 VignetteBuilder:

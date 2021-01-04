@@ -51,9 +51,7 @@ build_b_call <- function( data_item,
                           ...) {
   service_type <- match.arg(service_type)
   check_data_item(data_item, "B Flow")
-  input_params  <- as.list(as.environment(-1))
-  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
-  input_params <- input_params[!sapply(input_params, is.null)]
+  input_params  <- get_build_arguments(as.list(as.environment(-1)))
 
   base_url  <- httr::modify_url("https://api.bmreports.com",
                               path= paste0("BMRS/", data_item,"/", api_version)
@@ -109,9 +107,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
                              unavailability_type =  NULL, active_flag = NULL, sequence_id = NULL, service_type = "xml", api_version = "v1", ...){
 
   check_data_item(data_item, "REMIT")
-  input_params  <- as.list(as.environment(-1))
-  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
-  input_params <- input_params[!sapply(input_params, is.null)]
+  input_params  <- get_build_arguments(as.list(as.environment(-1)))
 
   base_url  <- httr::modify_url("https://api.bmreports.com",
                                 path= paste0("BMRS/", data_item,"/", api_version)
@@ -181,9 +177,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
                               period = NULL, fuel_type = NULL, balancing_service_volume = NULL, zone_identifier = NULL, start_time = NULL, end_time = NULL,
                               trade_name = NULL, trade_type = NULL, api_version = "v1", service_type = "csv", ...){
   check_data_item(data_item, "Legacy")
-  input_params  <- as.list(as.environment(-1))
-  input_params <- input_params[!names(input_params) %in% c("data_item", "api_version")]
-  input_params <- input_params[!sapply(input_params, is.null)]
+  input_params  <- get_build_arguments(as.list(as.environment(-1)))
 
   base_url  <- httr::modify_url("https://api.bmreports.com",
                                 path= paste0("BMRS/", data_item,"/", api_version)
