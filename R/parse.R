@@ -21,8 +21,8 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
   }
 
   if (httr::status_code(response) != 200){
-    warning(paste("Parsing unsuccessful: response code was", httr::status_code(response)))
-    return()
+    warning(paste0("Parsing unsuccessful: response code was ", httr::status_code(response)), call. = FALSE)
+    return(response)
   }
 
   if (warn_on_initial_parse) {
@@ -34,8 +34,8 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
   if (format == "csv"){
 
     if (methods::is(quiet_parse(response, "parsed"))[1] == "xml_document"){
-      warning(paste0("csv requested, xml returned. Retuning raw response. ", "Error code within response =", xml2::as_list(xml2::read_xml(response))$response$responseMetadata$httpCode[[1]]))
-      return(response)
+      warning(paste0("csv requested, xml returned. ", "Error code within response = ", xml2::as_list(xml2::read_xml(response))$response$responseMetadata$httpCode[[1]]), call. = FALSE)
+      return(xml2::as_list(httr::content(response)))
     }
 
     if (response$data_item_type == "B Flow"){
@@ -56,7 +56,7 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
       ret <- ret[1:nrow(ret) - 1,]
       if (rename){
         if (ncol(ret) != length(get_column_names(response$data_item))){
-          warning("Number of columns in csv doesn't match expected; leaving names as default")
+          warning("Number of columns in csv doesn't match expected; leaving names as default.", call. = FALSE)
         }
         else {
           names(ret) <- get_column_names(response$data_item)

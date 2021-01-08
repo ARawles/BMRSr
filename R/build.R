@@ -215,6 +215,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 build_call <- function(data_item, api_key, service_type = c("csv", "xml"), api_version = "v1", warn = TRUE, ...){
   service_type <- match.arg(service_type)
   allowed_params <- get_parameters(data_item)
+  check_data_item_version(data_item, api_version, FALSE)
   prov_params <- list(...)
   if (length(prov_params) > 0){
     warn_params <- c()
