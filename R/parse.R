@@ -4,6 +4,8 @@
 #' @param format character string; NULL to use response service type or "csv" or "xml" to force that format
 #' @param clean_dates boolean; whether to clean date/time columns
 #' @param rename boolean; whether to rename column headings (they are usually blank from the API)
+#' @param warn_on_initial_parse logical; should warning messages be shown during the orignal attempt at parsing the response? The default is FALSE
+#' as many of the data items need further cleaning and so the warning messages from the original attempt to parse the file are uninformative.
 #' @return A tibble if format == "csv", otherwise a list
 #' @examples
 #' list_example <- parse_response(
@@ -12,7 +14,7 @@
 #' to_date = "10 Jun 2019", service_type = "xml")
 #' ), "xml")
 #' @export
-parse_response <- function(response, format = NULL, clean_dates = TRUE, rename = TRUE){
+parse_response <- function(response, format = NULL, clean_dates = TRUE, rename = TRUE, warn_on_initial_parse = FALSE){
 
   if (is.null(format)){
     format <- response$service_type
@@ -23,11 +25,17 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
     return()
   }
 
-  parsed_content <- httr::content(response, "text")
+  if (warn_on_initial_parse) {
+    parsed_content <- httr::content(response, "text")
+  } else {
+    parsed_content <- quiet_parse(response, "text")
+  }
+
   if (format == "csv"){
 
-    if (methods::is(httr::content(response, "parsed"))[1] == "xml_document"){
-      stop(paste("csv requested, xml returned. ", "Error code = ", xml2::as_list(xml2::read_xml(response))$response$responseMetadata$httpCode[[1]]))
+    if (methods::is(quiet_parse(response, "parsed"))[1] == "xml_document"){
+      warning(paste0("csv requested, xml returned. Retuning raw response. ", "Error code within response =", xml2::as_list(xml2::read_xml(response))$response$responseMetadata$httpCode[[1]]))
+      return(response)
     }
 
     if (response$data_item_type == "B Flow"){
@@ -81,7 +89,7 @@ parse_eof_csv <- function(content) {
   try_parse({
     end_ind <- stringr::str_locate(content, "\\<EOF>")
     parsed_content <- substr(content, 1, end_ind-1)
-    readr::read_delim(file = content, delim = ",", skip = 4, na = "NA")
+    readr::read_delim(file = parsed_content, delim = ",", skip = 4, na = "NA")
   },
   error_message = "Response could not be parsed using `parse_eof()` function.
                         Returning an empty tibble."

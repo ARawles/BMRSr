@@ -92,3 +92,7 @@ get_build_arguments <- function(params) {
   params <- params[!names(params) %in% c("data_item", "api_version")]
   params[!sapply(params, is.null)]
 }
+
+quiet_parse <- function(response, type = "text") {
+  suppressWarnings(httr::content(response, type, col_types = readr::cols()))
+}
