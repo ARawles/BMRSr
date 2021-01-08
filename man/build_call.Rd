@@ -27,6 +27,9 @@ Default is TRUE.}
 
 \item{...}{values to be passed to appropriate build_x_call function}
 }
+\value{
+list; list with entries \code{url} for the call, \code{service_type} and \code{data_item}
+}
 \description{
 Build an API call (uses the appropriate function based on the data item)
 }

@@ -20,3 +20,6 @@ modified \code{param} object (if \code{before} isn't NULL)
 \description{
 Fixes parameters provided in the \code{build_x_call()} functions
 }
+\seealso{
+fix_all_parameters
+}

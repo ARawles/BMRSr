@@ -29,6 +29,7 @@ reference:
 - contents:
   - clean_date_columns
   - check_data_item
+  - check_data_item_version
   - generation_dataset_example
   - get_column_names
   - get_data_items

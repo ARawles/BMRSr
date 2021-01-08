@@ -20,7 +20,7 @@
 #' @param api_version character string;
 #'   version of the api to use (currently on v1)
 #' @param ... additional parameters that will be appended onto the query string
-#' @return list; created url for the call, service type and data item
+#' @return list; list with entries `url` for the call, `service_type` and `data_item`
 #' @family call-building functions
 #' @export
 #' @examples
@@ -93,7 +93,7 @@ build_b_call <- function( data_item,
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
 #' @param ... additional parameters that will be appended onto the query string
-#' @return list; created url for the call, service type and data item
+#' @return list; list with entries `url` for the call, `service_type` and `data_item`
 #' @family call-building functions
 #' @examples
 #' build_remit_call(data_item = "MessageListRetrieval", api_key = "12345",
@@ -162,7 +162,7 @@ build_remit_call <- function(data_item, api_key, event_start = NULL, event_end =
 #' @param service_type character string; file format (csv or xml)
 #' @param api_version character string; version of the api to use (currently on v1)
 #' @param ... additional parameters that will be appended onto the query string
-#' @return list; created url for the call, service type and data item
+#' @return list; list with entries `url` for the call, `service_type` and `data_item`
 #' @family call-building functions
 #' @examples
 #' build_legacy_call(data_item = "FUELINST", api_key = "12345",
@@ -206,6 +206,7 @@ build_legacy_call <- function(data_item, api_key, from_date = NULL, to_date = NU
 #' @seealso [build_b_call()]
 #' @seealso [build_remit_call()]
 #' @seealso [build_legacy_call()]
+#' @return list; list with entries `url` for the call, `service_type` and `data_item`
 #' @examples
 #' build_call(data_item = "TEMP", api_key = "12345", from_date = "12 Jun 2018",
 #' to_date = "13 Jun 2018", service_type = "csv")
