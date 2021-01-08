@@ -9,7 +9,8 @@ test_that("Returns list", {
 })
 
 test_that("Returns xml instead of csv because api key incorrect", {
-  expect_error(full_request(data_item = "TEMP", api_key = "test", from_date = "12 Jun 2018", service_type = "csv"))
+  expect_warning(resp <- full_request(data_item = "TEMP", api_key = "test", from_date = "12 Jun 2018", service_type = "csv"))
+  expect_true(class(resp) == "list")
 })
 
 
