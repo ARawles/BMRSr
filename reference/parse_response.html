@@ -146,7 +146,13 @@
     <p>Parse the results of a call</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_response</span><span class='op'>(</span><span class='va'>response</span>, format <span class='op'>=</span> <span class='cn'>NULL</span>, clean_dates <span class='op'>=</span> <span class='cn'>TRUE</span>, rename <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>parse_response</span><span class='op'>(</span>
+  <span class='va'>response</span>,
+  format <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clean_dates <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  rename <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  warn_on_initial_parse <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +172,11 @@
     <tr>
       <th>rename</th>
       <td><p>boolean; whether to rename column headings (they are usually blank from the API)</p></td>
+    </tr>
+    <tr>
+      <th>warn_on_initial_parse</th>
+      <td><p>logical; should warning messages be shown during the orignal attempt at parsing the response? The default is FALSE
+as many of the data items need further cleaning and so the warning messages from the original attempt to parse the file are uninformative.</p></td>
     </tr>
     </table>
 

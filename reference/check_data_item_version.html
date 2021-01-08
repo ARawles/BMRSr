@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the correct function to create the API call depending on the data item — get_function • BMRSr</title>
+<title>Check the data item to ensure that it is valid for the version specified — check_data_item_version • BMRSr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the correct function to create the API call depending on the data item — get_function" />
-<meta property="og:description" content="Get the correct function to create the API call depending on the data item" />
+<meta property="og:title" content="Check the data item to ensure that it is valid for the version specified — check_data_item_version" />
+<meta property="og:description" content="Currently, &quot;B1610&quot; is the only data item that no longer supports v1 and equally is the only data item that supports v2." />
 <meta property="og:image" content="http://bmrsr.arawles.co.uk/logo.png" />
 
 
@@ -137,57 +137,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the correct function to create the API call depending on the data item</h1>
+    <h1>Check the data item to ensure that it is valid for the version specified</h1>
     
-    <div class="hidden name"><code>get_function.Rd</code></div>
+    <div class="hidden name"><code>check_data_item_version.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the correct function to create the API call depending on the data item</p>
+    <p>Currently, "B1610" is the only data item that no longer supports v1 and equally is the only data item that supports v2.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_function</span><span class='op'>(</span><span class='va'>data_item</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_data_item_version</span><span class='op'>(</span><span class='va'>data_item</span>, version <span class='op'>=</span> <span class='fl'>1</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data_item</th>
-      <td><p>character string; data item to be retrieved</p></td>
+      <td><p>character; the data item to check</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>character/numeric; the API version, either as a number (e.g. <code>1</code>) or as a case-insensitive string (e.g. "v1" or "V2"). Default is 1.</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p>boolean; whether to show a warning if that version is not valid for the provided
+data item. Default is TRUE.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>function</p>
+    <p>boolean; returns <code>TRUE</code> if data_item is valid for the provided version, <code>FALSE</code> if it is not</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_function</span><span class='op'>(</span><span class='st'>"TEMP"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; function (data_item, api_key, from_date = NULL, to_date = NULL, 
-#&gt;     settlement_date = NULL, settlement_period = NULL, bm_unit_id = NULL, 
-#&gt;     bm_unit_type = NULL, lead_party_name = NULL, ngc_bm_unit_name = NULL, 
-#&gt;     from_cleared_date = NULL, to_cleared_date = NULL, is_two_day_window = NULL, 
-#&gt;     from_datetime = NULL, to_datetime = NULL, from_settlement_date = NULL, 
-#&gt;     to_settlement_date = NULL, period = NULL, fuel_type = NULL, 
-#&gt;     balancing_service_volume = NULL, zone_identifier = NULL, 
-#&gt;     start_time = NULL, end_time = NULL, trade_name = NULL, trade_type = NULL, 
-#&gt;     api_version = "v1", service_type = "csv", ...) 
-#&gt; {
-#&gt;     check_data_item(data_item, "Legacy")
-#&gt;     input_params &lt;- get_build_arguments(as.list(as.environment(-1)))
-#&gt;     base_url &lt;- httr::modify_url("https://api.bmreports.com", 
-#&gt;         path = paste0("BMRS/", data_item, "/", api_version))
-#&gt;     additional_params &lt;- list(...)
-#&gt;     fixed_params &lt;- fix_all_parameters(input_params)
-#&gt;     request &lt;- list()
-#&gt;     request$url &lt;- httr::modify_url(base_url, query = c(fixed_params, 
-#&gt;         additional_params))
-#&gt;     request$service_type &lt;- service_type
-#&gt;     request$data_item &lt;- data_item
-#&gt;     return(request)
-#&gt; }
-#&gt; &lt;bytecode: 0x564539cc5fd0&gt;
-#&gt; &lt;environment: namespace:BMRSr&gt;</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>check_data_item_version</span><span class='op'>(</span><span class='st'>"B1610"</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in check_data_item_version("B1610", 1): could not find function "check_data_item_version"</span></div><div class='input'><span class='fu'>check_data_item_version</span><span class='op'>(</span><span class='st'>"B1710"</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in check_data_item_version("B1710", 1): could not find function "check_data_item_version"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
