@@ -9,15 +9,11 @@ NULL
 #' @return function
 #' @export
 get_function <- function(data_item){
-  if (get_data_item_type(data_item) == "B Flow"){
-    return(build_b_call)
-  }
-  else if (get_data_item_type(data_item) == "REMIT"){
-    return(build_remit_call)
-  }
-  else if(get_data_item_type(data_item) == "Legacy"){
-    return(build_legacy_call)
-  }
+
+  switch(get_data_item_type(data_item),
+         "B Flow" = build_b_call,
+         "REMIT" = build_remit_call,
+         "Legacy" = build_legacy_call)
 }
 
 
