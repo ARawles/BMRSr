@@ -139,6 +139,7 @@ clean_date_columns <- function(x){
 #' @param silent boolean; whether to show a warning if that version is not valid for the provided
 #' data item. Default is TRUE.
 #' @return boolean; returns `TRUE` if data_item is valid for the provided version, `FALSE` if it is not
+#' @export
 #' @examples
 #' check_data_item_version("B1610", 1)
 #' check_data_item_version("B1710", 1)
