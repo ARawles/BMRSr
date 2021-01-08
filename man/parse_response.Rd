@@ -4,7 +4,13 @@
 \alias{parse_response}
 \title{Parse the results of a call}
 \usage{
-parse_response(response, format = NULL, clean_dates = TRUE, rename = TRUE)
+parse_response(
+  response,
+  format = NULL,
+  clean_dates = TRUE,
+  rename = TRUE,
+  warn_on_initial_parse = FALSE
+)
 }
 \arguments{
 \item{response}{A response object returned from the API request}
@@ -14,6 +20,9 @@ parse_response(response, format = NULL, clean_dates = TRUE, rename = TRUE)
 \item{clean_dates}{boolean; whether to clean date/time columns}
 
 \item{rename}{boolean; whether to rename column headings (they are usually blank from the API)}
+
+\item{warn_on_initial_parse}{logical; should warning messages be shown during the orignal attempt at parsing the response? The default is FALSE
+as many of the data items need further cleaning and so the warning messages from the original attempt to parse the file are uninformative.}
 }
 \value{
 A tibble if format == "csv", otherwise a list

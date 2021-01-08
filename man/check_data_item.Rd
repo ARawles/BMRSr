@@ -4,7 +4,11 @@
 \alias{check_data_item}
 \title{Check the data item to ensure that it is a valid request}
 \usage{
-check_data_item(data_item, type = "any", silent = FALSE)
+check_data_item(
+  data_item,
+  type = c("any", "B Flow", "Legacy", "REMIT"),
+  silent = FALSE
+)
 }
 \arguments{
 \item{data_item}{character; the data item to check}
