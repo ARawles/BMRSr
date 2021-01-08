@@ -1,3 +1,8 @@
+# BMRSr 1.0.2.9000
+
+* Fixed issue where EOF files were showing warnings when being parsed because the EOF wasn't being removed.
+* Added check of data item to ensure that the data item is present for the provided version
+
 # BMRSr 1.0.2
 
 * Third CRAN release
