@@ -21,7 +21,7 @@ Imports:
     dplyr,
     rlang
 RoxygenNote: 7.1.1
-URL: http://bmrsr.arawles.co.uk
+URL: https://bmrsr.arawles.co.uk
 Suggests: 
     covr,
     knitr,
