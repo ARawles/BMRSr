@@ -2,8 +2,8 @@
 
 This a resubmission. In this version, I have:
 
-* Fixed URL to use `https` as this is force
-* Added URL to the API in Description
+* Fixed URL in DESCRIPTION to add trailing /
+* Fixed URL in Description field of DESCRIPTION to point to the base URL instead of API url that was causing a NOTE
 
 ## Test environments
 * local Windows 10 x64 install, R 4.0.3
