@@ -1,5 +1,4 @@
 #' @importFrom rlang .data
-NULL
 
 
 #' Get the correct function to create the API call depending on the data item
