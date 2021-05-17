@@ -15,14 +15,20 @@
 #' ), "xml")
 #' @export
 parse_response <- function(response, format = NULL, clean_dates = TRUE, rename = TRUE, warn_on_initial_parse = FALSE){
-
+  
   if (is.null(format)){
     format <- response$service_type
   }
 
-  if (httr::status_code(response) != 200){
-    warning(paste0("Parsing unsuccessful: response code was ", httr::status_code(response)), call. = FALSE)
-    return(response)
+ if (httr::http_error(response)) {
+    stop(
+      sprintf(
+        "API request failed [%s]\n%s\n<%s>", 
+        httr::status_code(response),
+        httr::content(response, as = "parsed")
+      ),
+      call. = FALSE
+    )
   }
 
   if (warn_on_initial_parse) {
@@ -45,9 +51,10 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
         ret <- parse_clean_csv(parsed_content)
       }
       if (clean_dates == TRUE){
-        try({
-          ret <- clean_date_columns(ret)}
-          , TRUE)
+        ret <- tryCatch({
+          clean_date_columns(ret)
+          }, error = function(e) {
+          ret})
       }
     }
     else if (response$data_item_type == "Legacy"){
@@ -63,9 +70,10 @@ parse_response <- function(response, format = NULL, clean_dates = TRUE, rename =
         }
       }
       if (clean_dates == TRUE){
-        try({
-          ret <- clean_date_columns(ret)}
-          , TRUE)
+        ret <- tryCatch({
+          clean_date_columns(ret)
+          }, error = function(e) {
+          ret})
       }
     }}
   else if (format == "xml"){
