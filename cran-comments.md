@@ -1,14 +1,13 @@
-## Resubmission
+## Fix
 
-This a resubmission. In this version, I have:
-
-* Fixed URL in DESCRIPTION to add trailing /
-* Fixed URL in Description field of DESCRIPTION to point to the base URL instead of API url that was causing a NOTE
+This submission is in response to an email I received stating that the package should '...fail gracefully if the resource is not available or has changed...'.
+The response is now checked for errors which are converted to R errors. There is also error handling around the request-sending process.
 
 ## Test environments
 * local Windows 10 x64 install, R 4.0.3
-* ubuntu 18.04.5 (on Github Actions), R 4.0.3
-* win-builder (devel and release)
+* ubuntu 18.04.5 via GitHub Actions, (release), (devel), (oldrel)
+* macOS-latest via GitHub Actions (release)
+* windows-latest via GitHub Actions (release)
 
 ## R CMD check results
 

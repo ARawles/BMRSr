@@ -1,3 +1,7 @@
+# BMRSr 1.0.3
+
+* Added better error handling around the sending and parsing of requests as per CRAN policies
+
 # BMRSr 1.0.2.9000
 
 * Fixed issue where EOF files were showing warnings when being parsed because the EOF wasn't being removed.
