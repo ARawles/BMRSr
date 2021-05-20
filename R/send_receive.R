@@ -13,14 +13,9 @@ send_request <- function(request, config_options = list()) {
     httr::GET(request$url, do.call(httr::config, config_options))
     }, error = function(e) {
     stop(paste0("Could not send the request. The resource may be temporarily unavailable or may have moved.\n", e))
+    })
   response$data_item_type <- get_data_item_type(request$data_item)
   response$data_item <- request$data_item
   response$service_type <- request$service_type
   return(response)
 }
-
-
-
-
-
-
