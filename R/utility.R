@@ -1,6 +1,7 @@
 #' @importFrom rlang .data
 NULL
 
+
 #' Get the correct function to create the API call depending on the data item
 #' @param data_item character string; data item to be retrieved
 #' @examples
