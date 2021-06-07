@@ -26,7 +26,7 @@
 
 *  Changes to build_b_call() function
 *  Collect query parameters using list input_query
-*  Use httr::modify_url() to build query
+*  Use `httr::modify_url()` to build query
 *  Shorten long lines
 *  Added test 'Typical Request' to test_that
 *  Other cosmetic changes

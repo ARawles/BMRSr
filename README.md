@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# BMRSr <a href='http://bmrsr.arawles.co.uk'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# BMRSr <a href='https://bmrsr.arawles.co.uk'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/BMRSr)](https://cran.r-project.org/package=BMRSr)
