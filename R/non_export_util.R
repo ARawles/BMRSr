@@ -1,40 +1,14 @@
 # non-exported, utility functions
 
 format_date <- function(dat){
-  date_return <- as.Date(dat, tryFormats = c("%d-%m-%Y", "%d-%b-%Y",
-                                             "%d/%m/%Y", "%d/%b/%Y",
-                                             "%d %m %Y", "%d %b %Y", "%d %B %Y"))
+  date_return <- as.Date(dat)
   return(format(date_return, format = "%Y-%m-%d"))
 }
 
 format_datetime <- function(dattime){
-  datetime_return <- as.POSIXct(dattime, tryFormats = c("%Y-%m-%d %H:%M:%OS",
-                                                        "%Y/%m/%d %H:%M:%OS",
-                                                        "%d-%m-%Y %H:%M:%OS",
-                                                        "%d-%b-%Y %H:%M:%OS",
-                                                        "%d/%m/%Y %H:%M:%OS",
-                                                        "%d/%b/%Y %H:%M:%OS",
-                                                        "%d/%m/%y %H:%M:%OS",
-                                                        "%d %m %Y %H:%M:%OS",
-                                                        "%d %b %Y %H:%M:%OS",
-                                                        "%d %B %Y %H:%M:%OS",
-                                                        "%Y-%m-%d %H%M%OS",
-                                                        "%Y/%m/%d %H%M%OS",
-                                                        "%d-%m-%Y %H%M%OS",
-                                                        "%d-%b-%Y %H%M%OS",
-                                                        "%d/%m/%Y %H%M%OS",
-                                                        "%d/%b/%Y %H%M%OS",
-                                                        "%d %m %Y %H%M%OS",
-                                                        "%d %b %Y %H%M%OS",
-                                                        "%d %B %Y %H%M%OS",
-                                                        "%Y%m%d%H%M%OS",
-                                                        "%Y%b%d%H%M%OS",
-                                                        "%d%m%Y%H%M%OS",
-                                                        "%d%b%Y%H%M%OS",
-                                                        "%d%B%Y%H%M%OS"
-  ))
+  datetime_return <- as.POSIXct(dattime)
 
-  datetime_return <- format(datetime_return, format = "%Y-%m-%d%%20%H:%M:%OS")
+  datetime_return <- format(datetime_return, format = "%Y-%m-%d %H:%M:%OS")
   return(datetime_return)
 }
 
