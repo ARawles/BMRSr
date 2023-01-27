@@ -1,3 +1,9 @@
+# BMRSr 1.0.3.9000
+
+* Just use ISO date and datetime formats across the board instead of trying to accept lots of different formats
+    + This just leads to dates being formatted incorrectly and not working
+* Fixed the column renaming for the 'FUELINST' data item
+
 # BMRSr 1.0.3
 
 * Added better error handling around the sending and parsing of requests as per CRAN policies

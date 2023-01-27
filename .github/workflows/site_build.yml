@@ -2,7 +2,7 @@
 
 name: Site build
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -24,27 +24,27 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - uses: r-lib/actions/setup-r@v1
         with:
-          r-version: '4.0.5'
+          r-version: '4.2.2'
 
       - uses: r-lib/actions/setup-pandoc@v1
-        
+
       - name: Install libcurl and libfribidi
         run: |
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libharfbuzz-dev libfribidi-dev
-        
-        
+
+
       - name: Install dependencies
         run: |
           Rscript -e 'install.packages("remotes")' \
                   -e 'remotes::install_deps(dependencies = TRUE)' \
-                   
+
       - name: Install package
         run: R CMD INSTALL .
-        
+
       - name: Cache R packages
         uses: actions/cache@v2
         with:
@@ -58,7 +58,7 @@ jobs:
           install.packages("pkgdown")
           pkgdown::build_site(new_process = FALSE)
         shell: Rscript {0}
-        
+
       - name: Deploy to GitHub Pages
         # You may pin to the exact commit or the version.
         # uses: JamesIves/github-pages-deploy-action@132898c54c57c7cc6b80eb3a89968de8fc283505
